@@ -56,15 +56,63 @@
 		3752D91F207FFA720019C5FA /* La Distrib' */ = {
 			isa = PBXGroup;
 			children = (
-				3752D920207FFA720019C5FA /* AppDelegate.swift */,
-				3752D922207FFA720019C5FA /* ViewController.swift */,
-				3752D924207FFA720019C5FA /* Main.storyboard */,
-				3752D92A207FFA720019C5FA /* Assets.xcassets */,
-				3752D92C207FFA720019C5FA /* LaunchScreen.storyboard */,
+				3752D938207FFB990019C5FA /* Main Files */,
+				3752D939207FFBB30019C5FA /* Storyboards */,
+				3752D93A207FFBC60019C5FA /* SupportingFiles */,
 				3752D92F207FFA720019C5FA /* Info.plist */,
 				3752D927207FFA720019C5FA /* La_Distrib_.xcdatamodeld */,
 			);
 			path = "La Distrib'";
+			sourceTree = "<group>";
+		};
+		3752D935207FFB1A0019C5FA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3752D936207FFB230019C5FA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3752D937207FFB350019C5FA /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3752D922207FFA720019C5FA /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		3752D938207FFB990019C5FA /* Main Files */ = {
+			isa = PBXGroup;
+			children = (
+				3752D920207FFA720019C5FA /* AppDelegate.swift */,
+				3752D937207FFB350019C5FA /* Controllers */,
+				3752D936207FFB230019C5FA /* Views */,
+				3752D935207FFB1A0019C5FA /* Models */,
+			);
+			path = "Main Files";
+			sourceTree = "<group>";
+		};
+		3752D939207FFBB30019C5FA /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				3752D92C207FFA720019C5FA /* LaunchScreen.storyboard */,
+				3752D924207FFA720019C5FA /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		3752D93A207FFBC60019C5FA /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				3752D92A207FFA720019C5FA /* Assets.xcassets */,
+			);
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,7 +333,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "DanielIK.La-Distrib-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -300,7 +348,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "DanielIK.La-Distrib-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
