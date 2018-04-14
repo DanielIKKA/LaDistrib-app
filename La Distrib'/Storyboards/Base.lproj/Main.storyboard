@@ -11,8 +11,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Roboto-Light.ttf">
-            <string>Roboto-Light</string>
+        <array key="RobotoCondensed-LightItalic.ttf">
+            <string>RobotoCondensed-LightItalic</string>
         </array>
     </customFonts>
     <scenes>
@@ -33,29 +33,39 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="gnA-Fn-AFi">
                                 <rect key="frame" x="32" y="269" width="256" height="70"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daniel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JYj-xA-56l" userLabel="Login">
+                                    <textField opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Login" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="j04-V3-u8O" customClass="CustomTextField" customModule="La_Distrib_" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="256" height="27"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="27" id="e8F-es-LKp"/>
+                                            <constraint firstAttribute="height" constant="27" id="26q-aX-iGk"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="17"/>
                                         <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u5K-X3-efD" userLabel="PassWord">
+                                        <fontDescription key="fontDescription" name="RobotoCondensed-LightItalic" family="Roboto Condensed" pointSize="15"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="name"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="insetX">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="insetY">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dsc-fi-Fwj" customClass="CustomTextField" customModule="La_Distrib_" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="43" width="256" height="27"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="27" id="4Hn-qp-AMC"/>
+                                            <constraint firstAttribute="height" constant="27" id="JY2-eE-zkD"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                        <fontDescription key="fontDescription" name="RobotoCondensed-LightItalic" family="Roboto Condensed" pointSize="15"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="insetX">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="JYj-xA-56l" firstAttribute="top" secondItem="gnA-Fn-AFi" secondAttribute="top" id="8iZ-Vf-W8q"/>
-                                    <constraint firstItem="JYj-xA-56l" firstAttribute="leading" secondItem="gnA-Fn-AFi" secondAttribute="leading" id="CdS-aD-R6I"/>
-                                    <constraint firstAttribute="trailing" secondItem="JYj-xA-56l" secondAttribute="trailing" id="YBa-2Y-scB"/>
                                     <constraint firstAttribute="width" constant="256" id="bpO-Yc-Ri9"/>
                                 </constraints>
                             </stackView>
@@ -70,6 +80,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cp3-eO-3FG"/>
                     </view>
+                    <connections>
+                        <outlet property="CenterConstraint" destination="BVN-dy-66s" id="Gs9-tA-Sbq"/>
+                        <outlet property="PasswordTextField" destination="Dsc-fi-Fwj" id="4Mc-tp-cD6"/>
+                        <outlet property="loginTextField" destination="j04-V3-u8O" id="CWw-fv-TLV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1LK-1j-ZSO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

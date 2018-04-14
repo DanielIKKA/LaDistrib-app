@@ -38,6 +38,7 @@
 		37654C7A2080F2AA00B54DC1 /* Oswald-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37654C742080F2A900B54DC1 /* Oswald-Medium.ttf */; };
 		37654C7B2080F2AA00B54DC1 /* Oswald-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37654C752080F2A900B54DC1 /* Oswald-Regular.ttf */; };
 		37654C7C2080F2AA00B54DC1 /* Oswald-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37654C762080F2A900B54DC1 /* Oswald-SemiBold.ttf */; };
+		37654C7E20820D9F00B54DC1 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37654C7D20820D9F00B54DC1 /* CustomTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		37654C742080F2A900B54DC1 /* Oswald-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Medium.ttf"; sourceTree = "<group>"; };
 		37654C752080F2A900B54DC1 /* Oswald-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Regular.ttf"; sourceTree = "<group>"; };
 		37654C762080F2A900B54DC1 /* Oswald-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-SemiBold.ttf"; sourceTree = "<group>"; };
+		37654C7D20820D9F00B54DC1 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 		3752D935207FFB1A0019C5FA /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				37654C7D20820D9F00B54DC1 /* CustomTextField.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				3752D923207FFA720019C5FA /* ConnectViewController.swift in Sources */,
 				3752D921207FFA720019C5FA /* AppDelegate.swift in Sources */,
 				3752D93E2080CF210019C5FA /* HomeViewController.swift in Sources */,
+				37654C7E20820D9F00B54DC1 /* CustomTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +441,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K6C3C9TCPC;
 				INFOPLIST_FILE = "La Distrib'/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "DanielIK.La-Distrib-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -452,6 +457,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K6C3C9TCPC;
 				INFOPLIST_FILE = "La Distrib'/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "DanielIK.La-Distrib-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
