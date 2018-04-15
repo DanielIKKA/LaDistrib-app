@@ -24,65 +24,79 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BoxConnection" translatesAutoresizingMaskIntoConstraints="NO" id="KlZ-x0-tAU">
-                                <rect key="frame" x="23" y="168" width="274" height="232"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="KlZ-x0-tAU" secondAttribute="height" multiplier="275:233" id="G7v-hm-0sj"/>
-                                </constraints>
-                            </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="gnA-Fn-AFi">
-                                <rect key="frame" x="32" y="269" width="256" height="70"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gA0-UN-1Wj" userLabel="BoxView">
+                                <rect key="frame" x="23" y="167" width="275" height="234"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Login" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="j04-V3-u8O" customClass="CustomTextField" customModule="La_Distrib_" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="256" height="27"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BoxConnection" translatesAutoresizingMaskIntoConstraints="NO" id="KlZ-x0-tAU">
+                                        <rect key="frame" x="0.0" y="0.5" width="275" height="233"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="27" id="26q-aX-iGk"/>
+                                            <constraint firstAttribute="width" secondItem="KlZ-x0-tAU" secondAttribute="height" multiplier="275:233" id="G7v-hm-0sj"/>
                                         </constraints>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" name="RobotoCondensed-LightItalic" family="Roboto Condensed" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="name"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="insetX">
-                                                <real key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="insetY">
-                                                <real key="value" value="0.0"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dsc-fi-Fwj" customClass="CustomTextField" customModule="La_Distrib_" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="43" width="256" height="27"/>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="gnA-Fn-AFi">
+                                        <rect key="frame" x="9.5" y="102" width="256" height="70"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Login" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="j04-V3-u8O" customClass="CustomTextField" customModule="La_Distrib_" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="256" height="27"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="27" id="26q-aX-iGk"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" name="RobotoCondensed-LightItalic" family="Roboto Condensed" pointSize="15"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" textContentType="name"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="insetX">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="insetY">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dsc-fi-Fwj" customClass="CustomTextField" customModule="La_Distrib_" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="43" width="256" height="27"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="27" id="JY2-eE-zkD"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" name="RobotoCondensed-LightItalic" family="Roboto Condensed" pointSize="15"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="insetX">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </textField>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="27" id="JY2-eE-zkD"/>
+                                            <constraint firstAttribute="width" constant="256" id="bpO-Yc-Ri9"/>
                                         </constraints>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" name="RobotoCondensed-LightItalic" family="Roboto Condensed" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="insetX">
-                                                <real key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </textField>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="256" id="bpO-Yc-Ri9"/>
+                                    <constraint firstAttribute="bottom" secondItem="KlZ-x0-tAU" secondAttribute="bottom" id="2Pa-b9-912"/>
+                                    <constraint firstAttribute="trailing" secondItem="KlZ-x0-tAU" secondAttribute="trailing" id="4ZR-85-vKL"/>
+                                    <constraint firstAttribute="width" secondItem="gA0-UN-1Wj" secondAttribute="height" multiplier="274:233" id="8T4-za-Btd"/>
+                                    <constraint firstItem="KlZ-x0-tAU" firstAttribute="centerX" secondItem="gA0-UN-1Wj" secondAttribute="centerX" id="MDN-Ru-lKe"/>
+                                    <constraint firstItem="KlZ-x0-tAU" firstAttribute="leading" secondItem="gA0-UN-1Wj" secondAttribute="leading" id="Mdr-eM-FY7"/>
+                                    <constraint firstItem="KlZ-x0-tAU" firstAttribute="centerY" secondItem="gA0-UN-1Wj" secondAttribute="centerY" id="hSv-7a-Lki"/>
+                                    <constraint firstItem="gnA-Fn-AFi" firstAttribute="centerX" secondItem="KlZ-x0-tAU" secondAttribute="centerX" id="li8-Mn-2U9"/>
+                                    <constraint firstItem="KlZ-x0-tAU" firstAttribute="top" secondItem="gA0-UN-1Wj" secondAttribute="top" id="uvZ-B8-0Zy"/>
+                                    <constraint firstItem="gnA-Fn-AFi" firstAttribute="centerY" secondItem="gA0-UN-1Wj" secondAttribute="centerY" constant="20" id="vmb-BZ-Tc5"/>
                                 </constraints>
-                            </stackView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.153734237" green="0.46812063459999997" blue="0.55368381739999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="KlZ-x0-tAU" firstAttribute="leading" secondItem="cp3-eO-3FG" secondAttribute="leading" constant="23" id="2a4-ha-7e9"/>
-                            <constraint firstItem="KlZ-x0-tAU" firstAttribute="centerY" secondItem="BJy-h9-i1D" secondAttribute="centerY" id="BVN-dy-66s"/>
-                            <constraint firstItem="gnA-Fn-AFi" firstAttribute="centerY" secondItem="KlZ-x0-tAU" secondAttribute="centerY" constant="20" id="YCn-EV-ff7"/>
-                            <constraint firstItem="gnA-Fn-AFi" firstAttribute="centerX" secondItem="KlZ-x0-tAU" secondAttribute="centerX" id="fhz-jw-wV8"/>
-                            <constraint firstItem="KlZ-x0-tAU" firstAttribute="centerX" secondItem="BJy-h9-i1D" secondAttribute="centerX" id="r7U-Gp-yuS"/>
+                            <constraint firstItem="gA0-UN-1Wj" firstAttribute="centerX" secondItem="BJy-h9-i1D" secondAttribute="centerX" id="4GT-i4-9QA"/>
+                            <constraint firstItem="gA0-UN-1Wj" firstAttribute="centerY" secondItem="BJy-h9-i1D" secondAttribute="centerY" id="5Fl-md-3tX"/>
+                            <constraint firstItem="gA0-UN-1Wj" firstAttribute="leading" secondItem="cp3-eO-3FG" secondAttribute="leading" constant="23" id="s8p-Ag-Mbr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cp3-eO-3FG"/>
                     </view>
                     <connections>
-                        <outlet property="CenterConstraint" destination="BVN-dy-66s" id="Gs9-tA-Sbq"/>
                         <outlet property="PasswordTextField" destination="Dsc-fi-Fwj" id="4Mc-tp-cD6"/>
+                        <outlet property="boxView" destination="gA0-UN-1Wj" id="6Sq-tu-0PH"/>
                         <outlet property="loginTextField" destination="j04-V3-u8O" id="CWw-fv-TLV"/>
                     </connections>
                 </viewController>

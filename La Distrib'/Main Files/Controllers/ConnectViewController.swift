@@ -8,11 +8,11 @@
 
 import UIKit
 
+// MARK: - UIViewController
 class ConnectViewController : UIViewController {
 
-    
     // MARK: - Public Attributs
-    @IBOutlet weak var CenterConstraint: NSLayoutConstraint!
+    @IBOutlet weak var boxView: UIView!
     @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var PasswordTextField: UITextField!
     
@@ -33,17 +33,41 @@ class ConnectViewController : UIViewController {
     }
     
     // MARK: - Private Méthodes
-    func setupGraphique() {
+    private func setupGraphique() {
         // setup Login
         loginTextField.layer.borderWidth = 1
         loginTextField.layer.borderColor = #colorLiteral(red: 0.5369121432, green: 0.5369251966, blue: 0.5369181633, alpha: 1)
         loginTextField.layer.cornerRadius = loginTextField.frame.height/5
+        loginTextField.delegate = self
         
         // setup Password
         PasswordTextField.layer.borderWidth = 1
         PasswordTextField.layer.borderColor = #colorLiteral(red: 0.5369121432, green: 0.5369251966, blue: 0.5369181633, alpha: 1)
         PasswordTextField.layer.cornerRadius = PasswordTextField.frame.height/5
+        PasswordTextField.delegate = self
     }
-
 }
 
+// MARK: - UITextFieldDelegate
+extension ConnectViewController : UITextFieldDelegate {
+    
+    public func textFieldDidBeginEditing(_ textField: UITextField) { // became first responder
+        let translateY: CGFloat = -40
+        
+        if(textField == loginTextField) {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.boxView.transform = CGAffineTransform(translationX: 0, y: translateY)
+            })
+        } else if (textField == PasswordTextField) {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.boxView.transform = CGAffineTransform(translationX: 0, y: translateY - self.loginTextField.bounds.height)
+            })
+        }
+    }
+    
+    public func textFieldDidEndEditing(_ textField: UITextField) {
+        if((loginTextField.isEditing) || (PasswordTextField.isEditing)) {
+            self.boxView.transform = .identity
+        }
+    }
+}
