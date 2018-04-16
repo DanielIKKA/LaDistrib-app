@@ -15,6 +15,8 @@ class ConnectViewController : UIViewController {
     @IBOutlet weak var boxView: UIView!
     @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var PasswordTextField: UITextField!
+    @IBOutlet weak var connectButton: UIButton!
+    
     
     // MARK: - Public Fonctions
     override func loadView() {
@@ -24,6 +26,11 @@ class ConnectViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Traking pour savoir si le bouton connect doit être activé ou pas
+        loginTextField.addTarget(self, action: #selector(textFielddidChange(_:)), for: .editingChanged)
+        PasswordTextField.addTarget(self, action: #selector(textFielddidChange(_:)), for: .editingChanged)
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -51,23 +58,49 @@ class ConnectViewController : UIViewController {
 // MARK: - UITextFieldDelegate
 extension ConnectViewController : UITextFieldDelegate {
     
+    //MARK: - Public Functions
+   
     public func textFieldDidBeginEditing(_ textField: UITextField) { // became first responder
-        let translateY: CGFloat = -40
+        let translationY: CGFloat = -40
         
-        if(textField == loginTextField) {
-            UIView.animate(withDuration: 0.3, animations: {
-                self.boxView.transform = CGAffineTransform(translationX: 0, y: translateY)
-            })
-        } else if (textField == PasswordTextField) {
-            UIView.animate(withDuration: 0.3, animations: {
-                self.boxView.transform = CGAffineTransform(translationX: 0, y: translateY - self.loginTextField.bounds.height)
-            })
+        deplacementY(textField: textField, translationY: translationY)
+    }
+    
+    
+    @objc func textFielddidChange(_ textField: UITextField) {
+        if(ButtonShouldActivate()) {
+            connectButton.isEnabled = true
+        } else {
+            connectButton.isEnabled = false
         }
     }
+    
     
     public func textFieldDidEndEditing(_ textField: UITextField) {
         if((loginTextField.isEditing) || (PasswordTextField.isEditing)) {
             self.boxView.transform = .identity
         }
+    }
+    
+    //MARK: - Private Functions
+    
+    private func deplacementY(textField: UITextField ,translationY: CGFloat) {
+        if(textField == loginTextField) {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.boxView.transform = CGAffineTransform(translationX: 0, y: translationY)
+            })
+        } else if (textField == PasswordTextField) {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.boxView.transform = CGAffineTransform(translationX: 0, y: translationY - self.loginTextField.bounds.height)
+            })
+        }
+    }
+    
+    
+    private func ButtonShouldActivate() -> Bool {
+        if((!(self.loginTextField.text?.isEmpty)!) && (!(self.PasswordTextField.text?.isEmpty)!)) {
+            return true
+        }
+        return false
     }
 }

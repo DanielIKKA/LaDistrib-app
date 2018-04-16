@@ -25,13 +25,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gA0-UN-1Wj" userLabel="BoxView">
-                                <rect key="frame" x="23" y="167" width="275" height="234"/>
+                                <rect key="frame" x="23" y="168" width="274" height="232"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BoxConnection" translatesAutoresizingMaskIntoConstraints="NO" id="KlZ-x0-tAU">
-                                        <rect key="frame" x="0.0" y="0.5" width="275" height="233"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="KlZ-x0-tAU" secondAttribute="height" multiplier="275:233" id="G7v-hm-0sj"/>
-                                        </constraints>
+                                        <rect key="frame" x="0.0" y="0.5" width="274" height="232"/>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="gnA-Fn-AFi">
                                         <rect key="frame" x="9.5" y="102" width="256" height="70"/>
@@ -72,31 +69,41 @@
                                             <constraint firstAttribute="width" constant="256" id="bpO-Yc-Ri9"/>
                                         </constraints>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5cW-w6-mkf">
+                                        <rect key="frame" x="63" y="196" width="147.5" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="5cW-w6-mkf" secondAttribute="height" multiplier="135:20" id="Bnf-Gh-gqv"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="ButtonConnectActivate"/>
+                                    </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="KlZ-x0-tAU" secondAttribute="bottom" id="2Pa-b9-912"/>
-                                    <constraint firstAttribute="trailing" secondItem="KlZ-x0-tAU" secondAttribute="trailing" id="4ZR-85-vKL"/>
-                                    <constraint firstAttribute="width" secondItem="gA0-UN-1Wj" secondAttribute="height" multiplier="274:233" id="8T4-za-Btd"/>
-                                    <constraint firstItem="KlZ-x0-tAU" firstAttribute="centerX" secondItem="gA0-UN-1Wj" secondAttribute="centerX" id="MDN-Ru-lKe"/>
-                                    <constraint firstItem="KlZ-x0-tAU" firstAttribute="leading" secondItem="gA0-UN-1Wj" secondAttribute="leading" id="Mdr-eM-FY7"/>
-                                    <constraint firstItem="KlZ-x0-tAU" firstAttribute="centerY" secondItem="gA0-UN-1Wj" secondAttribute="centerY" id="hSv-7a-Lki"/>
-                                    <constraint firstItem="gnA-Fn-AFi" firstAttribute="centerX" secondItem="KlZ-x0-tAU" secondAttribute="centerX" id="li8-Mn-2U9"/>
-                                    <constraint firstItem="KlZ-x0-tAU" firstAttribute="top" secondItem="gA0-UN-1Wj" secondAttribute="top" id="uvZ-B8-0Zy"/>
-                                    <constraint firstItem="gnA-Fn-AFi" firstAttribute="centerY" secondItem="gA0-UN-1Wj" secondAttribute="centerY" constant="20" id="vmb-BZ-Tc5"/>
+                                    <constraint firstItem="5cW-w6-mkf" firstAttribute="leading" secondItem="gA0-UN-1Wj" secondAttribute="leading" constant="63" id="OL7-SG-kMy"/>
+                                    <constraint firstAttribute="width" secondItem="gA0-UN-1Wj" secondAttribute="height" multiplier="137:116" id="PYs-DB-Euu"/>
+                                    <constraint firstAttribute="bottom" secondItem="5cW-w6-mkf" secondAttribute="bottom" constant="14" id="Qfv-iz-PTY"/>
+                                    <constraint firstItem="gnA-Fn-AFi" firstAttribute="centerX" secondItem="KlZ-x0-tAU" secondAttribute="centerX" id="cYC-sb-sdl"/>
+                                    <constraint firstAttribute="bottom" secondItem="KlZ-x0-tAU" secondAttribute="bottom" id="coD-em-Hvr"/>
+                                    <constraint firstItem="KlZ-x0-tAU" firstAttribute="top" secondItem="gA0-UN-1Wj" secondAttribute="top" id="gW3-8T-X40"/>
+                                    <constraint firstItem="gnA-Fn-AFi" firstAttribute="centerY" secondItem="KlZ-x0-tAU" secondAttribute="centerY" constant="20" id="jEO-SC-ad6"/>
+                                    <constraint firstItem="5cW-w6-mkf" firstAttribute="centerX" secondItem="gA0-UN-1Wj" secondAttribute="centerX" id="kLk-tB-sLe"/>
+                                    <constraint firstItem="KlZ-x0-tAU" firstAttribute="leading" secondItem="gA0-UN-1Wj" secondAttribute="leading" id="lMz-v7-T5K"/>
+                                    <constraint firstAttribute="trailing" secondItem="KlZ-x0-tAU" secondAttribute="trailing" id="oI0-yJ-Iwd"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.153734237" green="0.46812063459999997" blue="0.55368381739999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="gA0-UN-1Wj" firstAttribute="centerX" secondItem="BJy-h9-i1D" secondAttribute="centerX" id="4GT-i4-9QA"/>
-                            <constraint firstItem="gA0-UN-1Wj" firstAttribute="centerY" secondItem="BJy-h9-i1D" secondAttribute="centerY" id="5Fl-md-3tX"/>
-                            <constraint firstItem="gA0-UN-1Wj" firstAttribute="leading" secondItem="cp3-eO-3FG" secondAttribute="leading" constant="23" id="s8p-Ag-Mbr"/>
+                            <constraint firstItem="gA0-UN-1Wj" firstAttribute="centerX" secondItem="BJy-h9-i1D" secondAttribute="centerX" id="A0d-WZ-9BH"/>
+                            <constraint firstItem="gA0-UN-1Wj" firstAttribute="centerY" secondItem="BJy-h9-i1D" secondAttribute="centerY" id="NEq-Un-YCl"/>
+                            <constraint firstItem="gA0-UN-1Wj" firstAttribute="leading" secondItem="cp3-eO-3FG" secondAttribute="leading" constant="23" id="gDx-dm-Ssb"/>
+                            <constraint firstItem="gA0-UN-1Wj" firstAttribute="centerX" secondItem="BJy-h9-i1D" secondAttribute="centerX" id="zdY-dg-iLX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cp3-eO-3FG"/>
                     </view>
                     <connections>
                         <outlet property="PasswordTextField" destination="Dsc-fi-Fwj" id="4Mc-tp-cD6"/>
                         <outlet property="boxView" destination="gA0-UN-1Wj" id="6Sq-tu-0PH"/>
+                        <outlet property="connectButton" destination="5cW-w6-mkf" id="Y5L-Th-pYL"/>
                         <outlet property="loginTextField" destination="j04-V3-u8O" id="CWw-fv-TLV"/>
                     </connections>
                 </viewController>
@@ -122,5 +129,6 @@
     </scenes>
     <resources>
         <image name="BoxConnection" width="277" height="235"/>
+        <image name="ButtonConnectActivate" width="136" height="20"/>
     </resources>
 </document>

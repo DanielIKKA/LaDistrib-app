@@ -11,7 +11,6 @@
 		3752D923207FFA720019C5FA /* ConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3752D922207FFA720019C5FA /* ConnectViewController.swift */; };
 		3752D926207FFA720019C5FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3752D924207FFA720019C5FA /* Main.storyboard */; };
 		3752D929207FFA720019C5FA /* La_Distrib_.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3752D927207FFA720019C5FA /* La_Distrib_.xcdatamodeld */; };
-		3752D92B207FFA720019C5FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3752D92A207FFA720019C5FA /* Assets.xcassets */; };
 		3752D92E207FFA720019C5FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3752D92C207FFA720019C5FA /* LaunchScreen.storyboard */; };
 		3752D93E2080CF210019C5FA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3752D93D2080CF210019C5FA /* HomeViewController.swift */; };
 		37654C532080F27600B54DC1 /* RobotoCondensed-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37654C4D2080F27500B54DC1 /* RobotoCondensed-Light.ttf */; };
@@ -39,6 +38,7 @@
 		37654C7B2080F2AA00B54DC1 /* Oswald-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37654C752080F2A900B54DC1 /* Oswald-Regular.ttf */; };
 		37654C7C2080F2AA00B54DC1 /* Oswald-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37654C762080F2A900B54DC1 /* Oswald-SemiBold.ttf */; };
 		37654C7E20820D9F00B54DC1 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37654C7D20820D9F00B54DC1 /* CustomTextField.swift */; };
+		37654C8020849DD300B54DC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37654C7F20849DD300B54DC1 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,7 +47,6 @@
 		3752D922207FFA720019C5FA /* ConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectViewController.swift; sourceTree = "<group>"; };
 		3752D925207FFA720019C5FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3752D928207FFA720019C5FA /* La_Distrib_.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = La_Distrib_.xcdatamodel; sourceTree = "<group>"; };
-		3752D92A207FFA720019C5FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3752D92D207FFA720019C5FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3752D92F207FFA720019C5FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3752D93D2080CF210019C5FA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +75,7 @@
 		37654C752080F2A900B54DC1 /* Oswald-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Regular.ttf"; sourceTree = "<group>"; };
 		37654C762080F2A900B54DC1 /* Oswald-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-SemiBold.ttf"; sourceTree = "<group>"; };
 		37654C7D20820D9F00B54DC1 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		37654C7F20849DD300B54DC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,8 +164,8 @@
 		3752D93A207FFBC60019C5FA /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				37654C7F20849DD300B54DC1 /* Assets.xcassets */,
 				37654C4C2080F25500B54DC1 /* Fonts */,
-				3752D92A207FFA720019C5FA /* Assets.xcassets */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -276,7 +276,6 @@
 				3752D92E207FFA720019C5FA /* LaunchScreen.storyboard in Resources */,
 				37654C7B2080F2AA00B54DC1 /* Oswald-Regular.ttf in Resources */,
 				37654C6A2080F28B00B54DC1 /* Roboto-Thin.ttf in Resources */,
-				3752D92B207FFA720019C5FA /* Assets.xcassets in Resources */,
 				37654C772080F2AA00B54DC1 /* Oswald-Bold.ttf in Resources */,
 				37654C6E2080F28B00B54DC1 /* Roboto-BoldItalic.ttf in Resources */,
 				37654C702080F28B00B54DC1 /* Roboto-Bold.ttf in Resources */,
@@ -286,6 +285,7 @@
 				37654C692080F28B00B54DC1 /* Roboto-Black.ttf in Resources */,
 				37654C7A2080F2AA00B54DC1 /* Oswald-Medium.ttf in Resources */,
 				37654C562080F27600B54DC1 /* RobotoCondensed-LightItalic.ttf in Resources */,
+				37654C8020849DD300B54DC1 /* Assets.xcassets in Resources */,
 				3752D926207FFA720019C5FA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
