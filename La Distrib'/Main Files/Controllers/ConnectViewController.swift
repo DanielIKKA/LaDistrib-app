@@ -10,15 +10,17 @@ import UIKit
 
 // MARK: - UIViewController
 class ConnectViewController : UIViewController {
-
-    // MARK: - Public Attributs
+    /*-------------------------------*/
+        // MARK: - Public Attributs
+    /*-------------------------------*/
     @IBOutlet weak var boxView: UIView!
     @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var PasswordTextField: UITextField!
     @IBOutlet weak var connectButton: UIButton!
     
-    
-    // MARK: - Public Fonctions
+    /*-------------------------------*/
+        // MARK: - Public Fonctions
+    /*-------------------------------*/
     override func loadView() {
         super.loadView()
         setupGraphique()
@@ -28,8 +30,8 @@ class ConnectViewController : UIViewController {
         super.viewDidLoad()
         
         // Traking pour savoir si le bouton connect doit être activé ou pas
-        loginTextField.addTarget(self, action: #selector(textFielddidChange(_:)), for: .editingChanged)
-        PasswordTextField.addTarget(self, action: #selector(textFielddidChange(_:)), for: .editingChanged)
+        loginTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        PasswordTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -38,8 +40,9 @@ class ConnectViewController : UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    // MARK: - Private Méthodes
+    /*-------------------------------*/
+        // MARK: - Private Méthodes
+    /*-------------------------------*/
     private func setupGraphique() {
         // setup Login
         loginTextField.layer.borderWidth = 1
@@ -58,39 +61,50 @@ class ConnectViewController : UIViewController {
 // MARK: - UITextFieldDelegate
 extension ConnectViewController : UITextFieldDelegate {
     
-    //MARK: - Public Functions
-   
+    /*-------------------------------*/
+        //MARK: - Public Functions
+    /*-------------------------------*/
     public func textFieldDidBeginEditing(_ textField: UITextField) { // became first responder
         let translationY: CGFloat = -40
         
         deplacementY(textField: textField, translationY: translationY)
     }
     
-    @objc func textFielddidChange(_ textField: UITextField) {
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        // Control du bouton connect
         if(ButtonShouldActivate()) {
             connectButton.isEnabled = true
         } else {
             connectButton.isEnabled = false
         }
-    }
-    
-    public func textFieldDidEndEditing(_ textField: UITextField) {
-        if((loginTextField.isEditing) || (PasswordTextField.isEditing)) {
-            self.boxView.transform = .identity
+        
+        // control de la police d'écriture
+        if(textField.text?.isEmpty)! {
+            textField.font = UIFont(name: "RobotoCondensed-Italic", size: 15.0)
+        } else {
+            textField.font = UIFont(name: "Roboto-Medium", size: 15.0)
         }
     }
     
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        UIView.animate(withDuration: 0.3) {
-            self.boxView.transform = .identity
-        }
+        let nextTag = textField.tag+1
+        // Try to find next responder
+        let nextResponder = textField.superview?.viewWithTag(nextTag) as UIResponder!
         
-        return true
+        if(nextResponder != nil) {
+            nextResponder?.becomeFirstResponder()
+            return false
+        } else {
+            textField.resignFirstResponder()
+            UIView.animate(withDuration: 0.3) {
+                self.boxView.transform = .identity
+            }
+            return true
+        }
     }
-    
-    //MARK: - Private Functions
-    
+    /*-------------------------------*/
+        //MARK: - Private Functions
+    /*-------------------------------*/
     private func deplacementY(textField: UITextField ,translationY: CGFloat) {
         if(textField == loginTextField) {
             UIView.animate(withDuration: 0.3, animations: {
