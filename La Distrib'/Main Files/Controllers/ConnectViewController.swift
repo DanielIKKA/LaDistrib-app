@@ -66,7 +66,6 @@ extension ConnectViewController : UITextFieldDelegate {
         deplacementY(textField: textField, translationY: translationY)
     }
     
-    
     @objc func textFielddidChange(_ textField: UITextField) {
         if(ButtonShouldActivate()) {
             connectButton.isEnabled = true
@@ -75,11 +74,19 @@ extension ConnectViewController : UITextFieldDelegate {
         }
     }
     
-    
     public func textFieldDidEndEditing(_ textField: UITextField) {
         if((loginTextField.isEditing) || (PasswordTextField.isEditing)) {
             self.boxView.transform = .identity
         }
+    }
+    
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        UIView.animate(withDuration: 0.3) {
+            self.boxView.transform = .identity
+        }
+        
+        return true
     }
     
     //MARK: - Private Functions
@@ -95,7 +102,6 @@ extension ConnectViewController : UITextFieldDelegate {
             })
         }
     }
-    
     
     private func ButtonShouldActivate() -> Bool {
         if((!(self.loginTextField.text?.isEmpty)!) && (!(self.PasswordTextField.text?.isEmpty)!)) {
