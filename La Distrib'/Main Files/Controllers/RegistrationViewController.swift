@@ -17,23 +17,54 @@ class RegistrationViewController: UIViewController {
     @IBOutlet weak var usernameTextField: CustomTextField!
     @IBOutlet weak var emailTextField: CustomTextField!
     @IBOutlet weak var passwordTextField: CustomTextField!
-
+    @IBOutlet weak var registrateButton: UIButton!
     /*-------------------------------*/
         //MARK: - Public Methodes
     /*-------------------------------*/
     override func loadView() {
         super.loadView()
-        usernameTextField.delegate = self
-        emailTextField.delegate = self
-        passwordTextField.delegate = self
+        setup()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        //traking for registrateButton
+        usernameTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        emailTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    /*-------------------------------*/
+        //MARK: - Private Methodes
+    /*-------------------------------*/
+    private func setup() {
+        // initailisation delegate
+        usernameTextField.delegate = self
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        
+        // initialisation gestureRecognizer
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOnScreenToDismissKeyboard(_:)))
+        self.view!.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func didTapOnScreenToDismissKeyboard(_ sender: UITapGestureRecognizer){
+        // Dismiss Keyboard
+        if(usernameTextField.isFirstResponder) {
+            usernameTextField.resignFirstResponder()
+        } else if(passwordTextField.isFirstResponder) {
+            passwordTextField.resignFirstResponder()
+        } else if(emailTextField.isFirstResponder) {
+            emailTextField.resignFirstResponder()
+        }
+        
+        // reaganisation of view
+        UIView.animate(withDuration: 0.3) {
+            self.allFeaturesView.transform = .identity
+        }
     }
 }
 
@@ -49,12 +80,12 @@ extension RegistrationViewController : UITextFieldDelegate {
     }
 
     @objc func textFieldDidChange(_ textField: UITextField) {
-        // Control du bouton connect
-//        if(ButtonShouldActivate()) {
-//            connectButton.isEnabled = true
-//        } else {
-//            connectButton.isEnabled = false
-//        }
+        // Control du bouton registrate
+        if(ButtonShouldActivate()) {
+            registrateButton.isEnabled = true
+        } else {
+            registrateButton.isEnabled = false
+        }
 
         //control de la police d'écriture
         if(textField.text?.isEmpty)! {
@@ -100,12 +131,12 @@ extension RegistrationViewController : UITextFieldDelegate {
         }
     }
 
-//    private func ButtonShouldActivate() -> Bool {
-//        if((!(self.loginTextField.text?.isEmpty)!) && (!(self.PasswordTextField.text?.isEmpty)!)) {
-//            return true
-//        }
-//        return false
-//    }
+    private func ButtonShouldActivate() -> Bool {
+        if((!(self.usernameTextField.text?.isEmpty)!) && (!(self.passwordTextField.text?.isEmpty)!) && (!(self.emailTextField.text?.isEmpty)!)) {
+            return true
+        }
+        return false
+    }
 }
 
 

@@ -15,7 +15,7 @@ class ConnectViewController : UIViewController {
     /*-------------------------------*/
     @IBOutlet weak var boxView: UIView!
     @IBOutlet weak var loginTextField: UITextField!
-    @IBOutlet weak var PasswordTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var connectButton: UIButton!
     
     /*-------------------------------*/
@@ -31,7 +31,7 @@ class ConnectViewController : UIViewController {
         
         // Traking pour savoir si le bouton connect doit être activé ou pas
         loginTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        PasswordTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -40,6 +40,7 @@ class ConnectViewController : UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     /*-------------------------------*/
         // MARK: - Private Méthodes
     /*-------------------------------*/
@@ -51,10 +52,28 @@ class ConnectViewController : UIViewController {
         loginTextField.delegate = self
         
         // setup Password
-        PasswordTextField.layer.borderWidth = 1
-        PasswordTextField.layer.borderColor = #colorLiteral(red: 0.5369121432, green: 0.5369251966, blue: 0.5369181633, alpha: 1)
-        PasswordTextField.layer.cornerRadius = PasswordTextField.frame.height/5
-        PasswordTextField.delegate = self
+        passwordTextField.layer.borderWidth = 1
+        passwordTextField.layer.borderColor = #colorLiteral(red: 0.5369121432, green: 0.5369251966, blue: 0.5369181633, alpha: 1)
+        passwordTextField.layer.cornerRadius = passwordTextField.frame.height/5
+        passwordTextField.delegate = self
+        
+        // setup GestureReconizer for the MainView
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapOnScreenToDismissKeyboard(_:)))
+        self.view.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @objc private func didTapOnScreenToDismissKeyboard(_ sender: UITapGestureRecognizer){
+        // Dismiss Keyboard
+        if(loginTextField.isFirstResponder) {
+            loginTextField.resignFirstResponder()
+        } else if(passwordTextField.isFirstResponder) {
+            passwordTextField.resignFirstResponder()
+        }
+        
+        // reaganisation of view
+        UIView.animate(withDuration: 0.3) {
+            self.boxView.transform = .identity
+        }
     }
 }
 
@@ -80,7 +99,7 @@ extension ConnectViewController : UITextFieldDelegate {
         
         // control de la police d'écriture
         if(textField.text?.isEmpty)! {
-            textField.font = UIFont(name: "RobotoCondensed-Italic", size: 15.0)
+            textField.font = UIFont(name: "RobotoCondensed-LightItalic", size: 15.0)
         } else {
             textField.font = UIFont(name: "Roboto-Medium", size: 15.0)
         }
@@ -110,7 +129,7 @@ extension ConnectViewController : UITextFieldDelegate {
             UIView.animate(withDuration: 0.3, animations: {
                 self.boxView.transform = CGAffineTransform(translationX: 0, y: translationY)
             })
-        } else if (textField == PasswordTextField) {
+        } else if (textField == passwordTextField) {
             UIView.animate(withDuration: 0.3, animations: {
                 self.boxView.transform = CGAffineTransform(translationX: 0, y: translationY - self.loginTextField.bounds.height)
             })
@@ -118,7 +137,7 @@ extension ConnectViewController : UITextFieldDelegate {
     }
     
     private func ButtonShouldActivate() -> Bool {
-        if((!(self.loginTextField.text?.isEmpty)!) && (!(self.PasswordTextField.text?.isEmpty)!)) {
+        if((!(self.loginTextField.text?.isEmpty)!) && (!(self.passwordTextField.text?.isEmpty)!)) {
             return true
         }
         return false

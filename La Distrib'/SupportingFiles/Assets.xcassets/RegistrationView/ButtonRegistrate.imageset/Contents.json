@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "ButtonConnectActivate.png",
+      "filename" : "ButtonRegistrate.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "ButtonConnectActivate@2x.png",
+      "filename" : "ButtonRegistrate@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "ButtonConnectActivate@3x.png",
+      "filename" : "ButtonRegistrate@3x.png",
       "scale" : "3x"
     }
   ],
