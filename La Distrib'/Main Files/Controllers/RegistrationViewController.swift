@@ -18,6 +18,7 @@ class RegistrationViewController: UIViewController {
     @IBOutlet weak var emailTextField: CustomTextField!
     @IBOutlet weak var passwordTextField: CustomTextField!
     @IBOutlet weak var registrateButton: UIButton!
+    
     /*-------------------------------*/
         //MARK: - Public Methodes
     /*-------------------------------*/

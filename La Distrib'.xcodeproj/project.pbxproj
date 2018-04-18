@@ -40,6 +40,7 @@
 		37654C7E20820D9F00B54DC1 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37654C7D20820D9F00B54DC1 /* CustomTextField.swift */; };
 		37654C8020849DD300B54DC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37654C7F20849DD300B54DC1 /* Assets.xcassets */; };
 		37654C82208601DF00B54DC1 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37654C81208601DF00B54DC1 /* RegistrationViewController.swift */; };
+		37654C8420875CEE00B54DC1 /* Profil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37654C8320875CEE00B54DC1 /* Profil.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		37654C7D20820D9F00B54DC1 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		37654C7F20849DD300B54DC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37654C81208601DF00B54DC1 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RegistrationViewController.swift; path = "La Distrib'/Main Files/Controllers/RegistrationViewController.swift"; sourceTree = SOURCE_ROOT; };
+		37654C8320875CEE00B54DC1 /* Profil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profil.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				3752D920207FFA720019C5FA /* AppDelegate.swift */,
+				37654C8320875CEE00B54DC1 /* Profil.swift */,
 				3752D937207FFB350019C5FA /* Controllers */,
 				3752D936207FFB230019C5FA /* Views */,
 				3752D935207FFB1A0019C5FA /* Models */,
@@ -302,6 +305,7 @@
 			files = (
 				37654C82208601DF00B54DC1 /* RegistrationViewController.swift in Sources */,
 				3752D929207FFA720019C5FA /* La_Distrib_.xcdatamodeld in Sources */,
+				37654C8420875CEE00B54DC1 /* Profil.swift in Sources */,
 				3752D923207FFA720019C5FA /* ConnectViewController.swift in Sources */,
 				3752D921207FFA720019C5FA /* AppDelegate.swift in Sources */,
 				3752D93E2080CF210019C5FA /* HomeViewController.swift in Sources */,
