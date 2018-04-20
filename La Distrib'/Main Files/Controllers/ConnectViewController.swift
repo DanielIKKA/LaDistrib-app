@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 // MARK: - UIViewController
 class ConnectViewController : UIViewController {
@@ -17,6 +18,8 @@ class ConnectViewController : UIViewController {
     @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var connectButton: UIButton!
+    
+    public var userProfils = [UserProfil]()
     
     /*-------------------------------*/
         // MARK: - Public Fonctions
@@ -33,7 +36,15 @@ class ConnectViewController : UIViewController {
         loginTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
-        // Do any additional setup after loading the view, typically from a nib.
+        // Do request to fetch all existant user profils
+        chargeExistentUserProfils(for: nil, whith: nil)
+        print("there are \(userProfils.count) in this dataBase: ")
+        for user in userProfils {
+            print((user.username)!)
+            print((user.password)!)
+        }
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,6 +71,16 @@ class ConnectViewController : UIViewController {
         // setup GestureReconizer for the MainView
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapOnScreenToDismissKeyboard(_:)))
         self.view.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    private func chargeExistentUserProfils(for userName: String?, whith password: String?) {
+        let fetchRequest: NSFetchRequest<UserProfil> = UserProfil.fetchRequest()
+        
+        do {
+            let users = try UserProfilPersistent.context.fetch(fetchRequest)
+            self.userProfils.removeAll()
+            self.userProfils = users
+        } catch {}
     }
     
     @objc private func didTapOnScreenToDismissKeyboard(_ sender: UITapGestureRecognizer){

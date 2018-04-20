@@ -37,6 +37,24 @@ class RegistrationViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    /*-------------------------------*/
+        //MARK: IBActions
+    /*-------------------------------*/
+    @IBAction func registrate() {
+        // init du context utilisé
+        let newUserProfil = UserProfil(context: UserProfilPersistent.context)
+        
+        // rentrer les données saisie dans l'entité
+        newUserProfil.username = usernameTextField.text!
+        newUserProfil.email = emailTextField.text!
+        newUserProfil.password = passwordTextField.text!
+        
+        // savegarde l'entité
+        UserProfilPersistent.saveContext()
+        
+        // Actionner la segue vers connectView
+        performSegue(withIdentifier: "RegistrationToConnecSegue", sender: nil)
+    }
     
     /*-------------------------------*/
         //MARK: - Private Methodes

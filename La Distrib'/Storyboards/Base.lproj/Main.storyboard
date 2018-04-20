@@ -269,7 +269,7 @@
                                 </constraints>
                                 <state key="normal" backgroundImage="ButtonRegistrate"/>
                                 <connections>
-                                    <segue destination="n6J-Qx-P04" kind="presentation" identifier="RegistrationToConnecSegue" id="Cby-2V-0nX"/>
+                                    <action selector="registrate" destination="8J9-8O-h7p" eventType="touchUpInside" id="Mgj-zt-BhX"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -290,6 +290,7 @@
                         <outlet property="passwordTextField" destination="V5m-HH-bHm" id="INC-kN-a6h"/>
                         <outlet property="registrateButton" destination="IkD-7L-XWM" id="19h-bo-R5d"/>
                         <outlet property="usernameTextField" destination="q9F-6l-Bbu" id="WRz-Zn-Hsm"/>
+                        <segue destination="n6J-Qx-P04" kind="presentation" identifier="RegistrationToConnecSegue" modalTransitionStyle="flipHorizontal" id="rE7-Dc-9vH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P4a-rC-8RB" userLabel="First Responder" sceneMemberID="firstResponder"/>
