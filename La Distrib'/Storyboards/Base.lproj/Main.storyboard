@@ -107,7 +107,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="8J9-8O-h7p" kind="presentation" identifier="ConnectToRegistrationSegue" id="n1Y-qx-NOu"/>
+                                    <segue destination="8J9-8O-h7p" kind="presentation" identifier="segueToRegistration" id="n1Y-qx-NOu"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -146,7 +146,7 @@
                                 <rect key="frame" x="20" y="114" width="280" height="300"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="cDZ-kf-KEF" userLabel="allFeatures">
-                                        <rect key="frame" x="0.0" y="54" width="280" height="191"/>
+                                        <rect key="frame" x="0.0" y="20.5" width="280" height="258"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="p0C-wg-kBi" userLabel="username">
                                                 <rect key="frame" x="0.0" y="0.0" width="280" height="57"/>
@@ -227,7 +227,7 @@
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" secureTextEntry="YES"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" secureTextEntry="YES"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="insetX">
                                                                 <real key="value" value="10"/>
@@ -239,6 +239,37 @@
                                                     <constraint firstAttribute="trailing" secondItem="V5m-HH-bHm" secondAttribute="trailing" constant="5" id="0wv-6k-iah"/>
                                                     <constraint firstItem="7Yj-eX-JAV" firstAttribute="leading" secondItem="V5m-HH-bHm" secondAttribute="leading" id="FLk-E8-BsA"/>
                                                     <constraint firstItem="V5m-HH-bHm" firstAttribute="leading" secondItem="xae-VS-WB3" secondAttribute="leading" constant="5" id="QFE-qI-8kH"/>
+                                                </constraints>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="VYd-PI-gDT" userLabel="passWord">
+                                                <rect key="frame" x="0.0" y="201" width="280" height="57"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwF-kC-hcD" userLabel="confirmLabel">
+                                                        <rect key="frame" x="5" y="0.0" width="270" height="20"/>
+                                                        <fontDescription key="fontDescription" name="RobotoCondensed-Light" family="Roboto Condensed" pointSize="17"/>
+                                                        <color key="textColor" red="0.99991279840000002" green="1" blue="0.99988144639999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="YMT-PN-W3p" userLabel="confirmTextField" customClass="CustomTextField" customModule="La_Distrib_" customModuleProvider="target">
+                                                        <rect key="frame" x="5" y="27" width="270" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="256" id="JRh-ef-Qwa"/>
+                                                            <constraint firstAttribute="height" constant="30" id="iqQ-qA-I0z"/>
+                                                        </constraints>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" secureTextEntry="YES"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="insetX">
+                                                                <real key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </textField>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="hwF-kC-hcD" firstAttribute="leading" secondItem="YMT-PN-W3p" secondAttribute="leading" id="Y97-co-Awq"/>
+                                                    <constraint firstItem="YMT-PN-W3p" firstAttribute="leading" secondItem="VYd-PI-gDT" secondAttribute="leading" constant="5" id="fPw-W7-hX8"/>
+                                                    <constraint firstAttribute="trailing" secondItem="YMT-PN-W3p" secondAttribute="trailing" constant="5" id="vwf-Id-z0C"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
@@ -286,6 +317,7 @@
                     </view>
                     <connections>
                         <outlet property="allFeaturesView" destination="cDZ-kf-KEF" id="9Cj-Yl-6uo"/>
+                        <outlet property="confirmTextField" destination="YMT-PN-W3p" id="pWw-m9-gVh"/>
                         <outlet property="emailTextField" destination="RGy-Tc-jB0" id="Uvd-Fe-YsB"/>
                         <outlet property="passwordTextField" destination="V5m-HH-bHm" id="INC-kN-a6h"/>
                         <outlet property="registrateButton" destination="IkD-7L-XWM" id="19h-bo-R5d"/>

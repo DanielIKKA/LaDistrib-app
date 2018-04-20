@@ -53,7 +53,6 @@ class UserProfilPersistent {
         if context.hasChanges {
             do {
                 try context.save()
-                print("SAVED")
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -61,5 +60,20 @@ class UserProfilPersistent {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    static func deleteContex() {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "UserProfil")
+        
+        do {
+            let users = try context.fetch(fetchRequest) as! [NSManagedObject]
+            
+            for user in users {
+                context.delete(user)
+            }
+            
+            // Save Changes
+            try context.save()
+        } catch {}
     }
 }

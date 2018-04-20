@@ -14,11 +14,13 @@ class ConnectViewController : UIViewController {
     /*-------------------------------*/
         // MARK: - Public Attributs
     /*-------------------------------*/
+    //MARK: Outlets
     @IBOutlet weak var boxView: UIView!
     @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var connectButton: UIButton!
     
+    //MARK: Variables
     public var userProfils = [UserProfil]()
     
     /*-------------------------------*/
@@ -26,7 +28,7 @@ class ConnectViewController : UIViewController {
     /*-------------------------------*/
     override func loadView() {
         super.loadView()
-        setupGraphique()
+        setup()
     }
     
     override func viewDidLoad() {
@@ -37,25 +39,21 @@ class ConnectViewController : UIViewController {
         passwordTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         // Do request to fetch all existant user profils
-        chargeExistentUserProfils(for: nil, whith: nil)
-        print("there are \(userProfils.count) in this dataBase: ")
-        for user in userProfils {
-            print((user.username)!)
-            print((user.password)!)
-        }
-        
-        
+        chargeUserProfilFromDataBase()
+        displayDataBase()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "segueToRegistration") {
+            let nextViewController = segue.destination as! RegistrationViewController
+            nextViewController.userExist = userProfils
+        }
     }
     
     /*-------------------------------*/
         // MARK: - Private Méthodes
     /*-------------------------------*/
-    private func setupGraphique() {
+    private func setup() {
         // setup Login
         loginTextField.layer.borderWidth = 1
         loginTextField.layer.borderColor = #colorLiteral(red: 0.5369121432, green: 0.5369251966, blue: 0.5369181633, alpha: 1)
@@ -73,7 +71,7 @@ class ConnectViewController : UIViewController {
         self.view.addGestureRecognizer(tapGestureRecognizer)
     }
     
-    private func chargeExistentUserProfils(for userName: String?, whith password: String?) {
+    private func chargeUserProfilFromDataBase() {
         let fetchRequest: NSFetchRequest<UserProfil> = UserProfil.fetchRequest()
         
         do {
@@ -94,6 +92,16 @@ class ConnectViewController : UIViewController {
         // reaganisation of view
         UIView.animate(withDuration: 0.3) {
             self.boxView.transform = .identity
+        }
+    }
+    
+    /*-------------------------------*/
+        //MARK: - Private Debug
+    /*-------------------------------*/
+    private func displayDataBase() {
+        print("il y a \(userProfils.count)\n")
+        for user in userProfils {
+            print("\(user.username!) \n")
         }
     }
 }
