@@ -42,7 +42,7 @@
 		37654C82208601DF00B54DC1 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37654C81208601DF00B54DC1 /* RegistrationViewController.swift */; };
 		37654C862088FE5300B54DC1 /* UserProfilPersistent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37654C852088FE5300B54DC1 /* UserProfilPersistent.swift */; };
 		37654C89208909EC00B54DC1 /* UserProfil+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37654C87208909EC00B54DC1 /* UserProfil+CoreDataClass.swift */; };
-		37654C8F2089CDCA00B54DC1 /* UserProfil+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37654C8E2089CDCA00B54DC1 /* UserProfil+CoreDataProperties.swift */; };
+		37654C93208A5D6E00B54DC1 /* UserProfil+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37654C92208A5D6E00B54DC1 /* UserProfil+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,7 +83,7 @@
 		37654C81208601DF00B54DC1 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RegistrationViewController.swift; path = "La Distrib'/Main Files/Controllers/RegistrationViewController.swift"; sourceTree = SOURCE_ROOT; };
 		37654C852088FE5300B54DC1 /* UserProfilPersistent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilPersistent.swift; sourceTree = "<group>"; };
 		37654C87208909EC00B54DC1 /* UserProfil+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserProfil+CoreDataClass.swift"; sourceTree = "<group>"; };
-		37654C8E2089CDCA00B54DC1 /* UserProfil+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserProfil+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		37654C92208A5D6E00B54DC1 /* UserProfil+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserProfil+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,7 +216,7 @@
 			children = (
 				37654C852088FE5300B54DC1 /* UserProfilPersistent.swift */,
 				37654C87208909EC00B54DC1 /* UserProfil+CoreDataClass.swift */,
-				37654C8E2089CDCA00B54DC1 /* UserProfil+CoreDataProperties.swift */,
+				37654C92208A5D6E00B54DC1 /* UserProfil+CoreDataProperties.swift */,
 			);
 			path = PersistantFiles;
 			sourceTree = "<group>";
@@ -317,6 +317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37654C93208A5D6E00B54DC1 /* UserProfil+CoreDataProperties.swift in Sources */,
 				37654C89208909EC00B54DC1 /* UserProfil+CoreDataClass.swift in Sources */,
 				37654C82208601DF00B54DC1 /* RegistrationViewController.swift in Sources */,
 				3752D929207FFA720019C5FA /* La_Distrib_.xcdatamodeld in Sources */,
@@ -325,7 +326,6 @@
 				3752D93E2080CF210019C5FA /* HomeViewController.swift in Sources */,
 				37654C7E20820D9F00B54DC1 /* CustomTextField.swift in Sources */,
 				37654C862088FE5300B54DC1 /* UserProfilPersistent.swift in Sources */,
-				37654C8F2089CDCA00B54DC1 /* UserProfil+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

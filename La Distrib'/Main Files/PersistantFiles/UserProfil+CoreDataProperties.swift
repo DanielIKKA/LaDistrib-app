@@ -17,10 +17,13 @@ extension UserProfil {
         return NSFetchRequest<UserProfil>(entityName: "UserProfil")
     }
 
-    @NSManaged public var username: String?
-    @NSManaged public var password: String?
     @NSManaged public var email: String?
     @NSManaged public var isConnected: Bool
     @NSManaged public var isStayConnect: Bool
+    @NSManaged public var isAdmin : Bool
+    @NSManaged public var password: String?
+    @NSManaged public var username: String?
+    @NSManaged public var balance: Int16
+    @NSManaged public var articles: NSObject?
 
 }

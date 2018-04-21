@@ -10,6 +10,9 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
+    
+    var currentUser = UserProfil()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

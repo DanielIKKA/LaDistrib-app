@@ -55,7 +55,7 @@ class RegistrationViewController: UIViewController {
             // savegarde l'entité
             UserProfilPersistent.saveContext()
             // Actionner la segue vers connectView
-            performSegue(withIdentifier: "RegistrationToConnecSegue", sender: nil)
+            performSegue(withIdentifier: "segueToConnect", sender: nil)
         } else if (!passwordIsCorrect()) {
             alertPasswordNotCorrect()
         } else if (userIsAlreadyRegistered()) {
@@ -128,7 +128,7 @@ class RegistrationViewController: UIViewController {
     
     //MARK: alert message
     private func alertPasswordNotCorrect() {
-        let alertMessage = UIAlertController(title: "Erreur Registration", message: "password is not the same", preferredStyle: .alert)
+        let alertMessage = UIAlertController(title: "Erreur Registration", message: "password is not the same ! Please try again.", preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "Cancel", style: .cancel) { (success) in
             self.passwordTextField.text?.removeAll()
             self.confirmTextField.text?.removeAll()
@@ -141,7 +141,7 @@ class RegistrationViewController: UIViewController {
         present(alertMessage, animated: true)
     }
     private func alerUserIsAlreadyResgistered() {
-        let alertMessage = UIAlertController(title: "Erreur Registration", message: "This username or email adress is already registered !", preferredStyle: .alert)
+        let alertMessage = UIAlertController(title: "Erreur Registration", message: "This username or email adress is already registered ! Please try again.", preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "Cancel", style: .cancel) { (success) in
             self.registrateButton.isEnabled = false
             self.usernameTextField.becomeFirstResponder()

@@ -40,13 +40,35 @@ class ConnectViewController : UIViewController {
         
         // Do request to fetch all existant user profils
         chargeUserProfilFromDataBase()
-        displayDataBase()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "segueToRegistration") {
+        switch segue.identifier! {
+        case "segueToRegistration":
             let nextViewController = segue.destination as! RegistrationViewController
             nextViewController.userExist = userProfils
+            break
+        
+        case "segueToHome":
+            let nextViewController = segue.destination as! HomeViewController
+            if(currentUser() == nil) {
+                print("ERREUR")
+            } else {
+                nextViewController.currentUser = currentUser()!
+            }
+            break
+        
+        default:
+            break
+        }
+    }
+    
+    //MARK: IBActions
+    @IBAction func connection() {
+        if(isAlreadyRegistered() && isGoodPassword()) {
+            performSegue(withIdentifier: "segueToHome", sender: self)
+        } else {
+            alertConnection()
         }
     }
     
@@ -93,6 +115,53 @@ class ConnectViewController : UIViewController {
         UIView.animate(withDuration: 0.3) {
             self.boxView.transform = .identity
         }
+    }
+    
+    //MARK: Checks
+    private func isAlreadyRegistered() -> Bool {
+        for user in userProfils {
+            if((user.email)! != loginTextField.text! || (user.username)! != loginTextField.text!) {
+                return true
+            }
+        }
+        
+        return false
+    }
+    private func isGoodPassword() -> Bool {
+        var userFind : UserProfil? = nil
+        
+        // Find the good user
+        userFind = currentUser()
+        
+        // check if password is correct
+        if(userFind != nil && userFind?.password == passwordTextField.text!) {
+            return true
+        }
+        
+        return false
+    }
+    private func currentUser() -> UserProfil? {
+        for user in userProfils {
+            if (user.username == loginTextField.text! || user.email == loginTextField.text!) {
+                return user
+            }
+        }
+        return nil
+    }
+    
+    // Alert
+    private func alertConnection() {
+        let alertMessage = UIAlertController(title: "Erreur Connection", message: "Username or password isn't correct ! Please try again.", preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "Cancel", style: .cancel) { (success) in
+            self.passwordTextField.text?.removeAll()
+            self.loginTextField.text?.removeAll()
+            self.connectButton.isEnabled = false
+            self.loginTextField.becomeFirstResponder()
+        }
+        
+        alertMessage.addAction(alertAction)
+        
+        present(alertMessage, animated: true)
     }
     
     /*-------------------------------*/

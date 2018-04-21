@@ -12,5 +12,5 @@ import CoreData
 
 @objc(UserProfil)
 public class UserProfil: NSManagedObject {
-
+    
 }
