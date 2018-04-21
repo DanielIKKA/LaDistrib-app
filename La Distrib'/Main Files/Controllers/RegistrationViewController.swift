@@ -85,8 +85,14 @@ class RegistrationViewController: UIViewController {
         newUserProfil.username = usernameTextField.text!
         newUserProfil.email = emailTextField.text!
         newUserProfil.password = passwordTextField.text!
+        
         newUserProfil.isConnected = false
         newUserProfil.isStayConnect = false
+        newUserProfil.isAdmin = false
+        
+        newUserProfil.articles = nil
+        newUserProfil.balance = 0
+        
     }
     
     @objc private func didTapOnScreenToDismissKeyboard(_ sender: UITapGestureRecognizer){

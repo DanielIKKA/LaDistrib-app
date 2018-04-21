@@ -51,10 +51,11 @@ class ConnectViewController : UIViewController {
         
         case "segueToHome":
             let nextViewController = segue.destination as! HomeViewController
-            if(currentUser() == nil) {
+            let currentUser:  UserProfil? = findCurrentUser(named: loginTextField.text!)
+            if(currentUser == nil) {
                 print("ERREUR")
             } else {
-                nextViewController.currentUser = currentUser()!
+                nextViewController.currentUser = currentUser
             }
             break
         
@@ -66,9 +67,12 @@ class ConnectViewController : UIViewController {
     //MARK: IBActions
     @IBAction func connection() {
         if(isAlreadyRegistered() && isGoodPassword()) {
-            performSegue(withIdentifier: "segueToHome", sender: self)
+            let currentUser : UserProfil? = findCurrentUser(named: loginTextField.text!)
+            
+            connect(currentUser: currentUser!)
+            alertStayConnected(currentUser!)
         } else {
-            alertConnection()
+            alertErrorConnection()
         }
     }
     
@@ -116,6 +120,16 @@ class ConnectViewController : UIViewController {
             self.boxView.transform = .identity
         }
     }
+    private func connect(currentUser : UserProfil) {
+        // disconnect all
+        for user in self.userProfils {
+            user.isConnected = false
+            user.isStayConnect = false
+        }
+        
+        // connect current user
+        currentUser.isConnected = true
+    }
     
     //MARK: Checks
     private func isAlreadyRegistered() -> Bool {
@@ -128,10 +142,8 @@ class ConnectViewController : UIViewController {
         return false
     }
     private func isGoodPassword() -> Bool {
-        var userFind : UserProfil? = nil
-        
-        // Find the good user
-        userFind = currentUser()
+         // Find the good user
+        let userFind : UserProfil? = findCurrentUser(named: loginTextField.text!)
         
         // check if password is correct
         if(userFind != nil && userFind?.password == passwordTextField.text!) {
@@ -140,7 +152,7 @@ class ConnectViewController : UIViewController {
         
         return false
     }
-    private func currentUser() -> UserProfil? {
+    private func findCurrentUser(named: String) -> UserProfil? {
         for user in userProfils {
             if (user.username == loginTextField.text! || user.email == loginTextField.text!) {
                 return user
@@ -149,12 +161,11 @@ class ConnectViewController : UIViewController {
         return nil
     }
     
-    // Alert
-    private func alertConnection() {
+    //MARK: Alert
+    private func alertErrorConnection() {
         let alertMessage = UIAlertController(title: "Erreur Connection", message: "Username or password isn't correct ! Please try again.", preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "Cancel", style: .cancel) { (success) in
             self.passwordTextField.text?.removeAll()
-            self.loginTextField.text?.removeAll()
             self.connectButton.isEnabled = false
             self.loginTextField.becomeFirstResponder()
         }
@@ -162,6 +173,22 @@ class ConnectViewController : UIViewController {
         alertMessage.addAction(alertAction)
         
         present(alertMessage, animated: true)
+    }
+    private func alertStayConnected(_ user: UserProfil) {
+        let alertMessage = UIAlertController(title: nil, message: "Do you want to stay connected ?", preferredStyle: .actionSheet)
+        let actionStayConnected = UIAlertAction(title: "Yes", style: .default) { (success) in
+            user.isStayConnect = true
+            self.performSegue(withIdentifier: "segueToHome", sender: self)
+        }
+        let actionNo = UIAlertAction(title: "No", style: .destructive) { (success) in
+            user.isStayConnect = false
+            self.performSegue(withIdentifier: "segueToHome", sender: self)
+        }
+        
+        alertMessage.addAction(actionStayConnected)
+        alertMessage.addAction(actionNo)
+        
+        present(alertMessage, animated: true, completion: nil)
     }
     
     /*-------------------------------*/
