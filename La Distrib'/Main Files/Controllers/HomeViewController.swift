@@ -9,19 +9,24 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-
+    
+    /*-------------------------------*/
+        // MARK: - Public Attributs
+    /*-------------------------------*/
+    //MARK: Outlets
     @IBOutlet weak var WelcomeLabel: UILabel!
     @IBOutlet weak var BalanceLabel: UILabel!
     
+    //MARK: Variable
     var currentUser : UserProfil?
     
-    override func loadView() {
-        WelcomeLabel.text = "Bonjour \(String(describing: currentUser?.username!))"
-        BalanceLabel.text = "Crédit: \(String(describing: currentUser?.balance))€"
-    }
-    
+    /*-------------------------------*/
+        // MARK: - Public Fonctions
+    /*-------------------------------*/
     override func viewDidLoad() {
         super.viewDidLoad()
+        WelcomeLabel.text = "Welcome \(String(describing: currentUser!.username!))"
+        BalanceLabel.text = "Balance: \(String(describing: currentUser!.balance))€"
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,5 +34,17 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK: IBActions
+    @IBAction func diconnect() {
+        currentUser?.isStayConnect = false
+        currentUser?.isConnected = false
+        UserProfilPersistent.saveContext()
+        
+        performSegue(withIdentifier: "segueToConnectFromHome", sender: self)
+    
+    }
 
+    
+    
+    
 }

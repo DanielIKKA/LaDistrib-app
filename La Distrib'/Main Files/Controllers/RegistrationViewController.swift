@@ -18,6 +18,7 @@ class RegistrationViewController: UIViewController {
     @IBOutlet weak var emailTextField: CustomTextField!
     @IBOutlet weak var passwordTextField: CustomTextField!
     @IBOutlet weak var registrateButton: UIButton!
+    @IBOutlet weak var returnButton: UIButton!
     @IBOutlet weak var confirmTextField: CustomTextField!
     
     //MARK: Variables
@@ -62,6 +63,9 @@ class RegistrationViewController: UIViewController {
             alerUserIsAlreadyResgistered()
         }
     }
+    @IBAction func returnToConnectView() {
+        performSegue(withIdentifier: "segueToConnect", sender: self)
+    }
     
     /*-------------------------------*/
         //MARK: - Private Methodes
@@ -103,11 +107,14 @@ class RegistrationViewController: UIViewController {
             passwordTextField.resignFirstResponder()
         } else if(emailTextField.isFirstResponder) {
             emailTextField.resignFirstResponder()
+        } else if(confirmTextField.isFirstResponder) {
+            confirmTextField.resignFirstResponder()
         }
         
         // reaganisation of view
         UIView.animate(withDuration: 0.3) {
             self.allFeaturesView.transform = .identity
+            self.returnButton.isHidden = false
         }
     }
     
@@ -162,8 +169,10 @@ class RegistrationViewController: UIViewController {
         //MARK: - Private Debug
     /*-------------------------------*/
     private func displayUserArray() {
+        print(userExist.count)
+        
         for user in userExist {
-            print("\(user) + \n")
+            print("\(user) \n")
         }
     }
 }
@@ -176,6 +185,7 @@ extension RegistrationViewController : UITextFieldDelegate {
     public func textFieldDidBeginEditing(_ textField: UITextField) { // became first responder
         let translationY: CGFloat = -40
         
+        returnButton.isHidden = true
         deplacementY(textField: textField, translationY: translationY)
     }
 
@@ -207,6 +217,7 @@ extension RegistrationViewController : UITextFieldDelegate {
             textField.resignFirstResponder()
             UIView.animate(withDuration: 0.3) {
                 self.allFeaturesView.transform = .identity
+                self.returnButton.isHidden = false
             }
             return true
         }
