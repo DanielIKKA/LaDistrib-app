@@ -46,7 +46,7 @@ class RegistrationViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     /*-------------------------------*/
-        //MARK: IBActions
+            //MARK: IBActions
     /*-------------------------------*/
     @IBAction func registrate() {
         if(passwordIsCorrect() && !userIsAlreadyRegistered()){
