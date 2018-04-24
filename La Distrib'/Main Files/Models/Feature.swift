@@ -9,15 +9,17 @@
 import Foundation
 import UIKit
 
-class Feature {
+public class Feature :  NSObject {
     
     let title : String
     let image : UIImage
-    let price : Double
+    let unitPrice : Double
+    let multiple: Int?
     
-    init(image : UIImage, title: String, price: Double) {
-        self.image = image
+    init(imageNamed: String, title: String, price: Double, multiple : Int?) {
+        self.image = UIImage(named: imageNamed)!
         self.title = title
-        self.price = price
+        self.unitPrice = price
+        self.multiple = multiple
     }
 }

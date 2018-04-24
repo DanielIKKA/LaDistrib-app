@@ -40,6 +40,12 @@ class ConnectViewController : UIViewController {
         
         // Do request to fetch all existant user profils
         chargeUserProfilFromDataBase()
+        displayDataBase()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        ConnectCurrentUserIfExist()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -51,10 +57,11 @@ class ConnectViewController : UIViewController {
         
         case "segueToHome":
             let nextViewController = segue.destination as! HomeViewController
-            let currentUser:  UserProfil? = findCurrentUser(named: loginTextField.text!)
+            let currentUser:  UserProfil? = findUserConnected()
             if(currentUser == nil) {
                 print("ERREUR")
             } else {
+                //currentUser?.articles.append(Feature(imageNamed: "paperIconSolo", title: "paper", price: 0.10, multiple: 3))
                 nextViewController.currentUser = currentUser
             }
             break
@@ -68,6 +75,7 @@ class ConnectViewController : UIViewController {
     @IBAction func connection() {
         if(isAlreadyRegistered() && isGoodPassword()) {
             let currentUser : UserProfil? = findCurrentUser(named: loginTextField.text!)
+            
             
             connect(currentUser: currentUser!)
             alertStayConnected(currentUser!)
@@ -105,6 +113,20 @@ class ConnectViewController : UIViewController {
             self.userProfils.removeAll()
             self.userProfils = users
         } catch {}
+    }
+    
+    private func ConnectCurrentUserIfExist() {
+        for user in userProfils {
+            if user.isStayConnect {
+                performSegue(withIdentifier: "segueToHome", sender: self)
+            } else {
+                // disconnect all
+                for user in self.userProfils {
+                    user.isConnected = false
+                    user.isStayConnect = false
+                }
+            }
+        }
     }
     
     @objc private func didTapOnScreenToDismissKeyboard(_ sender: UITapGestureRecognizer){
@@ -160,6 +182,14 @@ class ConnectViewController : UIViewController {
         }
         return nil
     }
+    private func findUserConnected() -> UserProfil? {
+        for user in userProfils {
+            if(user.isConnected){
+                return user
+            }
+        }
+        return nil
+    }
     
     //MARK: Alert
     private func alertErrorConnection() {
@@ -178,10 +208,12 @@ class ConnectViewController : UIViewController {
         let alertMessage = UIAlertController(title: nil, message: "Do you want to stay connected ?", preferredStyle: .actionSheet)
         let actionStayConnected = UIAlertAction(title: "Yes", style: .default) { (success) in
             user.isStayConnect = true
+            UserProfilPersistent.saveContext()
             self.performSegue(withIdentifier: "segueToHome", sender: self)
         }
         let actionNo = UIAlertAction(title: "No", style: .destructive) { (success) in
             user.isStayConnect = false
+            UserProfilPersistent.saveContext()
             self.performSegue(withIdentifier: "segueToHome", sender: self)
         }
         
@@ -197,7 +229,7 @@ class ConnectViewController : UIViewController {
     private func displayDataBase() {
         print("il y a \(userProfils.count)\n")
         for user in userProfils {
-            print("\(user.username!) \n")
+            print("\(user.username!) , \(user.isStayConnect)\n")
         }
     }
 }

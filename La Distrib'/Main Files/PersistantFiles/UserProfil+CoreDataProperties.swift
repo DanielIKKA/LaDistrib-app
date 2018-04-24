@@ -24,6 +24,5 @@ extension UserProfil {
     @NSManaged public var password: String?
     @NSManaged public var username: String?
     @NSManaged public var balance: Int16
-    @NSManaged public var articles: NSObject?
-
+    @NSManaged public var articles: [Feature]
 }

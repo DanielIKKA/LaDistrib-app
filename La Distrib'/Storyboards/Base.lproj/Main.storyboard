@@ -379,7 +379,7 @@
                                     <color key="titleColor" red="0.99991279840000002" green="1" blue="0.99988144639999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="diconnect" destination="Vbj-6p-Qkc" eventType="touchUpInside" id="PZt-Jx-8Lw"/>
+                                    <action selector="disconnect" destination="Vbj-6p-Qkc" eventType="touchUpInside" id="PZt-Jx-8Lw"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="XUI-Fx-BHA" userLabel="Title Stack View">

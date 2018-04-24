@@ -35,16 +35,25 @@ class HomeViewController: UIViewController {
         welcomeLabel.text = "Welcome \(String(describing: currentUser!.username!))"
         balanceLabel.text = "\(String(describing: currentUser!.balance))€"
         
-        featuresPurshased.append(Feature(image: UIImage(named: "Registrate")!, title: "title", price: 0.3))
+        featuresPurshased = (currentUser?.articles)!
     }
     
     //MARK: IBActions
-    @IBAction func diconnect() {
+    @IBAction func disconnect() {
         currentUser?.isStayConnect = false
         currentUser?.isConnected = false
         UserProfilPersistent.saveContext()
         
         performSegue(withIdentifier: "segueToConnectFromHome", sender: self)
+    }
+    
+    public func saveConnectionStatus() {
+        if(self.currentUser?.isStayConnect)! {
+            return
+        } else {
+            self.currentUser?.isConnected = false
+            self.currentUser?.isStayConnect = false
+        }
     }
 }
 
@@ -62,14 +71,27 @@ extension HomeViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomHomeCell", for: indexPath) as! CustomTableViewCell
-     
-        cell.featureImage.image = featuresPurshased[indexPath.row].image
-        cell.featureTitle.text = featuresPurshased[indexPath.row].title
-        cell.totalPrice.text = String(describing: featuresPurshased[indexPath.row].price)
+        
+        setupCell(cell, forKey: featuresPurshased[indexPath.row].title, indexPath: indexPath)
         return cell
      }
  
-    
+    private func setupCell(_ cell: CustomTableViewCell, forKey: String, indexPath: IndexPath)
+    {
+        
+        switch forKey {
+        
+        case "paper":
+            cell.featureImage.image = featuresPurshased[indexPath.row].image
+            cell.featureTitle.text = featuresPurshased[indexPath.row].title
+            cell.unitPrice.text = String(describing: featuresPurshased[indexPath.row].unitPrice)
+            break
+        default:
+            break
+        }
+        
+        
+    }
     /*
      // Override to support conditional editing of the table view.
      override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

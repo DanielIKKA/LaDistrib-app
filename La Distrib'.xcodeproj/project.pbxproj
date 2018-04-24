@@ -45,7 +45,6 @@
 		37654CC3208B441E00B54DC1 /* Oswald-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37654CBD208B441D00B54DC1 /* Oswald-SemiBold.ttf */; };
 		37654CC7208CDF3400B54DC1 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37654CC6208CDF3400B54DC1 /* CustomTableViewCell.swift */; };
 		37654CC9208DBB7F00B54DC1 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37654CC8208DBB7F00B54DC1 /* Feature.swift */; };
-		37654CCB208E377D00B54DC1 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37654CCA208E377D00B54DC1 /* HomeTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,7 +88,6 @@
 		37654CBD208B441D00B54DC1 /* Oswald-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Oswald-SemiBold.ttf"; path = "../../../../Sketch/Ressources/fonts/Oswald/Oswald-SemiBold.ttf"; sourceTree = "<group>"; };
 		37654CC6208CDF3400B54DC1 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		37654CC8208DBB7F00B54DC1 /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
-		37654CCA208E377D00B54DC1 /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,7 +152,6 @@
 				3752D922207FFA720019C5FA /* ConnectViewController.swift */,
 				3752D93D2080CF210019C5FA /* HomeViewController.swift */,
 				37654C81208601DF00B54DC1 /* RegistrationViewController.swift */,
-				37654CCA208E377D00B54DC1 /* HomeTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -326,7 +323,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37654CCB208E377D00B54DC1 /* HomeTableViewController.swift in Sources */,
 				37654C93208A5D6E00B54DC1 /* UserProfil+CoreDataProperties.swift in Sources */,
 				37654CC7208CDF3400B54DC1 /* CustomTableViewCell.swift in Sources */,
 				37654C89208909EC00B54DC1 /* UserProfil+CoreDataClass.swift in Sources */,

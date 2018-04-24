@@ -94,7 +94,7 @@ class RegistrationViewController: UIViewController {
         newUserProfil.isStayConnect = false
         newUserProfil.isAdmin = false
         
-        newUserProfil.articles = nil
+        newUserProfil.articles = []
         newUserProfil.balance = 0
         
     }
