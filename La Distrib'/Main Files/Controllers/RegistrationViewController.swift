@@ -18,9 +18,13 @@ class RegistrationViewController: UIViewController {
     @IBOutlet weak var emailTextField: CustomTextField!
     @IBOutlet weak var passwordTextField: CustomTextField!
     @IBOutlet weak var registrateButton: UIButton!
+    @IBOutlet weak var returnButton: UIButton!
     @IBOutlet weak var confirmTextField: CustomTextField!
     
     //MARK: Variables
+    var dataController : DataController {
+        return (UIApplication.shared.delegate as! AppDelegate).dataController
+    }
     var userExist = [UserProfil]()
     
     /*-------------------------------*/
@@ -45,22 +49,26 @@ class RegistrationViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     /*-------------------------------*/
-        //MARK: IBActions
+            //MARK: IBActions
     /*-------------------------------*/
     @IBAction func registrate() {
         if(passwordIsCorrect() && !userIsAlreadyRegistered()){
-            // rentrer les données saisie dans l'entité
+            // creer l'entity avec les données saisie dans l'entité
             newUser()
             
             // savegarde l'entité
-            UserProfilPersistent.saveContext()
+            
+            
             // Actionner la segue vers connectView
-            performSegue(withIdentifier: "RegistrationToConnecSegue", sender: nil)
+            performSegue(withIdentifier: "segueToConnect", sender: nil)
         } else if (!passwordIsCorrect()) {
             alertPasswordNotCorrect()
         } else if (userIsAlreadyRegistered()) {
             alerUserIsAlreadyResgistered()
         }
+    }
+    @IBAction func returnToConnectView() {
+        performSegue(withIdentifier: "segueToConnect", sender: self)
     }
     
     /*-------------------------------*/
@@ -79,14 +87,19 @@ class RegistrationViewController: UIViewController {
     }
     
     private func newUser() {
-        // init du context utilisé
-        let newUserProfil = UserProfil(context: UserProfilPersistent.context)
+        // init de l'objet dans le manageObjectContext
+        let newUserProfil = UserProfil(context: dataController.managedObjectContext)
         
         newUserProfil.username = usernameTextField.text!
         newUserProfil.email = emailTextField.text!
         newUserProfil.password = passwordTextField.text!
+        
         newUserProfil.isConnected = false
         newUserProfil.isStayConnect = false
+        newUserProfil.isAdmin = false
+
+        newUserProfil.balance = 0
+        
     }
     
     @objc private func didTapOnScreenToDismissKeyboard(_ sender: UITapGestureRecognizer){
@@ -97,11 +110,14 @@ class RegistrationViewController: UIViewController {
             passwordTextField.resignFirstResponder()
         } else if(emailTextField.isFirstResponder) {
             emailTextField.resignFirstResponder()
+        } else if(confirmTextField.isFirstResponder) {
+            confirmTextField.resignFirstResponder()
         }
         
         // reaganisation of view
         UIView.animate(withDuration: 0.3) {
             self.allFeaturesView.transform = .identity
+            self.returnButton.isHidden = false
         }
     }
     
@@ -128,7 +144,7 @@ class RegistrationViewController: UIViewController {
     
     //MARK: alert message
     private func alertPasswordNotCorrect() {
-        let alertMessage = UIAlertController(title: "Erreur Registration", message: "password is not the same", preferredStyle: .alert)
+        let alertMessage = UIAlertController(title: "Erreur Registration", message: "password is not the same ! Please try again.", preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "Cancel", style: .cancel) { (success) in
             self.passwordTextField.text?.removeAll()
             self.confirmTextField.text?.removeAll()
@@ -141,7 +157,7 @@ class RegistrationViewController: UIViewController {
         present(alertMessage, animated: true)
     }
     private func alerUserIsAlreadyResgistered() {
-        let alertMessage = UIAlertController(title: "Erreur Registration", message: "This username or email adress is already registered !", preferredStyle: .alert)
+        let alertMessage = UIAlertController(title: "Erreur Registration", message: "This username or email adress is already registered ! Please try again.", preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "Cancel", style: .cancel) { (success) in
             self.registrateButton.isEnabled = false
             self.usernameTextField.becomeFirstResponder()
@@ -156,8 +172,10 @@ class RegistrationViewController: UIViewController {
         //MARK: - Private Debug
     /*-------------------------------*/
     private func displayUserArray() {
+        print(userExist.count)
+        
         for user in userExist {
-            print("\(user) + \n")
+            print("\(user) \n")
         }
     }
 }
@@ -170,6 +188,7 @@ extension RegistrationViewController : UITextFieldDelegate {
     public func textFieldDidBeginEditing(_ textField: UITextField) { // became first responder
         let translationY: CGFloat = -40
         
+        returnButton.isHidden = true
         deplacementY(textField: textField, translationY: translationY)
     }
 
@@ -201,6 +220,7 @@ extension RegistrationViewController : UITextFieldDelegate {
             textField.resignFirstResponder()
             UIView.animate(withDuration: 0.3) {
                 self.allFeaturesView.transform = .identity
+                self.returnButton.isHidden = false
             }
             return true
         }
