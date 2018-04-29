@@ -57,7 +57,7 @@ class HomeViewController: UIViewController {
         let currentUserName = currentUser?.value(forKey: "username") as! String
         let balance = currentUser?.value(forKey: "balance") as! Double
         
-        welcomeLabel.text = "Welcome \(currentUserName)"
+        welcomeLabel.text = currentUserName
         balanceLabel.text = "\(String(describing: balance))€"
         
         historyList.layer.cornerRadius = 8

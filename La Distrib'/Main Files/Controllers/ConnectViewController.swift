@@ -68,12 +68,6 @@ class ConnectViewController : UIViewController {
             if(currentUser == nil) {
                 print("ERREUR")
             } else {
-                let feature = Feature(context: manageObjectContext)
-                
-                feature.setupConfiguration(forKey: FeatureConstants.Key.kPaperSingle)
-                
-                currentUser?.addToFeature(feature)
-                dataController.saveContext()
                 nextViewController.currentUser = currentUser
             }
             break
@@ -87,7 +81,6 @@ class ConnectViewController : UIViewController {
     @IBAction func connection() {
         if(isAlreadyRegistered() && isGoodPassword()) {
             let currentUser : UserProfil? = findCurrentUser(named: loginTextField.text!)
-            
             
             connect(currentUser: currentUser!)
             alertStayConnected(currentUser!)
