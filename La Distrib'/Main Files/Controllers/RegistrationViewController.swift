@@ -22,6 +22,9 @@ class RegistrationViewController: UIViewController {
     @IBOutlet weak var confirmTextField: CustomTextField!
     
     //MARK: Variables
+    var dataController : DataController {
+        return (UIApplication.shared.delegate as! AppDelegate).dataController
+    }
     var userExist = [UserProfil]()
     
     /*-------------------------------*/
@@ -50,11 +53,12 @@ class RegistrationViewController: UIViewController {
     /*-------------------------------*/
     @IBAction func registrate() {
         if(passwordIsCorrect() && !userIsAlreadyRegistered()){
-            // rentrer les données saisie dans l'entité
+            // creer l'entity avec les données saisie dans l'entité
             newUser()
             
             // savegarde l'entité
-            UserProfilPersistent.saveContext()
+            
+            
             // Actionner la segue vers connectView
             performSegue(withIdentifier: "segueToConnect", sender: nil)
         } else if (!passwordIsCorrect()) {
@@ -83,8 +87,8 @@ class RegistrationViewController: UIViewController {
     }
     
     private func newUser() {
-        // init du context utilisé
-        let newUserProfil = UserProfil(context: UserProfilPersistent.context)
+        // init de l'objet dans le manageObjectContext
+        let newUserProfil = UserProfil(context: dataController.managedObjectContext)
         
         newUserProfil.username = usernameTextField.text!
         newUserProfil.email = emailTextField.text!
@@ -93,8 +97,7 @@ class RegistrationViewController: UIViewController {
         newUserProfil.isConnected = false
         newUserProfil.isStayConnect = false
         newUserProfil.isAdmin = false
-        
-        newUserProfil.articles = []
+
         newUserProfil.balance = 0
         
     }

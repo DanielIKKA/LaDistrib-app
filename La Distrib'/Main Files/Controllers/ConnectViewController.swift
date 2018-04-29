@@ -20,7 +20,14 @@ class ConnectViewController : UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var connectButton: UIButton!
     
-    //MARK: Variables
+    //MARK: CoreData Variables
+    var dataController : DataController {
+        return (UIApplication.shared.delegate as! AppDelegate).dataController
+    }
+    var manageObjectContext : NSManagedObjectContext {
+        return dataController.managedObjectContext
+    }
+    
     public var userProfils = [UserProfil]()
     
     /*-------------------------------*/
@@ -61,7 +68,12 @@ class ConnectViewController : UIViewController {
             if(currentUser == nil) {
                 print("ERREUR")
             } else {
-                //currentUser?.articles.append(Feature(imageNamed: "paperIconSolo", title: "paper", price: 0.10, multiple: 3))
+                let feature = Feature(context: manageObjectContext)
+                
+                feature.setupConfiguration(forKey: FeatureConstants.Key.kPaperSingle)
+                
+                currentUser?.addToFeature(feature)
+                dataController.saveContext()
                 nextViewController.currentUser = currentUser
             }
             break
@@ -106,13 +118,15 @@ class ConnectViewController : UIViewController {
     }
     
     private func chargeUserProfilFromDataBase() {
-        let fetchRequest: NSFetchRequest<UserProfil> = UserProfil.fetchRequest()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "UserProfil")
         
         do {
-            let users = try UserProfilPersistent.context.fetch(fetchRequest)
+            let users = try manageObjectContext.fetch(fetchRequest) as! [UserProfil]
             self.userProfils.removeAll()
             self.userProfils = users
-        } catch {}
+        } catch {
+            fatalError("there are an error fetching the list of UsersProfils")
+        }
     }
     
     private func ConnectCurrentUserIfExist() {
@@ -156,7 +170,7 @@ class ConnectViewController : UIViewController {
     //MARK: Checks
     private func isAlreadyRegistered() -> Bool {
         for user in userProfils {
-            if((user.email)! != loginTextField.text! || (user.username)! != loginTextField.text!) {
+            if((user.email) != loginTextField.text! || (user.username) != loginTextField.text!) {
                 return true
             }
         }
@@ -208,12 +222,12 @@ class ConnectViewController : UIViewController {
         let alertMessage = UIAlertController(title: nil, message: "Do you want to stay connected ?", preferredStyle: .actionSheet)
         let actionStayConnected = UIAlertAction(title: "Yes", style: .default) { (success) in
             user.isStayConnect = true
-            UserProfilPersistent.saveContext()
+            self.dataController.saveContext()
             self.performSegue(withIdentifier: "segueToHome", sender: self)
         }
         let actionNo = UIAlertAction(title: "No", style: .destructive) { (success) in
             user.isStayConnect = false
-            UserProfilPersistent.saveContext()
+            self.dataController.saveContext()
             self.performSegue(withIdentifier: "segueToHome", sender: self)
         }
         
@@ -229,7 +243,7 @@ class ConnectViewController : UIViewController {
     private func displayDataBase() {
         print("il y a \(userProfils.count)\n")
         for user in userProfils {
-            print("\(user.username!) , \(user.isStayConnect)\n")
+            print("\(user.username) , \(user.isStayConnect), \(String(describing: user.feature)))\n")
         }
     }
 }

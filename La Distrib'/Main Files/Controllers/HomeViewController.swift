@@ -19,6 +19,9 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var historyList: UITableView!
     
     //MARK: Variable
+    var dataController : DataController {
+        return (UIApplication.shared.delegate as! AppDelegate).dataController
+    }
     var currentUser : UserProfil?
     var featuresPurshased = [Feature]()
     
@@ -27,33 +30,41 @@ class HomeViewController: UIViewController {
     /*-------------------------------*/
     override func viewDidLoad() {
         super.viewDidLoad()
-        historyList.delegate = self
-        historyList.dataSource = self
+        setupView()
         
-        historyList.layer.cornerRadius = 8
-        
-        welcomeLabel.text = "Welcome \(String(describing: currentUser!.username!))"
-        balanceLabel.text = "\(String(describing: currentUser!.balance))€"
-        
-        featuresPurshased = (currentUser?.articles)!
+        reloadFeaturesPurshased()
     }
     
     //MARK: IBActions
     @IBAction func disconnect() {
         currentUser?.isStayConnect = false
         currentUser?.isConnected = false
-        UserProfilPersistent.saveContext()
+        dataController.saveContext()
         
         performSegue(withIdentifier: "segueToConnectFromHome", sender: self)
     }
     
-    public func saveConnectionStatus() {
-        if(self.currentUser?.isStayConnect)! {
-            return
-        } else {
-            self.currentUser?.isConnected = false
-            self.currentUser?.isStayConnect = false
-        }
+    /*-------------------------------*/
+        //MARK: - Private Fonctions
+    /*-------------------------------*/
+    private func setupView() {
+    
+        // init Delegate
+        historyList.delegate = self
+        historyList.dataSource = self
+        
+        // GraphicSetup
+        let currentUserName = currentUser?.value(forKey: "username") as! String
+        let balance = currentUser?.value(forKey: "balance") as! Double
+        
+        welcomeLabel.text = "Welcome \(currentUserName)"
+        balanceLabel.text = "\(String(describing: balance))€"
+        
+        historyList.layer.cornerRadius = 8
+        
+    }
+    private func reloadFeaturesPurshased() {
+        featuresPurshased = currentUser?.feature?.allObjects as! [Feature]
     }
 }
 
@@ -61,7 +72,12 @@ class HomeViewController: UIViewController {
 extension HomeViewController : UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return featuresPurshased.count
+        if currentUser?.feature == nil {
+            return 0
+        } else {
+            return (currentUser?.feature!.count)!
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -72,26 +88,18 @@ extension HomeViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomHomeCell", for: indexPath) as! CustomTableViewCell
         
-        setupCell(cell, forKey: featuresPurshased[indexPath.row].title, indexPath: indexPath)
+        setupCell(cell, indexPath: indexPath)
         return cell
      }
  
-    private func setupCell(_ cell: CustomTableViewCell, forKey: String, indexPath: IndexPath)
+    private func setupCell(_ cell: CustomTableViewCell, indexPath: IndexPath)
     {
-        
-        switch forKey {
-        
-        case "paper":
-            cell.featureImage.image = featuresPurshased[indexPath.row].image
-            cell.featureTitle.text = featuresPurshased[indexPath.row].title
-            cell.unitPrice.text = String(describing: featuresPurshased[indexPath.row].unitPrice)
-            break
-        default:
-            break
-        }
-        
-        
+        let feature = featuresPurshased[indexPath.row]
+        cell.featureImage.image = UIImage(named: (feature.imageNamed))
+        cell.featureTitle.text = featuresPurshased[indexPath.row].title
+        cell.unitPrice.text = String(describing: featuresPurshased[indexPath.row].unitPrice)
     }
+    
     /*
      // Override to support conditional editing of the table view.
      override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
