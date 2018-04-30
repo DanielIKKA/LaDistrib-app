@@ -20,6 +20,7 @@ class RegistrationViewController: UIViewController {
     @IBOutlet weak var registrateButton: UIButton!
     @IBOutlet weak var returnButton: UIButton!
     @IBOutlet weak var confirmTextField: CustomTextField!
+    @IBOutlet weak var titleLabel: UILabel!
     
     //MARK: Variables
     var dataController : DataController {
@@ -117,6 +118,7 @@ class RegistrationViewController: UIViewController {
         // reaganisation of view
         UIView.animate(withDuration: 0.3) {
             self.allFeaturesView.transform = .identity
+            self.titleLabel.isHidden = false
             self.returnButton.isHidden = false
         }
     }
@@ -189,6 +191,7 @@ extension RegistrationViewController : UITextFieldDelegate {
         let translationY: CGFloat = -40
         
         returnButton.isHidden = true
+        titleLabel.isHidden = true
         deplacementY(textField: textField, translationY: translationY)
     }
 
@@ -221,6 +224,7 @@ extension RegistrationViewController : UITextFieldDelegate {
             UIView.animate(withDuration: 0.3) {
                 self.allFeaturesView.transform = .identity
                 self.returnButton.isHidden = false
+                self.titleLabel.isHidden = false
             }
             return true
         }

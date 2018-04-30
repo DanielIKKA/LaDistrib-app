@@ -36,12 +36,14 @@ class HomeViewController: UIViewController {
     }
     
     //MARK: IBActions
-    @IBAction func disconnect() {
-        currentUser?.isStayConnect = false
-        currentUser?.isConnected = false
-        dataController.saveContext()
-        
-        performSegue(withIdentifier: "segueToConnectFromHome", sender: self)
+    @IBAction func pushButton(_ sender: UIButton) {
+        if(sender.tag == 0) {
+            disconnect()
+        } else if sender.tag == 1 {
+            print("Go setting")
+        } else if sender.tag == 2 {
+            performSegue(withIdentifier: "segueToStore", sender: self)
+        }
     }
     
     /*-------------------------------*/
@@ -65,6 +67,13 @@ class HomeViewController: UIViewController {
     }
     private func reloadFeaturesPurshased() {
         featuresPurshased = currentUser?.feature?.allObjects as! [Feature]
+    }
+    func disconnect() {
+        currentUser?.isStayConnect = false
+        currentUser?.isConnected = false
+        dataController.saveContext()
+        
+        performSegue(withIdentifier: "segueToConnectFromHome", sender: self)
     }
 }
 
@@ -135,15 +144,14 @@ extension HomeViewController : UITableViewDataSource {
      }
      */
     
-    /*
+    
      // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+        if(segue.identifier == "segueToStore") {
+            let ControllerDest = segue.destination as! StoreViewController
+            ControllerDest.currentUser = self.currentUser
+        }
+    }
 }
 
 //MARK: - TableViewDelegate

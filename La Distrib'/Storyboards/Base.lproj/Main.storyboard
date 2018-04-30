@@ -371,6 +371,7 @@
                         <outlet property="passwordTextField" destination="V5m-HH-bHm" id="INC-kN-a6h"/>
                         <outlet property="registrateButton" destination="IkD-7L-XWM" id="19h-bo-R5d"/>
                         <outlet property="returnButton" destination="fPn-E8-NQ2" id="dLJ-Dh-Rky"/>
+                        <outlet property="titleLabel" destination="rBf-F7-kxT" id="Pr3-nY-gJ2"/>
                         <outlet property="usernameTextField" destination="q9F-6l-Bbu" id="WRz-Zn-Hsm"/>
                         <segue destination="n6J-Qx-P04" kind="presentation" identifier="segueToConnect" modalTransitionStyle="flipHorizontal" id="rE7-Dc-9vH"/>
                     </connections>
@@ -390,13 +391,16 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="X8f-rj-HYV" userLabel="Buttons">
                                 <rect key="frame" x="220" y="35" width="70" height="30"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sAZ-De-SxH" userLabel="Settings">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sAZ-De-SxH" userLabel="Settings">
                                         <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="3v8-3y-VoA"/>
                                             <constraint firstAttribute="width" constant="30" id="a6Q-SY-K1M"/>
                                         </constraints>
                                         <state key="normal" backgroundImage="settingIcon"/>
+                                        <connections>
+                                            <action selector="pushButton:" destination="Vbj-6p-Qkc" eventType="touchUpInside" id="34j-cE-gO2"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vp6-tk-TwV">
                                         <rect key="frame" x="40" y="0.0" width="30" height="30"/>
@@ -407,7 +411,7 @@
                                             <color key="titleColor" red="0.99991279840000002" green="1" blue="0.99988144639999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="disconnect" destination="Vbj-6p-Qkc" eventType="touchUpInside" id="PZt-Jx-8Lw"/>
+                                            <action selector="pushButton:" destination="Vbj-6p-Qkc" eventType="touchUpInside" id="aQC-tc-5JI"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -440,7 +444,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="PAS-hG-4Qc" userLabel="Balance">
-                                        <rect key="frame" x="74" y="41" width="122.5" height="23.5"/>
+                                        <rect key="frame" x="68" y="41" width="134" height="23.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance : " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IuB-gq-tKi" userLabel="BalanceLabel">
                                                 <rect key="frame" x="0.0" y="0.0" width="82" height="23.5"/>
@@ -448,8 +452,8 @@
                                                 <color key="textColor" red="0.99991279840000002" green="1" blue="0.99988144639999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9.5€" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rVh-js-XTF" userLabel="ValueLabel">
-                                                <rect key="frame" x="82" y="0.0" width="40.5" height="23.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9.64€" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rVh-js-XTF" userLabel="ValueLabel">
+                                                <rect key="frame" x="82" y="0.0" width="52" height="23.5"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="20"/>
                                                 <color key="textColor" red="0.99991279840000002" green="1" blue="0.99988144639999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -509,7 +513,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="RTn-Xv-alf" userLabel="SecondStackView">
-                                                            <rect key="frame" x="300" y="24" width="25" height="28.5"/>
+                                                            <rect key="frame" x="206" y="24" width="25" height="28.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x1" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3b9-KT-4Gc" userLabel="multiple">
                                                                     <rect key="frame" x="0.0" y="0.0" width="25" height="16.5"/>
@@ -559,7 +563,7 @@
                                     <constraint firstItem="Na5-2j-Oyv" firstAttribute="leading" secondItem="yN3-bv-2sX" secondAttribute="leading" constant="5" id="xn7-FL-Nvf"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ry-cQ-Ccf">
+                            <button opaque="NO" tag="2" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ry-cQ-Ccf">
                                 <rect key="frame" x="30" y="35" width="75" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="JhC-Rb-PDT"/>
@@ -567,6 +571,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="16"/>
                                 <state key="normal" title=" Store" image="storeIcon"/>
+                                <connections>
+                                    <action selector="pushButton:" destination="Vbj-6p-Qkc" eventType="touchUpInside" id="IPr-Ax-jDV"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.153734237" green="0.46812063459999997" blue="0.55368381739999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -596,7 +603,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T9z-Z5-89u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="469" y="280"/>
+            <point key="canvasLocation" x="468.75" y="279.92957746478874"/>
         </scene>
         <!--Store View Controller-->
         <scene sceneID="xsB-rk-H6t">
@@ -615,30 +622,93 @@
                                 <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="13"/>
                                 <state key="normal" title=" HomePage" image="Disclosure Indicator"/>
                                 <connections>
+                                    <action selector="didTapReturnButton:" destination="9Us-kC-pI4" eventType="touchUpInside" id="9mP-mU-Qr5"/>
                                     <action selector="returnToConnectView" destination="8J9-8O-h7p" eventType="touchUpInside" id="Br3-Pt-GvS"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Store" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SPB-ov-nnM">
-                                <rect key="frame" x="30" y="65" width="96" height="50"/>
+                                <rect key="frame" x="30" y="65" width="96" height="36"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="NfN-su-Keq"/>
+                                    <constraint firstAttribute="height" constant="36" id="NfN-su-Keq"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="40"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fkw-4i-YVw" userLabel="BalanceLabel">
+                                <rect key="frame" x="185" y="81" width="104.5" height="20"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L9R-aa-k7G" userLabel="Title">
+                                        <rect key="frame" x="0.0" y="0.0" width="65.5" height="20"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Thin" family="Roboto" pointSize="17"/>
+                                        <color key="textColor" red="0.99991279840000002" green="1" blue="0.99988144639999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9.64€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jHD-KX-muR" userLabel="Balance">
+                                        <rect key="frame" x="65.5" y="0.0" width="39" height="20"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="15"/>
+                                        <color key="textColor" red="0.99991279840000002" green="1" blue="0.99988144639999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="BI1-ML-N5k">
+                                <rect key="frame" x="30" y="121" width="260" height="427"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GXe-NQ-DDT">
+                                        <rect key="frame" x="0.0" y="0.0" width="260" height="387"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="StoreCustomCell" rowHeight="75" id="9Oq-G9-P9L">
+                                                <rect key="frame" x="0.0" y="28" width="260" height="75"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9Oq-G9-P9L" id="1oH-a2-NF6">
+                                                    <rect key="frame" x="0.0" y="0.0" width="260" height="74.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UfO-SJ-7HY">
+                                        <rect key="frame" x="0.0" y="397" width="260" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="UfO-SJ-7HY" secondAttribute="height" multiplier="260:30" id="HBM-hz-xvB"/>
+                                            <constraint firstAttribute="height" constant="30" id="gme-0T-ElN"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="buyButton"/>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="GXe-NQ-DDT" secondAttribute="trailing" id="Mof-Co-bxr"/>
+                                    <constraint firstAttribute="trailing" secondItem="UfO-SJ-7HY" secondAttribute="trailing" id="VNY-wU-sMw"/>
+                                    <constraint firstItem="UfO-SJ-7HY" firstAttribute="leading" secondItem="BI1-ML-N5k" secondAttribute="leading" id="hhp-i5-KGa"/>
+                                    <constraint firstItem="GXe-NQ-DDT" firstAttribute="leading" secondItem="BI1-ML-N5k" secondAttribute="leading" id="vvg-K9-ZIj"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.153734237" green="0.46812063459999997" blue="0.55368381739999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Okn-2R-s5a" firstAttribute="leading" secondItem="EGZ-R9-fB4" secondAttribute="leading" constant="30" id="2hJ-i4-zoE"/>
+                            <constraint firstItem="BI1-ML-N5k" firstAttribute="top" secondItem="SPB-ov-nnM" secondAttribute="bottom" constant="20" id="2lP-xa-DSX"/>
                             <constraint firstItem="SPB-ov-nnM" firstAttribute="leading" secondItem="Okn-2R-s5a" secondAttribute="leading" id="8pI-I6-sfB"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SPB-ov-nnM" secondAttribute="trailing" constant="20" symbolic="YES" id="C7t-br-ipy"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Okn-2R-s5a" secondAttribute="trailing" constant="20" symbolic="YES" id="JrL-gA-5ih"/>
+                            <constraint firstItem="Fkw-4i-YVw" firstAttribute="trailing" secondItem="BI1-ML-N5k" secondAttribute="trailing" id="Nif-O5-OQn"/>
+                            <constraint firstItem="EGZ-R9-fB4" firstAttribute="trailing" secondItem="BI1-ML-N5k" secondAttribute="trailing" constant="30" id="Nqj-tg-QYz"/>
                             <constraint firstItem="SPB-ov-nnM" firstAttribute="top" secondItem="Okn-2R-s5a" secondAttribute="bottom" constant="8" id="PQa-yv-tb8"/>
+                            <constraint firstItem="BI1-ML-N5k" firstAttribute="leading" secondItem="EGZ-R9-fB4" secondAttribute="leading" constant="30" id="PzY-sc-AjM"/>
                             <constraint firstItem="Okn-2R-s5a" firstAttribute="top" secondItem="EGZ-R9-fB4" secondAttribute="top" constant="15" id="SOF-AH-bwg"/>
+                            <constraint firstAttribute="bottom" secondItem="BI1-ML-N5k" secondAttribute="bottom" constant="20" id="f7M-Ja-Yk3"/>
+                            <constraint firstItem="Fkw-4i-YVw" firstAttribute="bottom" secondItem="SPB-ov-nnM" secondAttribute="bottom" id="owb-mb-gV6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="EGZ-R9-fB4"/>
                     </view>
+                    <connections>
+                        <outlet property="BalanceLabel" destination="jHD-KX-muR" id="c9l-Cw-mTw"/>
+                        <outlet property="buyButton" destination="UfO-SJ-7HY" id="nwj-Hn-fRX"/>
+                        <outlet property="storeList" destination="GXe-NQ-DDT" id="kol-Yk-c4x"/>
+                        <segue destination="Vbj-6p-Qkc" kind="presentation" identifier="segueToHomeFromStore" modalTransitionStyle="crossDissolve" id="gaw-1U-RTZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4px-1A-izd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -651,12 +721,14 @@
         <image name="ButtonRegistrate" width="191" height="35"/>
         <image name="Disclosure Indicator" width="15" height="24"/>
         <image name="Registrate" width="34" height="32"/>
+        <image name="buyButton" width="260" height="30"/>
         <image name="pencilIcon" width="52" height="52"/>
         <image name="powerButton" width="30" height="30"/>
         <image name="settingIcon" width="30" height="30"/>
         <image name="storeIcon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="gaw-1U-RTZ"/>
         <segue reference="rE7-Dc-9vH"/>
     </inferredMetricsTieBreakers>
 </document>
