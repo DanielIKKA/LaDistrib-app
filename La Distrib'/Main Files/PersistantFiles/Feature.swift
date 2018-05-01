@@ -40,6 +40,7 @@ struct FeatureConstants {
 }
 
 public class Feature: NSManagedObject {
+    
     public func setupConfiguration(forKey Key : String, numberOfpurshased nb: Int16 = 0) {
         
         switch Key {

@@ -95,18 +95,18 @@ extension HomeViewController : UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomHomeCell", for: indexPath) as! CustomTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomHomeCell", for: indexPath) as! CustomHomeTableViewCell
         
         setupCell(cell, indexPath: indexPath)
         return cell
      }
  
-    private func setupCell(_ cell: CustomTableViewCell, indexPath: IndexPath)
+    private func setupCell(_ cell: CustomHomeTableViewCell, indexPath: IndexPath)
     {
         let feature = featuresPurshased[indexPath.row]
         cell.featureImage.image = UIImage(named: (feature.imageNamed))
         cell.featureTitle.text = featuresPurshased[indexPath.row].title
-        cell.unitPrice.text = String(describing: featuresPurshased[indexPath.row].unitPrice)
+        cell.unitPrice.text = "\(String(describing: featuresPurshased[indexPath.row].unitPrice))€"
     }
     
     /*

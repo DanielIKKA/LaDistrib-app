@@ -65,6 +65,7 @@ class ConnectViewController : UIViewController {
         case "segueToHome":
             let nextViewController = segue.destination as! HomeViewController
             let currentUser:  UserProfil? = findUserConnected()
+            
             if(currentUser == nil) {
                 print("ERREUR")
             } else {

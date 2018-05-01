@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class StoreViewController: UIViewController {
 
@@ -17,12 +18,13 @@ class StoreViewController: UIViewController {
     @IBOutlet weak var storeList: UITableView!
     @IBOutlet weak var BalanceLabel: UILabel!
     @IBOutlet weak var buyButton: UIButton!
-    
+
     //MARK: Variable
     var dataController : DataController {
         return (UIApplication.shared.delegate as! AppDelegate).dataController
     }
     var currentUser : UserProfil?
+    let featuresArray : [String] = [FeatureConstants.Key.kPaperSingle , FeatureConstants.Key.kPaperMultiple, FeatureConstants.Key.kPen, FeatureConstants.Key.kPencil]
     
     /*-------------------------------*/
     // MARK: - Public Fonctions
@@ -44,9 +46,10 @@ class StoreViewController: UIViewController {
     private func setupView() {
         
         // init Delegate
+        storeList.dataSource = self
+        storeList.delegate = self
         
         // GraphicSetup
-        
         storeList.layer.cornerRadius = 8
         
     }
@@ -62,7 +65,7 @@ class StoreViewController: UIViewController {
 extension StoreViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return featuresArray.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -71,16 +74,42 @@ extension StoreViewController : UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomHomeCell", for: indexPath) as! CustomTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "StoreCustomCell", for: indexPath) as! CustomStoreTableViewCell
         
-        setupCell(cell, indexPath: indexPath)
+        setupConfiguration(cell, indexPath: indexPath)
         return cell
     }
     
-    private func setupCell(_ cell: CustomTableViewCell, indexPath: IndexPath)
-    {
+    public func setupConfiguration(_ cell: CustomStoreTableViewCell, indexPath: IndexPath) {
+        
+        let key = featuresArray[indexPath.row]
+        
+        switch key {
+        case FeatureConstants.Key.kPaperSingle:
+            cell.featureImage.image = UIImage(named: FeatureConstants.ImageName.kPaperSingle)
+            cell.featureTitle.text = FeatureConstants.Title.kPaper
+            cell.unitPrice.text = "\(String(describing: FeatureConstants.UnitPrice.kPaperPrice))€"
+            break
+            
+        case FeatureConstants.Key.kPaperMultiple:
+            cell.featureImage.image = UIImage(named: FeatureConstants.ImageName.kPaperMultiple)
+            cell.featureTitle.text = FeatureConstants.Title.kPaper
+            cell.unitPrice.text = "\(String(describing: FeatureConstants.UnitPrice.kPaperPrice))€"
+            break
+            
+        case FeatureConstants.Key.kPencil:
+            cell.featureImage.image = UIImage(named: FeatureConstants.ImageName.kPencil)
+            cell.featureTitle.text = FeatureConstants.Title.kPencil
+            cell.unitPrice.text = "\(String(describing: FeatureConstants.UnitPrice.kPencilPrice))€"
+            break
+            
+        case FeatureConstants.Key.kPen:
+            break
+        default:
+            break
+        }
+        cell.numberTextField.text = String(0)
     }
-    
     /*
      // Override to support conditional editing of the table view.
      override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
