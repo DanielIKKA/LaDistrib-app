@@ -488,7 +488,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="315" height="75"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="Ozb-ee-GsT" id="ZI7-Ua-Cl2">
-                                                    <rect key="frame" x="0.0" y="0.0" width="315" height="74"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="315" height="74.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pencilIcon" translatesAutoresizingMaskIntoConstraints="NO" id="ziR-D0-TDk">
@@ -825,6 +825,7 @@
         <image name="storeIcon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="oZy-1o-xUa"/>
         <segue reference="gaw-1U-RTZ"/>
         <segue reference="eQp-dC-A6C"/>
     </inferredMetricsTieBreakers>

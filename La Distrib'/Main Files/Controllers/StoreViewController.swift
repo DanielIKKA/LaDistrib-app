@@ -24,7 +24,7 @@ class StoreViewController: UIViewController {
         return (UIApplication.shared.delegate as! AppDelegate).dataController
     }
     var currentUser : UserProfil?
-    let featuresArray : [String] = [FeatureConstants.Key.kPaperSingle , FeatureConstants.Key.kPaperMultiple, FeatureConstants.Key.kPen, FeatureConstants.Key.kPencil]
+    let featuresArray : [String] = [FeatureConstants.Key.kPaperSingle , FeatureConstants.Key.kPencil, FeatureConstants.Key.kBlackPen, FeatureConstants.Key.kBluePen, FeatureConstants.Key.kRedPen, FeatureConstants.Key.kGreenPen, FeatureConstants.Key.kInk]
     
     /*-------------------------------*/
     // MARK: - Public Fonctions
@@ -103,7 +103,26 @@ extension StoreViewController : UITableViewDataSource {
             cell.unitPrice.text = "\(String(describing: FeatureConstants.UnitPrice.kPencilPrice))€"
             break
             
-        case FeatureConstants.Key.kPen:
+        case FeatureConstants.Key.kRedPen, FeatureConstants.Key.kBluePen, FeatureConstants.Key.kBlackPen, FeatureConstants.Key.kGreenPen:
+            cell.unitPrice.text = "\(String(describing: FeatureConstants.UnitPrice.kPenPrice))€"
+            if(key == FeatureConstants.Key.kGreenPen){
+                cell.featureTitle.text = FeatureConstants.Title.kGreenPen
+                cell.featureImage.image = UIImage(named:FeatureConstants.ImageName.kGreenPen)
+            } else if (key == FeatureConstants.Key.kBluePen) {
+                cell.featureTitle.text = FeatureConstants.Title.kBluePen
+                cell.featureImage.image = UIImage(named:FeatureConstants.ImageName.kBluePen)
+            } else if(key == FeatureConstants.Key.kRedPen) {
+                cell.featureTitle.text = FeatureConstants.Title.kRedPen
+                cell.featureImage.image = UIImage(named: FeatureConstants.ImageName.kRedPen)
+            } else if(key == FeatureConstants.Key.kBlackPen) {
+                cell.featureTitle.text = FeatureConstants.Title.kBlackPen
+                cell.featureImage.image = UIImage(named:FeatureConstants.ImageName.kBlackPen)
+            }
+            break
+        case FeatureConstants.Key.kInk :
+            cell.featureImage.image = UIImage(named:FeatureConstants.ImageName.kInk)
+            cell.featureTitle.text = FeatureConstants.Title.kInk
+            cell.unitPrice.text = "\(String(describing: FeatureConstants.UnitPrice.kInkPrice))€"
             break
         default:
             break
