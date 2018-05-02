@@ -101,7 +101,5 @@ public class Feature: NSManagedObject {
                 break
         }
         self.multiplicator = nb
-        
-        
     }
 }

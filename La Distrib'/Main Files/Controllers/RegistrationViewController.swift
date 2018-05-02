@@ -99,7 +99,7 @@ class RegistrationViewController: UIViewController {
         newUserProfil.isStayConnect = false
         newUserProfil.isAdmin = false
 
-        newUserProfil.balance = 0
+        newUserProfil.balance = 10
         
     }
     

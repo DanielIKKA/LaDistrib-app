@@ -9,14 +9,17 @@
 import UIKit
 
 class CustomStoreTableViewCell: UITableViewCell {
-
+    
+    //MARK: - IBOutlets
     @IBOutlet weak var featureImage: UIImageView!
     @IBOutlet weak var featureTitle: UILabel!
-    //@IBOutlet weak var totalPrice: UILabel!
     @IBOutlet weak var numberTextField: UITextField!
     @IBOutlet weak var unitPrice: UILabel!
     @IBOutlet weak var minusButton: UIButton!
     @IBOutlet weak var plusButton: UIButton!
+    
+    //MARK: - Variables
+    var price = Double()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,5 +31,21 @@ class CustomStoreTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    @IBAction func changeValueNumberOfPurshased(_ sender: UIButton) {
+        var number : Int? = Int(numberTextField.text!)
+        
+        if(sender.tag == 0) {
+            if(number != nil && number! > 0) {
+                number! -= 1
+            }
+        } else if (sender.tag == 1) {
+            if(number != nil) {
+                number! += 1
+            }
+        }
+        numberTextField.text! = number!.description
+        numberTextField.becomeFirstResponder()
+        numberTextField.resignFirstResponder()
+    }
 }

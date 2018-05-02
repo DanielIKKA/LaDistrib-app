@@ -18,11 +18,13 @@ class StoreViewController: UIViewController {
     @IBOutlet weak var storeList: UITableView!
     @IBOutlet weak var BalanceLabel: UILabel!
     @IBOutlet weak var buyButton: UIButton!
-
+    @IBOutlet weak var totalPrice: UILabel!
+    
     //MARK: Variable
     var dataController : DataController {
         return (UIApplication.shared.delegate as! AppDelegate).dataController
     }
+    var totalpurchased = Double()
     var currentUser : UserProfil?
     let featuresArray : [String] = [FeatureConstants.Key.kPaperSingle , FeatureConstants.Key.kPencil, FeatureConstants.Key.kBlackPen, FeatureConstants.Key.kBluePen, FeatureConstants.Key.kRedPen, FeatureConstants.Key.kGreenPen, FeatureConstants.Key.kInk]
     
@@ -35,9 +37,29 @@ class StoreViewController: UIViewController {
     }
     
     //MARK: IBActions
-    
     @IBAction func didTapReturnButton(_ sender: UIButton) {
         performSegue(withIdentifier: "segueToHomeFromStore", sender: self)
+    }
+    @IBAction func buyAction(_ sender : UIButton) {
+        if(totalpurchased > (currentUser?.balance)!) {
+            let alerVC = UIAlertController(title: "Error", message: "Please Credit your account !", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (success) in
+                for section in 0..<self.storeList.numberOfSections {
+                    for row in 0..<self.storeList.numberOfRows(inSection: section){
+                        let cell = self.storeList.cellForRow(at: (NSIndexPath(row: row, section: section) as IndexPath)) as! CustomStoreTableViewCell
+                        cell.numberTextField.text = "0"
+                        self.totalPrice.text! = "0.00€"
+                    }
+                }
+            })
+            
+            alerVC.addAction(alertAction)
+            present(alerVC, animated: true)
+        } else {
+            buyFeatures()
+            updateBalance()
+            resignValuesToZero()
+        }
     }
     
     /*-------------------------------*/
@@ -50,8 +72,41 @@ class StoreViewController: UIViewController {
         storeList.delegate = self
         
         // GraphicSetup
+        totalPrice.text = "0.00€"
+        BalanceLabel.text = (currentUser?.balance.description)! + "€"
         storeList.layer.cornerRadius = 8
         
+    }
+    private func buyFeatures() {
+        for section in 0..<storeList.numberOfSections {
+            for row in 0..<storeList.numberOfRows(inSection: section){
+                let cell = storeList.cellForRow(at: NSIndexPath(row: row, section: section) as IndexPath) as! CustomStoreTableViewCell
+                if Double(cell.numberTextField.text!) != 0 {
+                    let feature = Feature(context: dataController.managedObjectContext)
+                    feature.setupConfiguration(forKey: featuresArray[row])
+                    
+                    currentUser?.addToFeature(feature)
+                }
+            }
+        }
+    }
+
+
+    private func updateBalance() {
+        currentUser?.balance -= totalpurchased
+        dataController.saveContext()
+        BalanceLabel.text = (currentUser?.balance.description)! + "€"
+        
+    }
+    private func resignValuesToZero() {
+        for section in 0..<storeList.numberOfSections {
+            for row in 0..<storeList.numberOfRows(inSection: section){
+                let cell = storeList.cellForRow(at: NSIndexPath(row: row, section: section) as IndexPath as IndexPath) as! CustomStoreTableViewCell
+                cell.numberTextField.text = "0"
+                cell.becomeFirstResponder()
+                cell.resignFirstResponder()
+            }
+        }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "segueToHomeFromStore") {
@@ -61,8 +116,8 @@ class StoreViewController: UIViewController {
     }
 }
 
-//MARK: - DataSource
-extension StoreViewController : UITableViewDataSource {
+//MARK: - DataSource and delegate
+extension StoreViewController : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return featuresArray.count
@@ -72,7 +127,6 @@ extension StoreViewController : UITableViewDataSource {
         return 75.0
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StoreCustomCell", for: indexPath) as! CustomStoreTableViewCell
         
@@ -80,7 +134,22 @@ extension StoreViewController : UITableViewDataSource {
         return cell
     }
     
-    public func setupConfiguration(_ cell: CustomStoreTableViewCell, indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if(indexPath.row <= featuresArray.count) {
+            return nil
+        }
+        return indexPath
+    }
+    
+    func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
+        let cell = tableView.cellForRow(at: indexPath!) as! CustomStoreTableViewCell
+        let multCell = Double(cell.numberTextField.text!)
+        let total = multCell! * cell.price
+        
+        totalPrice.text! = total.description
+    }
+    
+    private func setupConfiguration(_ cell: CustomStoreTableViewCell, indexPath: IndexPath) {
         
         let key = featuresArray[indexPath.row]
         
@@ -88,23 +157,27 @@ extension StoreViewController : UITableViewDataSource {
         case FeatureConstants.Key.kPaperSingle:
             cell.featureImage.image = UIImage(named: FeatureConstants.ImageName.kPaperSingle)
             cell.featureTitle.text = FeatureConstants.Title.kPaper
-            cell.unitPrice.text = "\(String(describing: FeatureConstants.UnitPrice.kPaperPrice))€"
+            cell.price = FeatureConstants.UnitPrice.kPaperPrice
+            cell.unitPrice.text = "\(String(describing: cell.price))€"
             break
             
         case FeatureConstants.Key.kPaperMultiple:
             cell.featureImage.image = UIImage(named: FeatureConstants.ImageName.kPaperMultiple)
             cell.featureTitle.text = FeatureConstants.Title.kPaper
-            cell.unitPrice.text = "\(String(describing: FeatureConstants.UnitPrice.kPaperPrice))€"
+            cell.price = FeatureConstants.UnitPrice.kPaperPrice
+            cell.unitPrice.text = "\(String(describing: cell.price))€"
             break
             
         case FeatureConstants.Key.kPencil:
             cell.featureImage.image = UIImage(named: FeatureConstants.ImageName.kPencil)
             cell.featureTitle.text = FeatureConstants.Title.kPencil
-            cell.unitPrice.text = "\(String(describing: FeatureConstants.UnitPrice.kPencilPrice))€"
+            cell.price = FeatureConstants.UnitPrice.kPencilPrice
+            cell.unitPrice.text = "\(String(describing: cell.price))€"
             break
             
         case FeatureConstants.Key.kRedPen, FeatureConstants.Key.kBluePen, FeatureConstants.Key.kBlackPen, FeatureConstants.Key.kGreenPen:
-            cell.unitPrice.text = "\(String(describing: FeatureConstants.UnitPrice.kPenPrice))€"
+            cell.price = FeatureConstants.UnitPrice.kPenPrice
+            cell.unitPrice.text = "\(String(describing: cell.price))€"
             if(key == FeatureConstants.Key.kGreenPen){
                 cell.featureTitle.text = FeatureConstants.Title.kGreenPen
                 cell.featureImage.image = UIImage(named:FeatureConstants.ImageName.kGreenPen)
@@ -122,60 +195,43 @@ extension StoreViewController : UITableViewDataSource {
         case FeatureConstants.Key.kInk :
             cell.featureImage.image = UIImage(named:FeatureConstants.ImageName.kInk)
             cell.featureTitle.text = FeatureConstants.Title.kInk
-            cell.unitPrice.text = "\(String(describing: FeatureConstants.UnitPrice.kInkPrice))€"
+            cell.price = FeatureConstants.UnitPrice.kInkPrice
+            cell.unitPrice.text = "\(String(describing: cell.price))€"
             break
         default:
             break
         }
         cell.numberTextField.text = String(0)
+        cell.numberTextField.addTarget(self, action: #selector(didChange(_:)), for: UIControlEvents.allEvents)
+        cell.numberTextField.delegate = self 
+        
+        cell.selectionStyle = .none
+        
     }
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
 }
 
 //MARK: - TableViewDelegate
-extension StoreViewController : UITableViewDelegate {
-    
+extension StoreViewController : UITextFieldDelegate {
+    @objc public func didChange(_ sender: UITextField) {
+        totalpurchased = Double()
+        
+        for section in 0..<storeList.numberOfSections {
+            for row in 0..<storeList.numberOfRows(inSection: section){
+                let cell = storeList.cellForRow(at: NSIndexPath(row: row, section: section) as IndexPath) as! CustomStoreTableViewCell
+                var totalCell = Double()
+                if !(cell.numberTextField.text?.isEmpty)! {
+                    totalCell = cell.price * Double(cell.numberTextField.text!)!
+                }
+                
+                totalpurchased += totalCell
+            }
+        }
+        totalPrice.text = "\(totalpurchased)€"
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if (textField.text?.isEmpty)! {
+            textField.text! = "0"
+        }
+    }
 }
+

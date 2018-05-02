@@ -22,7 +22,7 @@ extension UserProfil {
     @NSManaged public var isStayConnect: Bool
     @NSManaged public var password: String
     @NSManaged public var username: String
-    @NSManaged public var balance: Int16
+    @NSManaged public var balance: Double
     @NSManaged public var isAdmin: Bool
     @NSManaged public var feature: NSSet?
 

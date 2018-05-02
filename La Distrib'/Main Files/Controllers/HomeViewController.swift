@@ -33,12 +33,12 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         
-        let feature = Feature(context: dataController.managedObjectContext)
-        feature.setupConfiguration(forKey: FeatureConstants.Key.kBluePen)
-        let feature2 = Feature(context: dataController.managedObjectContext)
-        feature2.setupConfiguration(forKey: FeatureConstants.Key.kPaperMultiple)
-        currentUser?.addToFeature(feature)
-        currentUser?.addToFeature(feature2)
+//        let feature = Feature(context: dataController.managedObjectContext)
+//        feature.setupConfiguration(forKey: FeatureConstants.Key.kBluePen)
+//        let feature2 = Feature(context: dataController.managedObjectContext)
+//        feature2.setupConfiguration(forKey: FeatureConstants.Key.kPaperMultiple)
+//        currentUser?.addToFeature(feature)
+//        currentUser?.addToFeature(feature2)
         
         reloadFeaturesPurshased()
     }
