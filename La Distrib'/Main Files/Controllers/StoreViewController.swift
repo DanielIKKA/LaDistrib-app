@@ -44,12 +44,9 @@ class StoreViewController: UIViewController {
         if(totalpurchased > (currentUser?.balance)!) {
             let alerVC = UIAlertController(title: "Error", message: "Please Credit your account !", preferredStyle: .alert)
             let alertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (success) in
-                for section in 0..<self.storeList.numberOfSections {
-                    for row in 0..<self.storeList.numberOfRows(inSection: section){
-                        let cell = self.storeList.cellForRow(at: (NSIndexPath(row: row, section: section) as IndexPath)) as! CustomStoreTableViewCell
-                        cell.numberTextField.text = "0"
-                        self.totalPrice.text! = "0.00€"
-                    }
+                for cell in self.storeList.visibleCells as! [CustomStoreTableViewCell] {
+                    cell.numberTextField.text = "0"
+                    self.totalPrice.text! = "0.00€"
                 }
             })
             
@@ -58,7 +55,6 @@ class StoreViewController: UIViewController {
         } else {
             buyFeatures()
             updateBalance()
-            resignValuesToZero()
         }
     }
     
@@ -78,16 +74,14 @@ class StoreViewController: UIViewController {
         
     }
     private func buyFeatures() {
-        for section in 0..<storeList.numberOfSections {
-            for row in 0..<storeList.numberOfRows(inSection: section){
-                let cell = storeList.cellForRow(at: NSIndexPath(row: row, section: section) as IndexPath) as! CustomStoreTableViewCell
-                if Double(cell.numberTextField.text!) != 0 {
-                    let feature = Feature(context: dataController.managedObjectContext)
-                    feature.setupConfiguration(forKey: featuresArray[row])
-                    
-                    currentUser?.addToFeature(feature)
-                }
+        var cpt = Int()
+        for cell in storeList.visibleCells as! [CustomStoreTableViewCell] {
+            if Double(cell.numberTextField.text!) != 0 {
+                let feature = Feature(context: dataController.managedObjectContext)
+                feature.setupConfiguration(forKey: featuresArray[cpt], numberOfpurshased: Int16(cell.numberTextField.text!))
+                currentUser?.addToFeature(feature)
             }
+            cpt += 1
         }
     }
 
@@ -97,16 +91,6 @@ class StoreViewController: UIViewController {
         dataController.saveContext()
         BalanceLabel.text = (currentUser?.balance.description)! + "€"
         
-    }
-    private func resignValuesToZero() {
-        for section in 0..<storeList.numberOfSections {
-            for row in 0..<storeList.numberOfRows(inSection: section){
-                let cell = storeList.cellForRow(at: NSIndexPath(row: row, section: section) as IndexPath as IndexPath) as! CustomStoreTableViewCell
-                cell.numberTextField.text = "0"
-                cell.becomeFirstResponder()
-                cell.resignFirstResponder()
-            }
-        }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "segueToHomeFromStore") {
@@ -205,6 +189,7 @@ extension StoreViewController : UITableViewDataSource, UITableViewDelegate {
         cell.numberTextField.addTarget(self, action: #selector(didChange(_:)), for: UIControlEvents.allEvents)
         cell.numberTextField.delegate = self 
         
+        cell.totalpurchased = self.totalpurchased
         cell.selectionStyle = .none
         
     }
@@ -215,19 +200,17 @@ extension StoreViewController : UITextFieldDelegate {
     @objc public func didChange(_ sender: UITextField) {
         totalpurchased = Double()
         
-        for section in 0..<storeList.numberOfSections {
-            for row in 0..<storeList.numberOfRows(inSection: section){
-                let cell = storeList.cellForRow(at: NSIndexPath(row: row, section: section) as IndexPath) as! CustomStoreTableViewCell
-                var totalCell = Double()
-                if !(cell.numberTextField.text?.isEmpty)! {
-                    totalCell = cell.price * Double(cell.numberTextField.text!)!
-                }
-                
-                totalpurchased += totalCell
+        for cell in storeList.visibleCells as! [CustomStoreTableViewCell] {
+            var totalCell = Double()
+            if !(cell.numberTextField.text?.isEmpty)! {
+                totalCell = cell.price * Double(cell.numberTextField.text!)!
             }
+            
+            totalpurchased += totalCell
         }
         totalPrice.text = "\(totalpurchased)€"
     }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         if (textField.text?.isEmpty)! {
             textField.text! = "0"

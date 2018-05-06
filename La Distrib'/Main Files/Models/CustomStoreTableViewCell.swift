@@ -20,6 +20,7 @@ class CustomStoreTableViewCell: UITableViewCell {
     
     //MARK: - Variables
     var price = Double()
+    var totalpurchased = Double()
     
     override func awakeFromNib() {
         super.awakeFromNib()

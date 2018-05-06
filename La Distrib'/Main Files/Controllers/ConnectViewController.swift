@@ -127,13 +127,12 @@ class ConnectViewController : UIViewController {
         for user in userProfils {
             if user.isStayConnect {
                 performSegue(withIdentifier: "segueToHome", sender: self)
-            } else {
-                // disconnect all
-                for user in self.userProfils {
-                    user.isConnected = false
-                    user.isStayConnect = false
-                }
             }
+        }
+        // disconnect all
+        for user in self.userProfils {
+            user.isConnected = false
+            user.isStayConnect = false
         }
     }
     

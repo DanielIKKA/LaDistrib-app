@@ -7,6 +7,12 @@
         <attribute name="unitPrice" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserProfil" inverseName="feature" inverseEntity="UserProfil" syncable="YES"/>
     </entity>
+    <entity name="FeatureStore" representedClassName="FeatureStore" syncable="YES">
+        <attribute name="imageNamed" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="multiplicator" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="unitPrice" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
     <entity name="UserProfil" representedClassName=".UserProfil" syncable="YES">
         <attribute name="balance" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
@@ -20,5 +26,6 @@
     <elements>
         <element name="Feature" positionX="-2864" positionY="-11754" width="128" height="120"/>
         <element name="UserProfil" positionX="-3114" positionY="-11764" width="225" height="165"/>
+        <element name="FeatureStore" positionX="-2988" positionY="-11700" width="128" height="105"/>
     </elements>
 </model>

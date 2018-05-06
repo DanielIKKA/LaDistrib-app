@@ -9,21 +9,24 @@
 import Foundation
 import CoreData
 
-class DataController : NSObject {
+class DataController {
     
     // MARK: - Core Data stack
     let persistentContainer : NSPersistentContainer
     let managedObjectContext: NSManagedObjectContext
     
-    override init() {
+    let featuresKey : [String] = [FeatureConstants.Key.kPaperSingle , FeatureConstants.Key.kPencil, FeatureConstants.Key.kBlackPen, FeatureConstants.Key.kBluePen, FeatureConstants.Key.kRedPen, FeatureConstants.Key.kGreenPen, FeatureConstants.Key.kInk]
+    var featuresStore = [FeatureStore]()
+    
+    init() {
         persistentContainer = NSPersistentContainer(name: "La_Distrib_")
         persistentContainer.loadPersistentStores() { (description, error) in
             if let error = error {
                 fatalError("Failed to load Core Data stack: \(error)")
             }
         }
-        
         managedObjectContext = persistentContainer.viewContext
+        setupStore()
     }
     
     // MARK: - Core Data Saving support
@@ -39,5 +42,31 @@ class DataController : NSObject {
             }
         }
     }
+    
+    // MARK: - Store Data Service
+    private func setupStore() {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FeatureStore")
+        
+        do {
+            let feature = try managedObjectContext.fetch(fetchRequest) as! [FeatureStore]
+            if(feature.isEmpty){
+                createStore()
+            } else {
+                self.featuresStore = feature
+            }
+            
+        } catch {
+            fatalError("there are an error fetching the list of UsersProfils")
+        }
+    }
+    
+    private func createStore() {
+        for key in featuresKey {
+            let feature = FeatureStore(context: managedObjectContext)
+            feature.setupConfiguration(forKey: key, numberOfpurshased: nil)
+            featuresStore.append(feature)
+        }
+    }
+
 }
 

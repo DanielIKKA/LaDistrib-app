@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		374370E7209EC25200E7C84C /* FeatureStore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374370E5209EC25200E7C84C /* FeatureStore+CoreDataClass.swift */; };
+		374370E8209EC25200E7C84C /* FeatureStore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374370E6209EC25200E7C84C /* FeatureStore+CoreDataProperties.swift */; };
 		3752D921207FFA720019C5FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3752D920207FFA720019C5FA /* AppDelegate.swift */; };
 		3752D923207FFA720019C5FA /* ConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3752D922207FFA720019C5FA /* ConnectViewController.swift */; };
 		3752D926207FFA720019C5FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3752D924207FFA720019C5FA /* Main.storyboard */; };
@@ -51,6 +53,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		374370E5209EC25200E7C84C /* FeatureStore+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeatureStore+CoreDataClass.swift"; sourceTree = "<group>"; };
+		374370E6209EC25200E7C84C /* FeatureStore+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeatureStore+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3752D91D207FFA720019C5FA /* La Distrib'.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "La Distrib'.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3752D920207FFA720019C5FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3752D922207FFA720019C5FA /* ConnectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ConnectViewController.swift; sourceTree = "<group>"; wrapsLines = 1; };
@@ -227,6 +231,8 @@
 		37654C8B20890B9000B54DC1 /* PersistantFiles */ = {
 			isa = PBXGroup;
 			children = (
+				374370E5209EC25200E7C84C /* FeatureStore+CoreDataClass.swift */,
+				374370E6209EC25200E7C84C /* FeatureStore+CoreDataProperties.swift */,
 				37654CD22092197400B54DC1 /* UserProfil.swift */,
 				37654CD32092197400B54DC1 /* UserProfil+CoreDataProperties.swift */,
 				37654CD42092197400B54DC1 /* Feature.swift */,
@@ -333,8 +339,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				37654CC7208CDF3400B54DC1 /* CustomHomeTableViewCell.swift in Sources */,
+				374370E7209EC25200E7C84C /* FeatureStore+CoreDataClass.swift in Sources */,
 				37654C82208601DF00B54DC1 /* RegistrationViewController.swift in Sources */,
 				37654CD62092197400B54DC1 /* UserProfil.swift in Sources */,
+				374370E8209EC25200E7C84C /* FeatureStore+CoreDataProperties.swift in Sources */,
 				3752D929207FFA720019C5FA /* La_Distrib_.xcdatamodeld in Sources */,
 				37654CD92092197400B54DC1 /* Feature+CoreDataProperties.swift in Sources */,
 				3752D923207FFA720019C5FA /* ConnectViewController.swift in Sources */,
