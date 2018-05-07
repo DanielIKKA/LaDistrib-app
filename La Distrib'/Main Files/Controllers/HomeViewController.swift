@@ -32,19 +32,18 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        
-//        let feature = Feature(context: dataController.managedObjectContext)
-//        feature.setupConfiguration(forKey: FeatureConstants.Key.kBluePen)
-//        let feature2 = Feature(context: dataController.managedObjectContext)
-//        feature2.setupConfiguration(forKey: FeatureConstants.Key.kPaperMultiple)
-//        currentUser?.addToFeature(feature)
-//        currentUser?.addToFeature(feature2)
-        
         reloadFeaturesPurshased()
     }
     
     //MARK: IBActions
-    @IBAction func pushButton(_ sender: UIButton) {
+    @IBAction func settingButton(_ sender: UIButton) {
+        if (currentUser?.isConnected)! && (currentUser?.isStayConnect)! {
+            balanceLabel.textColor = UIColor.green
+        } else {
+            balanceLabel.textColor = UIColor.red
+        }
+    }
+    @IBAction func powerButton(_ sender: UIButton) {
         if(sender.tag == 0) {
             disconnect()
         } else if sender.tag == 1 {

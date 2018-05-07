@@ -402,7 +402,8 @@
                                         </constraints>
                                         <state key="normal" backgroundImage="settingIcon"/>
                                         <connections>
-                                            <action selector="pushButton:" destination="Vbj-6p-Qkc" eventType="touchUpInside" id="34j-cE-gO2"/>
+                                            <action selector="powerButton:" destination="Vbj-6p-Qkc" eventType="touchUpInside" id="34j-cE-gO2"/>
+                                            <action selector="settingButton:" destination="Vbj-6p-Qkc" eventType="touchUpInside" id="cE7-ka-Sde"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vp6-tk-TwV">
@@ -414,7 +415,7 @@
                                             <color key="titleColor" red="0.99991279840000002" green="1" blue="0.99988144639999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="pushButton:" destination="Vbj-6p-Qkc" eventType="touchUpInside" id="aQC-tc-5JI"/>
+                                            <action selector="powerButton:" destination="Vbj-6p-Qkc" eventType="touchUpInside" id="aQC-tc-5JI"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -577,7 +578,7 @@
                                 <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="16"/>
                                 <state key="normal" title=" Store" image="storeIcon"/>
                                 <connections>
-                                    <action selector="pushButton:" destination="Vbj-6p-Qkc" eventType="touchUpInside" id="IPr-Ax-jDV"/>
+                                    <action selector="powerButton:" destination="Vbj-6p-Qkc" eventType="touchUpInside" id="IPr-Ax-jDV"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -857,6 +858,7 @@
         <image name="storeIcon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="oZy-1o-xUa"/>
         <segue reference="gaw-1U-RTZ"/>
         <segue reference="eQp-dC-A6C"/>
     </inferredMetricsTieBreakers>
