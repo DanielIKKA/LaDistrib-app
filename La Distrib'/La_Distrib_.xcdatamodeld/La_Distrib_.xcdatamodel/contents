@@ -24,8 +24,8 @@
         <relationship name="feature" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Feature" inverseName="owner" inverseEntity="Feature" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Feature" positionX="-2864" positionY="-11754" width="128" height="120"/>
+        <element name="Feature" positionX="-2864" positionY="-11754" width="128" height="118"/>
         <element name="UserProfil" positionX="-3114" positionY="-11764" width="225" height="165"/>
-        <element name="FeatureStore" positionX="-2988" positionY="-11700" width="128" height="105"/>
+        <element name="FeatureStore" positionX="-2873" positionY="-11934" width="128" height="105"/>
     </elements>
 </model>

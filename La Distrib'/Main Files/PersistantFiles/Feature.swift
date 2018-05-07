@@ -53,5 +53,10 @@ struct FeatureConstants {
 }
 
 public class Feature: NSManagedObject {
-    
+    public func setup(purchase : FeatureStore) {
+        self.imageNamed = purchase.imageNamed!
+        self.title = purchase.title!
+        self.multiplicator = purchase.multiplicator
+        self.unitPrice = purchase.unitPrice
+    }
 }

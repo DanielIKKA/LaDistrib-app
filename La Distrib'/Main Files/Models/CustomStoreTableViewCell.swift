@@ -19,34 +19,39 @@ class CustomStoreTableViewCell: UITableViewCell {
     @IBOutlet weak var plusButton: UIButton!
     
     //MARK: - Variables
-    var price = Double()
-    var totalpurchased = Double()
+    var feature : FeatureStore!
+    var dataController : DataController {
+        return (UIApplication.shared.delegate as! AppDelegate).dataController
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
+    func setup() {
+        featureImage.image = UIImage(named : feature.imageNamed!)
+        featureTitle.text = feature.title
+        unitPrice.text = "\(String(describing: feature.unitPrice))€"
+        
+        numberTextField.text = String(feature.multiplicator)
+        
+        selectionStyle = .none
+        dataController.saveContext()
+    }
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        // Configure the view for the selected state
+    }
     @IBAction func changeValueNumberOfPurshased(_ sender: UIButton) {
-        var number : Int? = Int(numberTextField.text!)
         
         if(sender.tag == 0) {
-            if(number != nil && number! > 0) {
-                number! -= 1
+            if(feature.multiplicator > 0) {
+                feature.multiplicator -= 1
             }
         } else if (sender.tag == 1) {
-            if(number != nil) {
-                number! += 1
-            }
+                feature.multiplicator += 1
         }
-        numberTextField.text! = number!.description
-        numberTextField.becomeFirstResponder()
-        numberTextField.resignFirstResponder()
+        numberTextField.text! = feature.multiplicator.description
+        dataController.saveContext()
     }
 }

@@ -83,18 +83,17 @@ class HomeViewController: UIViewController {
         let balance = currentUser?.value(forKey: "balance") as! Double
         
         welcomeLabel.text = currentUserName
-        balanceLabel.text = "\(String(describing: balance))€"
+        balanceLabel.text = String(format: "%.2f" , balance) + "€"
         
         historyList.layer.cornerRadius = 8
-        
     }
     private func reloadFeaturesPurshased() {
         featuresPurshased = currentUser?.feature?.allObjects as! [Feature]
     }
 }
 
-//MARK: - DataSource
-extension HomeViewController : UITableViewDataSource {
+//MARK: - TableViewDelegate / DataSource
+extension HomeViewController : UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if currentUser?.feature == nil {
@@ -144,9 +143,4 @@ extension HomeViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
      }
-}
-
-//MARK: - TableViewDelegate
-extension HomeViewController : UITableViewDelegate {
-    
 }

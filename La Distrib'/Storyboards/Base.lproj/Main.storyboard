@@ -488,7 +488,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="260" height="75"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="Ozb-ee-GsT" id="ZI7-Ua-Cl2">
-                                                    <rect key="frame" x="0.0" y="0.0" width="260" height="74.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="260" height="74"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pencilIcon" translatesAutoresizingMaskIntoConstraints="NO" id="ziR-D0-TDk">
@@ -781,7 +781,7 @@
                                         </constraints>
                                         <state key="normal" backgroundImage="buyButton"/>
                                         <connections>
-                                            <action selector="buyAction:" destination="9Us-kC-pI4" eventType="touchUpInside" id="H56-0M-rJa"/>
+                                            <action selector="buyButton:" destination="9Us-kC-pI4" eventType="touchUpInside" id="H56-0M-rJa"/>
                                         </connections>
                                     </button>
                                 </subviews>
