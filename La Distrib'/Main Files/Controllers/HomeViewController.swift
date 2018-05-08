@@ -42,6 +42,7 @@ class HomeViewController: UIViewController {
         } else {
             balanceLabel.textColor = UIColor.red
         }
+        performSegue(withIdentifier: "segueToSettings", sender: self)
     }
     @IBAction func powerButton(_ sender: UIButton) {
         if(sender.tag == 0) {
@@ -63,8 +64,11 @@ class HomeViewController: UIViewController {
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "segueToStore") {
-            let ControllerDest = segue.destination as! StoreViewController
-            ControllerDest.currentUser = self.currentUser
+            let destVC = segue.destination as! StoreViewController
+            destVC.currentUser = self.currentUser
+        } else if (segue.identifier == "segueToSettings") {
+            let destVc = segue.destination as! SettingViewController
+            destVc.currentUser = self.currentUser
         }
     }
     

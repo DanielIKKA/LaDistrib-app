@@ -410,6 +410,9 @@
                                 <state key="normal" title=" HomePage" image="Disclosure Indicator">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="Vbj-6p-Qkc" kind="showDetail" id="AXz-xf-JyL"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="iNt-3X-30e">
                                 <rect key="frame" x="30" y="218.5" width="315" height="230"/>
@@ -479,6 +482,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nTB-NM-gH5"/>
                     </view>
+                    <connections>
+                        <outletCollection property="buttons" destination="FsH-9P-9XJ" collectionClass="NSMutableArray" id="xvX-Pk-sCu"/>
+                        <outletCollection property="buttons" destination="zDn-MX-7vS" collectionClass="NSMutableArray" id="JxA-wP-SnD"/>
+                        <outletCollection property="buttons" destination="yqH-G6-Jxy" collectionClass="NSMutableArray" id="tw5-AP-Uzu"/>
+                        <outletCollection property="buttons" destination="mvf-ag-3TL" collectionClass="NSMutableArray" id="zyU-mB-TSl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CCT-vu-Cur" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -764,7 +773,7 @@
                                 <rect key="frame" x="30" y="121" width="315" height="526"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GXe-NQ-DDT">
-                                        <rect key="frame" x="0.0" y="0.0" width="315" height="479.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="315" height="473.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="StoreCustomCell" rowHeight="75" id="9Oq-G9-P9L" customClass="CustomStoreTableViewCell" customModule="La_Distrib_" customModuleProvider="target">
@@ -877,12 +886,15 @@
                                         </prototypes>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UfO-SJ-7HY">
-                                        <rect key="frame" x="0.0" y="489.5" width="315" height="36.5"/>
+                                        <rect key="frame" x="0.0" y="483.5" width="315" height="42.5"/>
+                                        <color key="backgroundColor" red="0.59541714189999995" green="0.18982923030000001" blue="0.36899501089999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="UfO-SJ-7HY" secondAttribute="height" multiplier="260:30" id="HBM-hz-xvB"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="gme-0T-ElN"/>
+                                            <constraint firstAttribute="width" secondItem="UfO-SJ-7HY" secondAttribute="height" multiplier="260:35" id="HBM-hz-xvB"/>
                                         </constraints>
-                                        <state key="normal" backgroundImage="buyButton"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="17"/>
+                                        <state key="normal" title="Buy">
+                                            <color key="titleColor" red="0.99991279840000002" green="1" blue="0.99988144639999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="buyButton:" destination="9Us-kC-pI4" eventType="touchUpInside" id="H56-0M-rJa"/>
                                         </connections>
@@ -952,7 +964,6 @@
         <image name="ButtonRegistrate" width="191" height="35"/>
         <image name="Disclosure Indicator" width="15" height="24"/>
         <image name="Registrate" width="34" height="32"/>
-        <image name="buyButton" width="260" height="30"/>
         <image name="paperIconMultiple" width="52" height="52"/>
         <image name="pencilIcon" width="52" height="52"/>
         <image name="powerButton" width="30" height="30"/>
@@ -960,8 +971,7 @@
         <image name="storeIcon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oZy-1o-xUa"/>
         <segue reference="gaw-1U-RTZ"/>
-        <segue reference="eQp-dC-A6C"/>
+        <segue reference="rE7-Dc-9vH"/>
     </inferredMetricsTieBreakers>
 </document>

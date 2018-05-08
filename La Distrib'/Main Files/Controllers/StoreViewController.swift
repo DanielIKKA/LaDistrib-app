@@ -67,6 +67,7 @@ class StoreViewController: UIViewController {
         resetMultiplicators()
         updateBalance()
         storeList.layer.cornerRadius = 8
+        buyButton.layer.cornerRadius = 8
     }
     private func buy(this feature: FeatureStore) {
         let newFeature = Feature(context: dataController.managedObjectContext)
