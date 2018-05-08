@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		373B846E20A1912100B2F800 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B846D20A1912100B2F800 /* SettingViewController.swift */; };
 		374370E7209EC25200E7C84C /* FeatureStore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374370E5209EC25200E7C84C /* FeatureStore+CoreDataClass.swift */; };
 		374370E8209EC25200E7C84C /* FeatureStore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374370E6209EC25200E7C84C /* FeatureStore+CoreDataProperties.swift */; };
 		3752D921207FFA720019C5FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3752D920207FFA720019C5FA /* AppDelegate.swift */; };
@@ -53,6 +54,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		373B846D20A1912100B2F800 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		374370E5209EC25200E7C84C /* FeatureStore+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeatureStore+CoreDataClass.swift"; sourceTree = "<group>"; };
 		374370E6209EC25200E7C84C /* FeatureStore+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeatureStore+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3752D91D207FFA720019C5FA /* La Distrib'.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "La Distrib'.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,6 +165,7 @@
 				37654C81208601DF00B54DC1 /* RegistrationViewController.swift */,
 				3752D93D2080CF210019C5FA /* HomeViewController.swift */,
 				37654CDA2095D3B100B54DC1 /* StoreViewController.swift */,
+				373B846D20A1912100B2F800 /* SettingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				37654C82208601DF00B54DC1 /* RegistrationViewController.swift in Sources */,
 				37654CD62092197400B54DC1 /* UserProfil.swift in Sources */,
 				374370E8209EC25200E7C84C /* FeatureStore+CoreDataProperties.swift in Sources */,
+				373B846E20A1912100B2F800 /* SettingViewController.swift in Sources */,
 				3752D929207FFA720019C5FA /* La_Distrib_.xcdatamodeld in Sources */,
 				37654CD92092197400B54DC1 /* Feature+CoreDataProperties.swift in Sources */,
 				3752D923207FFA720019C5FA /* ConnectViewController.swift in Sources */,
