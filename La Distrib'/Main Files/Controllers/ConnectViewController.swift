@@ -65,15 +65,10 @@ class ConnectViewController : UIViewController {
         case "segueToHome":
             let nextViewController = segue.destination as! HomeViewController
             let currentUser:  UserProfil? = findUserConnected()
+            
             if(currentUser == nil) {
                 print("ERREUR")
             } else {
-                let feature = Feature(context: manageObjectContext)
-                
-                feature.setupConfiguration(forKey: FeatureConstants.Key.kPaperSingle)
-                
-                currentUser?.addToFeature(feature)
-                dataController.saveContext()
                 nextViewController.currentUser = currentUser
             }
             break
@@ -86,8 +81,7 @@ class ConnectViewController : UIViewController {
     //MARK: IBActions
     @IBAction func connection() {
         if(isAlreadyRegistered() && isGoodPassword()) {
-            let currentUser : UserProfil? = findCurrentUser(named: loginTextField.text!)
-            
+            let currentUser : UserProfil? = findUser(named: loginTextField.text!)
             
             connect(currentUser: currentUser!)
             alertStayConnected(currentUser!)
@@ -130,17 +124,28 @@ class ConnectViewController : UIViewController {
     }
     
     private func ConnectCurrentUserIfExist() {
+        // check si il y n'y a qu'un user de connect
+        var cpt = 0
+        var currentUser : UserProfil? = nil
+        
         for user in userProfils {
             if user.isStayConnect {
-                performSegue(withIdentifier: "segueToHome", sender: self)
-            } else {
-                // disconnect all
-                for user in self.userProfils {
-                    user.isConnected = false
-                    user.isStayConnect = false
-                }
+                currentUser = user
+                cpt += 1
             }
         }
+        
+        if currentUser == nil || cpt > 1 {
+            // disconnect all
+            for user in self.userProfils {
+                user.isConnected = false
+                user.isStayConnect = false
+            }
+            return
+        }
+        
+        performSegue(withIdentifier: "segueToHome", sender: self)
+        
     }
     
     @objc private func didTapOnScreenToDismissKeyboard(_ sender: UITapGestureRecognizer){
@@ -159,12 +164,14 @@ class ConnectViewController : UIViewController {
     private func connect(currentUser : UserProfil) {
         // disconnect all
         for user in self.userProfils {
-            user.isConnected = false
-            user.isStayConnect = false
+            if user == currentUser {
+                // connect current user
+                currentUser.isConnected = true
+            } else {
+                user.isConnected = false
+                user.isStayConnect = false
+            }
         }
-        
-        // connect current user
-        currentUser.isConnected = true
     }
     
     //MARK: Checks
@@ -179,7 +186,7 @@ class ConnectViewController : UIViewController {
     }
     private func isGoodPassword() -> Bool {
          // Find the good user
-        let userFind : UserProfil? = findCurrentUser(named: loginTextField.text!)
+        let userFind : UserProfil? = findUser(named: loginTextField.text!)
         
         // check if password is correct
         if(userFind != nil && userFind?.password == passwordTextField.text!) {
@@ -188,7 +195,7 @@ class ConnectViewController : UIViewController {
         
         return false
     }
-    private func findCurrentUser(named: String) -> UserProfil? {
+    private func findUser(named: String) -> UserProfil? {
         for user in userProfils {
             if (user.username == loginTextField.text! || user.email == loginTextField.text!) {
                 return user

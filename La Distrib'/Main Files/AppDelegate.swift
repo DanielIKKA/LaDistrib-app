@@ -44,25 +44,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        print("\n4\n")
     }
     
-    
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         dataController.saveContext()
     }
-    
-    //MARK: CoreData
-    
-//    public func addFeature(forSetupKey key: String) -> Feature {
-//        guard let entity = NSEntityDescription.entity(forEntityName: "Feature", in: AppDelegate.persistentContainer.viewContext) else {
-//            fatalError("could not find entity description")
-//        }
-//
-//        let feature = NSManagedObject(entity: entity, insertInto: AppDelegate.persistentContainer.viewContext) as! Feature
-//
-//        feature.setupConfiguration(forKey: key)
-//
-//        return feature
-//    }
 }
 

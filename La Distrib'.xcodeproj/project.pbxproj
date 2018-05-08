@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		373B846E20A1912100B2F800 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B846D20A1912100B2F800 /* SettingViewController.swift */; };
+		374370E7209EC25200E7C84C /* FeatureStore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374370E5209EC25200E7C84C /* FeatureStore+CoreDataClass.swift */; };
+		374370E8209EC25200E7C84C /* FeatureStore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374370E6209EC25200E7C84C /* FeatureStore+CoreDataProperties.swift */; };
 		3752D921207FFA720019C5FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3752D920207FFA720019C5FA /* AppDelegate.swift */; };
 		3752D923207FFA720019C5FA /* ConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3752D922207FFA720019C5FA /* ConnectViewController.swift */; };
 		3752D926207FFA720019C5FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3752D924207FFA720019C5FA /* Main.storyboard */; };
@@ -41,19 +44,24 @@
 		37654CC1208B441E00B54DC1 /* Oswald-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37654CBB208B441A00B54DC1 /* Oswald-Medium.ttf */; };
 		37654CC2208B441E00B54DC1 /* Oswald-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37654CBC208B441B00B54DC1 /* Oswald-Regular.ttf */; };
 		37654CC3208B441E00B54DC1 /* Oswald-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37654CBD208B441D00B54DC1 /* Oswald-SemiBold.ttf */; };
-		37654CC7208CDF3400B54DC1 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37654CC6208CDF3400B54DC1 /* CustomTableViewCell.swift */; };
+		37654CC7208CDF3400B54DC1 /* CustomHomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37654CC6208CDF3400B54DC1 /* CustomHomeTableViewCell.swift */; };
 		37654CD62092197400B54DC1 /* UserProfil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37654CD22092197400B54DC1 /* UserProfil.swift */; };
 		37654CD72092197400B54DC1 /* UserProfil+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37654CD32092197400B54DC1 /* UserProfil+CoreDataProperties.swift */; };
 		37654CD82092197400B54DC1 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37654CD42092197400B54DC1 /* Feature.swift */; };
 		37654CD92092197400B54DC1 /* Feature+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37654CD52092197400B54DC1 /* Feature+CoreDataProperties.swift */; };
+		37654CDB2095D3B100B54DC1 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37654CDA2095D3B100B54DC1 /* StoreViewController.swift */; };
+		37654CDD2097387400B54DC1 /* CustomStoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37654CDC2097387400B54DC1 /* CustomStoreTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		373B846D20A1912100B2F800 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		374370E5209EC25200E7C84C /* FeatureStore+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeatureStore+CoreDataClass.swift"; sourceTree = "<group>"; };
+		374370E6209EC25200E7C84C /* FeatureStore+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeatureStore+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3752D91D207FFA720019C5FA /* La Distrib'.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "La Distrib'.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3752D920207FFA720019C5FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3752D922207FFA720019C5FA /* ConnectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ConnectViewController.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		3752D925207FFA720019C5FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3752D928207FFA720019C5FA /* La_Distrib_.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = La_Distrib_.xcdatamodel; sourceTree = "<group>"; };
+		3752D928207FFA720019C5FA /* La_Distrib_.xcdatamodel */ = {isa = PBXFileReference; explicitFileType = wrapper.xcdatamodeld; path = La_Distrib_.xcdatamodel; sourceTree = "<group>"; };
 		3752D92D207FFA720019C5FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3752D92F207FFA720019C5FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3752D93D2080CF210019C5FA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -85,11 +93,13 @@
 		37654CBB208B441A00B54DC1 /* Oswald-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Oswald-Medium.ttf"; path = "../../../../Sketch/Ressources/fonts/Oswald/Oswald-Medium.ttf"; sourceTree = "<group>"; };
 		37654CBC208B441B00B54DC1 /* Oswald-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Oswald-Regular.ttf"; path = "../../../../Sketch/Ressources/fonts/Oswald/Oswald-Regular.ttf"; sourceTree = "<group>"; };
 		37654CBD208B441D00B54DC1 /* Oswald-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Oswald-SemiBold.ttf"; path = "../../../../Sketch/Ressources/fonts/Oswald/Oswald-SemiBold.ttf"; sourceTree = "<group>"; };
-		37654CC6208CDF3400B54DC1 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		37654CC6208CDF3400B54DC1 /* CustomHomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHomeTableViewCell.swift; sourceTree = "<group>"; };
 		37654CD22092197400B54DC1 /* UserProfil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfil.swift; sourceTree = "<group>"; };
 		37654CD32092197400B54DC1 /* UserProfil+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserProfil+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		37654CD42092197400B54DC1 /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
 		37654CD52092197400B54DC1 /* Feature+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Feature+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		37654CDA2095D3B100B54DC1 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
+		37654CDC2097387400B54DC1 /* CustomStoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStoreTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,7 +145,8 @@
 			isa = PBXGroup;
 			children = (
 				37654C7D20820D9F00B54DC1 /* CustomTextField.swift */,
-				37654CC6208CDF3400B54DC1 /* CustomTableViewCell.swift */,
+				37654CC6208CDF3400B54DC1 /* CustomHomeTableViewCell.swift */,
+				37654CDC2097387400B54DC1 /* CustomStoreTableViewCell.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -151,8 +162,10 @@
 			isa = PBXGroup;
 			children = (
 				3752D922207FFA720019C5FA /* ConnectViewController.swift */,
-				3752D93D2080CF210019C5FA /* HomeViewController.swift */,
 				37654C81208601DF00B54DC1 /* RegistrationViewController.swift */,
+				3752D93D2080CF210019C5FA /* HomeViewController.swift */,
+				37654CDA2095D3B100B54DC1 /* StoreViewController.swift */,
+				373B846D20A1912100B2F800 /* SettingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -221,6 +234,8 @@
 		37654C8B20890B9000B54DC1 /* PersistantFiles */ = {
 			isa = PBXGroup;
 			children = (
+				374370E5209EC25200E7C84C /* FeatureStore+CoreDataClass.swift */,
+				374370E6209EC25200E7C84C /* FeatureStore+CoreDataProperties.swift */,
 				37654CD22092197400B54DC1 /* UserProfil.swift */,
 				37654CD32092197400B54DC1 /* UserProfil+CoreDataProperties.swift */,
 				37654CD42092197400B54DC1 /* Feature.swift */,
@@ -326,15 +341,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37654CC7208CDF3400B54DC1 /* CustomTableViewCell.swift in Sources */,
+				37654CC7208CDF3400B54DC1 /* CustomHomeTableViewCell.swift in Sources */,
+				374370E7209EC25200E7C84C /* FeatureStore+CoreDataClass.swift in Sources */,
 				37654C82208601DF00B54DC1 /* RegistrationViewController.swift in Sources */,
 				37654CD62092197400B54DC1 /* UserProfil.swift in Sources */,
+				374370E8209EC25200E7C84C /* FeatureStore+CoreDataProperties.swift in Sources */,
+				373B846E20A1912100B2F800 /* SettingViewController.swift in Sources */,
 				3752D929207FFA720019C5FA /* La_Distrib_.xcdatamodeld in Sources */,
 				37654CD92092197400B54DC1 /* Feature+CoreDataProperties.swift in Sources */,
 				3752D923207FFA720019C5FA /* ConnectViewController.swift in Sources */,
+				37654CDB2095D3B100B54DC1 /* StoreViewController.swift in Sources */,
 				37654CD82092197400B54DC1 /* Feature.swift in Sources */,
 				37654CD72092197400B54DC1 /* UserProfil+CoreDataProperties.swift in Sources */,
 				3752D921207FFA720019C5FA /* AppDelegate.swift in Sources */,
+				37654CDD2097387400B54DC1 /* CustomStoreTableViewCell.swift in Sources */,
 				3752D93E2080CF210019C5FA /* HomeViewController.swift in Sources */,
 				37654C7E20820D9F00B54DC1 /* CustomTextField.swift in Sources */,
 				37654C862088FE5300B54DC1 /* DataController.swift in Sources */,

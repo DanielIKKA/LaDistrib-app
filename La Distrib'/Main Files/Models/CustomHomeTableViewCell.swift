@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CustomTableViewCell: UITableViewCell {
+class CustomHomeTableViewCell: UITableViewCell {
 
     @IBOutlet weak var featureImage: UIImageView!
     @IBOutlet weak var featureTitle: UILabel!
