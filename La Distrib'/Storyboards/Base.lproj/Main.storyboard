@@ -421,7 +421,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="315" height="50"/>
                                         <color key="backgroundColor" red="0.99991279840000002" green="1" blue="0.99988144639999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="0Tk-CG-34r"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="0Tk-CG-34r"/>
                                             <constraint firstAttribute="width" secondItem="FsH-9P-9XJ" secondAttribute="height" multiplier="63:10" id="UzI-zq-9mb"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="17"/>
@@ -434,7 +434,7 @@
                                         <color key="backgroundColor" red="0.99991279840000002" green="1" blue="0.99988144639999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="zDn-MX-7vS" secondAttribute="height" multiplier="63:10" id="O4Q-3A-BXU"/>
-                                            <constraint firstAttribute="height" constant="50" id="lHV-Zc-S9m"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="lHV-Zc-S9m"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="17"/>
                                         <state key="normal" title="Edit password">
@@ -446,7 +446,7 @@
                                         <color key="backgroundColor" red="0.99991279840000002" green="1" blue="0.99988144639999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="yqH-G6-Jxy" secondAttribute="height" multiplier="63:10" id="edg-eB-Fiv"/>
-                                            <constraint firstAttribute="height" constant="50" id="oIK-7l-NBd"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="oIK-7l-NBd"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="17"/>
                                         <state key="normal" title="Send Report">
@@ -457,7 +457,7 @@
                                         <rect key="frame" x="0.0" y="180" width="315" height="50"/>
                                         <color key="backgroundColor" red="0.99991279840000002" green="1" blue="0.99988144639999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="MZw-9R-njU"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="MZw-9R-njU"/>
                                             <constraint firstAttribute="width" secondItem="mvf-ag-3TL" secondAttribute="height" multiplier="63:10" id="qul-4B-pdn"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="17"/>
@@ -599,7 +599,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="315" height="75"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="Ozb-ee-GsT" id="ZI7-Ua-Cl2">
-                                                    <rect key="frame" x="0.0" y="0.0" width="315" height="74"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="315" height="74.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pencilIcon" translatesAutoresizingMaskIntoConstraints="NO" id="ziR-D0-TDk">
@@ -971,7 +971,7 @@
         <image name="storeIcon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gaw-1U-RTZ"/>
+        <segue reference="AXz-xf-JyL"/>
         <segue reference="rE7-Dc-9vH"/>
     </inferredMetricsTieBreakers>
 </document>
