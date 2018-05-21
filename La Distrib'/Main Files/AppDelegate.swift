@@ -8,16 +8,18 @@
 
 import UIKit
 import CoreData
+import CoreBluetooth
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let dataController = DataController()
+    var bluetoothController : BluetoothManager!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-//        print("\n1\n")
+        bluetoothController = BluetoothManager(delegate: self, queue: nil)
         return true
         
     }
@@ -48,6 +50,91 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         dataController.saveContext()
+    }
+}
+
+extension AppDelegate : CBCentralManagerDelegate {
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        switch central.state {
+            
+        case .unknown:
+            print("central.state is unknown")
+        case .resetting:
+            print("central.state is resetting")
+        case .unsupported:
+            print("central.state is unsupported")
+        case .unauthorized:
+            print("central.state is unauthorized")
+        case .poweredOff:
+            print("central.state is poweredOff")
+        case .poweredOn:
+            print("central.state is poweredOn")
+            bluetoothController?.centralManager.scanForPeripherals(withServices: [bluetoothController.kServiceModuleCBUUID])
+        }
+    }
+    
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        
+        bluetoothController.centralManager.stopScan()
+        bluetoothController.modulePeripheral = peripheral
+        bluetoothController.centralManager.connect(bluetoothController.modulePeripheral)
+        bluetoothController.modulePeripheral.delegate = self
+    }
+    
+    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        print("connected")
+        bluetoothController.modulePeripheral.discoverServices([bluetoothController.kServiceModuleCBUUID])
+    }
+}
+
+extension AppDelegate : CBPeripheralDelegate {
+    
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+        guard let services = peripheral.services else { return }
+        
+        for service in services {
+            bluetoothController.modulePeripheral.discoverCharacteristics([bluetoothController.kReadWriteCharacteristicCBUUID], for: service)
+            print(service)
+        }
+    }
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+        guard service.characteristics != nil else { return }
+        
+        for characteristic in service.characteristics! {
+            if(characteristic.properties.contains(.notify)) {
+                print("notified is available")
+                bluetoothController.modulePeripheral.setNotifyValue(true, for: characteristic)
+            }
+            if characteristic.properties.contains(.read) {
+                print("read too")
+            }
+            if characteristic.properties.contains(.writeWithoutResponse) {
+                print("write too")
+            }
+            
+            
+        }
+    }
+    
+    func writeValue(data: String){
+        let data = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+        if let peripheralDevice = bluetoothController.modulePeripheral{
+            if let deviceCharacteristics = bluetoothController.modulePeripheral.services?.first?.characteristics?.first {
+                peripheralDevice.writeValue(data!, for: deviceCharacteristics, type: CBCharacteristicWriteType.withoutResponse)
+            }
+        }
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        // notify the delegate in different ways
+        // if you don't use one of these, just comment it (for optimum efficiency :])
+        let data = characteristic.value
+        guard data != nil else { return }
+        
+        // then the string
+        if let str = String(data: data!, encoding: String.Encoding.utf8) {
+            print(str)
+        }
     }
 }
 

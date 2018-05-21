@@ -7,30 +7,18 @@
 //
 
 import Foundation
+import UIKit
 import CoreBluetooth
 
-class BluetoothManager: CBCentralManager {
+class BluetoothManager {
     
-//    var centralManager : CBCentralManager!
+    let kServiceModuleCBUUID = CBUUID(string: "FFE0")
+    let kReadWriteCharacteristicCBUUID = CBUUID(string: "FFE1")
     
-}
-
-extension BluetoothManager : CBCentralManagerDelegate {
-    func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        switch central.state {
-            
-        case .unknown:
-            print("central.state is unknown")
-        case .resetting:
-            print("central.state is resetting")
-        case .unsupported:
-            print("central.state is unsupported")
-        case .unauthorized:
-            print("central.state is unauthorized")
-        case .poweredOff:
-            print("central.state is poweredOff")
-        case .poweredOn:
-            print("central.state is poweredOn")
-        }
+    var centralManager : CBCentralManager
+    var modulePeripheral : CBPeripheral!
+    
+    init(delegate: CBCentralManagerDelegate? , queue: DispatchQueue?) {
+        centralManager = CBCentralManager(delegate: delegate, queue: queue)
     }
 }

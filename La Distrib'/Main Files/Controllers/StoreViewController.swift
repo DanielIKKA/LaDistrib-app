@@ -29,6 +29,9 @@ class StoreViewController: UIViewController {
     var store : [FeatureStore] {
         return dataController.featuresStore
     }
+    var bluetoothManager : BluetoothManager {
+      return (UIApplication.shared.delegate as! AppDelegate).bluetoothController
+    }
     
     /*-------------------------------*/
     // MARK: - Public Fonctions
