@@ -53,6 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+// MARK: - CentralManagerDelegate
 extension AppDelegate : CBCentralManagerDelegate {
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
@@ -87,6 +88,7 @@ extension AppDelegate : CBCentralManagerDelegate {
     }
 }
 
+// MARK: - PeripheralDelegate
 extension AppDelegate : CBPeripheralDelegate {
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
@@ -116,24 +118,15 @@ extension AppDelegate : CBPeripheralDelegate {
         }
     }
     
-    func writeValue(data: String){
-        let data = (data as NSString).data(using: String.Encoding.utf8.rawValue)
-        if let peripheralDevice = bluetoothController.modulePeripheral{
-            if let deviceCharacteristics = bluetoothController.modulePeripheral.services?.first?.characteristics?.first {
-                peripheralDevice.writeValue(data!, for: deviceCharacteristics, type: CBCharacteristicWriteType.withoutResponse)
-            }
-        }
-    }
-    
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        // notify the delegate in different ways
-        // if you don't use one of these, just comment it (for optimum efficiency :])
+        
         let data = characteristic.value
         guard data != nil else { return }
         
         // then the string
         if let str = String(data: data!, encoding: String.Encoding.utf8) {
-            print(str)
+            bluetoothController.dataStr = str
+            print(bluetoothController.dataStr!)
         }
     }
 }
