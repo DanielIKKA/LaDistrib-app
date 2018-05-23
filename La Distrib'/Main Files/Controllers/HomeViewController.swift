@@ -78,10 +78,10 @@ class HomeViewController: UIViewController {
         historyList.dataSource = self
         
         // Observers
-        let notificationNameBLEconnect = NSNotification.Name(rawValue : "BLEConnected")
+        let notificationNameBLEconnect = NSNotification.Name(rawValue : BluetoothConstantes.Notifications.kConnected)
         NotificationCenter.default.addObserver(self, selector: #selector(BluetoothIconSwitchConnected), name: notificationNameBLEconnect, object: nil)
         
-        let notificationNameBLEdisconnect = NSNotification.Name(rawValue: "BLEdisconnected")
+        let notificationNameBLEdisconnect = NSNotification.Name(rawValue: BluetoothConstantes.Notifications.kDisconnected)
         NotificationCenter.default.addObserver(self, selector: #selector(BluetoothIconSwitchDisonnected), name: notificationNameBLEdisconnect, object: nil)
         
         

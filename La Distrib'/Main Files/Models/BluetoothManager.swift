@@ -10,6 +10,27 @@ import Foundation
 import UIKit
 import CoreBluetooth
 
+struct BluetoothConstantes {
+    
+    struct Disponibilities {
+        static let kPaper           = "D0"
+        static let kBluePen         = "D1"
+        static let kBlackPen        = "D2"
+        static let kGreenPen        = "D3"
+        static let kRedPen          = "D4"
+        static let kInk             = "D5"
+        static let kPencil          = "D6"
+    }
+    
+    struct Notifications {
+        static let kDisponibilities = "updateData"
+        static let kConnected       = "BLEConnected"
+        static let kDisconnected    = "BLEdisconnected"
+    }
+    
+    static let kEndData = Character("Z")
+}
+
 class BluetoothManager {
     
     // MARK: Constantes
@@ -38,4 +59,9 @@ class BluetoothManager {
             }
         }
     }
+    @objc private func resetDataStr() {
+        dataStr = ""
+    }
 }
+
+

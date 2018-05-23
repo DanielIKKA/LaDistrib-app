@@ -145,6 +145,14 @@ extension AppDelegate : CBPeripheralDelegate {
             bluetoothController.dataStr = str
             print(bluetoothController.dataStr!)
         }
+        
+        // Send notification
+        if bluetoothController.dataStr?.last == BluetoothConstantes.kEndData {
+            let notificationName = NSNotification.Name(rawValue : BluetoothConstantes.Notifications.kDisponibilities)
+            let notification = Notification(name: notificationName)
+            NotificationCenter.default.post(notification)
+        }
+        
     }
 }
 

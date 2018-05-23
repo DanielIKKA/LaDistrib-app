@@ -42,6 +42,10 @@ class StoreViewController: UIViewController {
         super.viewDidLoad()
         setupView()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        sendRequestStock()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateDisponibilities), name: NSNotification.Name(rawValue: BluetoothConstantes.Notifications.kDisponibilities), object: nil)
+    }
     
     //MARK: IBActions
     @IBAction func didTapReturnButton(_ sender: UIButton) {
@@ -68,10 +72,10 @@ class StoreViewController: UIViewController {
         let notificationNameManagedSave = NSNotification.Name.NSManagedObjectContextDidSave
         NotificationCenter.default.addObserver(self, selector: #selector(updateTotalPurchased), name: notificationNameManagedSave, object: nil)
         
-        let notificationNameBLEconnect = NSNotification.Name(rawValue : "BLEConnected")
+        let notificationNameBLEconnect = NSNotification.Name(rawValue : BluetoothConstantes.Notifications.kConnected)
         NotificationCenter.default.addObserver(self, selector: #selector(BluetoothIconSwitchConnected), name: notificationNameBLEconnect, object: nil)
         
-        let notificationNameBLEdisconnect = NSNotification.Name(rawValue: "BLEdisconnected")
+        let notificationNameBLEdisconnect = NSNotification.Name(rawValue: BluetoothConstantes.Notifications.kDisconnected)
         NotificationCenter.default.addObserver(self, selector: #selector(BluetoothIconSwitchDisonnected), name: notificationNameBLEdisconnect, object: nil)
         
         // GraphicSetup
@@ -115,6 +119,44 @@ class StoreViewController: UIViewController {
         updateBalance()
         resetMultiplicators()
     }
+    private func sendRequestStock() {
+        guard bluetoothManager.modulePeripheral != nil else { return }
+        var dataToSend = String()
+        
+        for cell in storeList.visibleCells as! [CustomStoreTableViewCell] {
+            switch cell.featureTitle.text! {
+            case FeatureConstants.Title.kBlackPen:
+                dataToSend += BluetoothConstantes.Disponibilities.kBlackPen
+                break
+            case FeatureConstants.Title.kBluePen :
+                dataToSend += BluetoothConstantes.Disponibilities.kBluePen
+                break
+            case FeatureConstants.Title.kGreenPen :
+                dataToSend += BluetoothConstantes.Disponibilities.kGreenPen
+                break
+            case FeatureConstants.Title.kRedPen :
+                dataToSend += BluetoothConstantes.Disponibilities.kRedPen
+                break
+            case FeatureConstants.Title.kPaper :
+                dataToSend += BluetoothConstantes.Disponibilities.kPaper
+                break
+            case FeatureConstants.Title.kInk :
+                dataToSend += BluetoothConstantes.Disponibilities.kInk
+                break
+            case FeatureConstants.Title.kPencil :
+                dataToSend += BluetoothConstantes.Disponibilities.kPencil
+                break
+            default:
+                return
+            }
+        }
+        bluetoothManager.writeValue(data: dataToSend)
+    }
+    @objc private func updateDisponibilities() {
+        
+    }
+    
+    
     // MARK : alerts
     private func alertNoMoney() {
         let alerVC = UIAlertController(title: "Error", message: "Please Credit your account !", preferredStyle: .alert)
@@ -163,29 +205,6 @@ extension StoreViewController : UITableViewDataSource, UITableViewDelegate {
         cell.feature = store[indexPath.row]
         cell.setup()
         cell.numberTextField.delegate = self
-        
-        guard stock(cellName: cell.featureTitle.text!) != nil else {
-            cell.stockLabel.text = "unavailable"
-            cell.stockLabel.textColor = #colorLiteral(red: 0.5954171419, green: 0.1898292303, blue: 0.3689950109, alpha: 1)
-            return
-        }
-        cell.stockLabel.text = "Stock: " + stock(cellName: cell.featureTitle.text!)!
-        cell.stockLabel.textColor = #colorLiteral(red: 0.3558041453, green: 0.4711943533, blue: 0, alpha: 1)
-    }
-    private func stock(cellName : String) -> String? {
-        guard bluetoothManager.modulePeripheral != nil else { return nil }
-        
-        switch cellName {
-        case FeatureConstants.Title.kBlackPen:
-            bluetoothManager.writeValue(data: "22")
-        default:
-            bluetoothManager.writeValue(data: "11")
-        }
-        
-        /*guard (bluetoothManager.dataStr?.count!)  else {
-            return nil
-        }*/
-        return bluetoothManager.dataStr
     }
 }
 

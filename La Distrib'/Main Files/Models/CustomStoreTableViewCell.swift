@@ -21,6 +21,7 @@ class CustomStoreTableViewCell: UITableViewCell {
     
     //MARK: - Variables
     var feature : FeatureStore!
+    var stock : Int = 0
     var dataController : DataController {
         return (UIApplication.shared.delegate as! AppDelegate).dataController
     }
@@ -35,6 +36,8 @@ class CustomStoreTableViewCell: UITableViewCell {
         unitPrice.text = "\(String(describing: feature.unitPrice))€"
         
         numberTextField.text = String(feature.multiplicator)
+        stockLabel.text = "Waiting disponibilities"
+        stockLabel.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         
         selectionStyle = .none
         dataController.saveContext()

@@ -1004,7 +1004,6 @@
         <image name="storeIcon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oZy-1o-xUa"/>
         <segue reference="gaw-1U-RTZ"/>
         <segue reference="eQp-dC-A6C"/>
     </inferredMetricsTieBreakers>
