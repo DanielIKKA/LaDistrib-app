@@ -17,6 +17,7 @@ class CustomStoreTableViewCell: UITableViewCell {
     @IBOutlet weak var unitPrice: UILabel!
     @IBOutlet weak var minusButton: UIButton!
     @IBOutlet weak var plusButton: UIButton!
+    @IBOutlet weak var stockLabel: UILabel!
     
     //MARK: - Variables
     var feature : FeatureStore!

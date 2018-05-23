@@ -18,6 +18,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var historyList: UITableView!
+    @IBOutlet weak var bluetoothButton: UIButton!
     
     //MARK: Variable
     var dataController : DataController {
@@ -37,14 +38,9 @@ class HomeViewController: UIViewController {
     
     //MARK: IBActions
     @IBAction func settingButton(_ sender: UIButton) {
-        if (currentUser?.isConnected)! && (currentUser?.isStayConnect)! {
-            balanceLabel.textColor = UIColor.green
-        } else {
-            balanceLabel.textColor = UIColor.red
-        }
         performSegue(withIdentifier: "segueToSettings", sender: self)
     }
-    @IBAction func powerButton(_ sender: UIButton) {
+    @IBAction func ButtonActions(_ sender: UIButton) {
         if(sender.tag == 0) {
             disconnect()
         } else if sender.tag == 1 {
@@ -81,14 +77,31 @@ class HomeViewController: UIViewController {
         historyList.delegate = self
         historyList.dataSource = self
         
+        // Observers
+        let notificationNameBLEconnect = NSNotification.Name(rawValue : "BLEConnected")
+        NotificationCenter.default.addObserver(self, selector: #selector(BluetoothIconSwitchConnected), name: notificationNameBLEconnect, object: nil)
+        
+        let notificationNameBLEdisconnect = NSNotification.Name(rawValue: "BLEdisconnected")
+        NotificationCenter.default.addObserver(self, selector: #selector(BluetoothIconSwitchDisonnected), name: notificationNameBLEdisconnect, object: nil)
+        
+        
         // GraphicSetup
         let currentUserName = currentUser?.value(forKey: "username") as! String
         let balance = currentUser?.value(forKey: "balance") as! Double
+        
+        bluetoothButton.isEnabled = false 
         
         welcomeLabel.text = currentUserName
         balanceLabel.text = String(format: "%.2f" , balance) + "€"
         
         historyList.layer.cornerRadius = 8
+    }
+    
+    @objc private func BluetoothIconSwitchConnected() {
+        bluetoothButton.isEnabled = true
+    }
+    @objc private func BluetoothIconSwitchDisonnected() {
+        bluetoothButton.isEnabled = false
     }
     private func reloadFeaturesPurshased() {
         featuresPurshased = currentUser?.feature?.allObjects as! [Feature]

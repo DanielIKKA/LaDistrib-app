@@ -80,12 +80,29 @@ extension AppDelegate : CBCentralManagerDelegate {
         bluetoothController.modulePeripheral = peripheral
         bluetoothController.centralManager.connect(bluetoothController.modulePeripheral)
         bluetoothController.modulePeripheral.delegate = self
+        
+        
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        let notificationNameConnect = Notification.Name(rawValue : "BLEConnected")
+        let notificationConnect = Notification(name: notificationNameConnect)
+        NotificationCenter.default.post(notificationConnect)
         print("connected")
-        bluetoothController.modulePeripheral.discoverServices([bluetoothController.kServiceModuleCBUUID])
+    bluetoothController.modulePeripheral.discoverServices([bluetoothController.kServiceModuleCBUUID])
     }
+    
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        let notificationNameConnect = Notification.Name(rawValue : "BLEdisconnected")
+        let notificationConnect = Notification(name: notificationNameConnect)
+        NotificationCenter.default.post(notificationConnect)
+        print("disconnected")
+        
+        if central.state == .poweredOn {
+            bluetoothController?.centralManager.scanForPeripherals(withServices: [bluetoothController.kServiceModuleCBUUID])
+        }
+    }
+    
 }
 
 // MARK: - PeripheralDelegate

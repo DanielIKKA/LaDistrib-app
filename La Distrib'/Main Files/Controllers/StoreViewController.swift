@@ -19,6 +19,8 @@ class StoreViewController: UIViewController {
     @IBOutlet weak var BalanceLabel: UILabel!
     @IBOutlet weak var buyButton: UIButton!
     @IBOutlet weak var totalPrice: UILabel!
+    @IBOutlet weak var bluetoothButton: UIButton!
+    
     
     //MARK: Variable
     var dataController : DataController {
@@ -63,14 +65,27 @@ class StoreViewController: UIViewController {
         storeList.delegate = self
         
         // init observer
-        let notificationName = NSNotification.Name.NSManagedObjectContextDidSave
-        NotificationCenter.default.addObserver(self, selector: #selector(updateTotalPurchased), name: notificationName, object: nil)
+        let notificationNameManagedSave = NSNotification.Name.NSManagedObjectContextDidSave
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTotalPurchased), name: notificationNameManagedSave, object: nil)
+        
+        let notificationNameBLEconnect = NSNotification.Name(rawValue : "BLEConnected")
+        NotificationCenter.default.addObserver(self, selector: #selector(BluetoothIconSwitchConnected), name: notificationNameBLEconnect, object: nil)
+        
+        let notificationNameBLEdisconnect = NSNotification.Name(rawValue: "BLEdisconnected")
+        NotificationCenter.default.addObserver(self, selector: #selector(BluetoothIconSwitchDisonnected), name: notificationNameBLEdisconnect, object: nil)
         
         // GraphicSetup
         resetMultiplicators()
         updateBalance()
+        bluetoothButton.isEnabled = false 
         storeList.layer.cornerRadius = 8
         buyButton.layer.cornerRadius = 8
+    }
+    @objc private func BluetoothIconSwitchConnected() {
+        bluetoothButton.isEnabled = true
+    }
+    @objc private func BluetoothIconSwitchDisonnected() {
+        bluetoothButton.isEnabled = false
     }
     private func buy(this feature: FeatureStore) {
         let newFeature = Feature(context: dataController.managedObjectContext)
@@ -91,14 +106,6 @@ class StoreViewController: UIViewController {
         dataController.saveContext()
         BalanceLabel.text = String(format: "%.2f", (currentUser?.balance)!) + "€"
     }
-    private func alertNoMoney() {
-        let alerVC = UIAlertController(title: "Error", message: "Please Credit your account !", preferredStyle: .alert)
-        let alertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (success) in
-            self.resetMultiplicators()
-        })
-        alerVC.addAction(alertAction)
-        present(alerVC, animated: true)
-    }
     private func buyFeatures() {
         for feature in store {
             if feature.multiplicator > 0 {
@@ -108,6 +115,17 @@ class StoreViewController: UIViewController {
         updateBalance()
         resetMultiplicators()
     }
+    // MARK : alerts
+    private func alertNoMoney() {
+        let alerVC = UIAlertController(title: "Error", message: "Please Credit your account !", preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (success) in
+            self.resetMultiplicators()
+        })
+        alerVC.addAction(alertAction)
+        present(alerVC, animated: true)
+    }
+    
+    // MARK : Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "segueToHomeFromStore") {
             let ControllerDest = segue.destination as! HomeViewController
@@ -145,6 +163,29 @@ extension StoreViewController : UITableViewDataSource, UITableViewDelegate {
         cell.feature = store[indexPath.row]
         cell.setup()
         cell.numberTextField.delegate = self
+        
+        guard stock(cellName: cell.featureTitle.text!) != nil else {
+            cell.stockLabel.text = "unavailable"
+            cell.stockLabel.textColor = #colorLiteral(red: 0.5954171419, green: 0.1898292303, blue: 0.3689950109, alpha: 1)
+            return
+        }
+        cell.stockLabel.text = "Stock: " + stock(cellName: cell.featureTitle.text!)!
+        cell.stockLabel.textColor = #colorLiteral(red: 0.3558041453, green: 0.4711943533, blue: 0, alpha: 1)
+    }
+    private func stock(cellName : String) -> String? {
+        guard bluetoothManager.modulePeripheral != nil else { return nil }
+        
+        switch cellName {
+        case FeatureConstants.Title.kBlackPen:
+            bluetoothManager.writeValue(data: "22")
+        default:
+            bluetoothManager.writeValue(data: "11")
+        }
+        
+        /*guard (bluetoothManager.dataStr?.count!)  else {
+            return nil
+        }*/
+        return bluetoothManager.dataStr
     }
 }
 
