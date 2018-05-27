@@ -12,14 +12,14 @@ import CoreBluetooth
 
 struct BluetoothConstantes {
     
-    struct Disponibilities {
-        static let kPaper           = "D0"
-        static let kBluePen         = "D1"
-        static let kBlackPen        = "D2"
-        static let kGreenPen        = "D3"
-        static let kRedPen          = "D4"
-        static let kInk             = "D5"
-        static let kPencil          = "D6"
+    struct codeFeature {
+        static let kPaper           = "0"
+        static let kBluePen         = "1"
+        static let kBlackPen        = "2"
+        static let kGreenPen        = "3"
+        static let kRedPen          = "4"
+        static let kInk             = "5"
+        static let kPencil          = "6"
     }
     
     struct Notifications {
@@ -28,7 +28,12 @@ struct BluetoothConstantes {
         static let kDisconnected    = "BLEdisconnected"
     }
     
-    static let kEndData = Character("Z")
+    static let kEndKeyData      = Character("Z")
+    static let kStoreRequestKey = Character("D")
+    static let kSeparatorKey    = Character("A")
+    
+    static let kWaitingKey      = -1
+    static let kUnavailable     =  0
 }
 
 class BluetoothManager {
@@ -44,7 +49,7 @@ class BluetoothManager {
     var modulePeripheral : CBPeripheral!
     
     // MARK: Data
-    var dataStr : String?
+    var dataStr = String()
     
     
     init(delegate: CBCentralManagerDelegate? , queue: DispatchQueue?) {
@@ -59,7 +64,7 @@ class BluetoothManager {
             }
         }
     }
-    @objc private func resetDataStr() {
+    func resetDataStr() {
         dataStr = ""
     }
 }

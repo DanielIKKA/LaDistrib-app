@@ -140,14 +140,23 @@ extension AppDelegate : CBPeripheralDelegate {
         let data = characteristic.value
         guard data != nil else { return }
         
+        var tmp = String()
+        
+        if !bluetoothController.dataStr.isEmpty {
+            tmp = String(describing:  bluetoothController.dataStr)
+        } 
+        
+        
+        
         // then the string
-        if let str = String(data: data!, encoding: String.Encoding.utf8) {
+        if var str = String(data: data!, encoding: String.Encoding.utf8) {
+            str = tmp + str
             bluetoothController.dataStr = str
-            print(bluetoothController.dataStr!)
+            print(bluetoothController.dataStr)
         }
         
         // Send notification
-        if bluetoothController.dataStr?.last == BluetoothConstantes.kEndData {
+        if bluetoothController.dataStr.last == BluetoothConstantes.kEndKeyData {
             let notificationName = NSNotification.Name(rawValue : BluetoothConstantes.Notifications.kDisponibilities)
             let notification = Notification(name: notificationName)
             NotificationCenter.default.post(notification)

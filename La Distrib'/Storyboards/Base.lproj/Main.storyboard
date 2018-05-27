@@ -929,13 +929,14 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ysB-Ic-GMF">
                                 <rect key="frame" x="248" y="40" width="97" height="33"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q71-b7-asp" userLabel="Bluetooth">
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q71-b7-asp" userLabel="Bluetooth">
                                         <rect key="frame" x="0.0" y="0.0" width="20" height="33"/>
                                         <state key="normal" backgroundImage="Bluetooth">
                                             <color key="titleColor" red="0.99991279840000002" green="1" blue="0.99988144639999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="ButtonActions:" destination="Vbj-6p-Qkc" eventType="touchUpInside" id="T16-DJ-wLu"/>
+                                            <action selector="tapBLEButton:" destination="9Us-kC-pI4" eventType="touchUpInside" id="Jc8-fA-4Nn"/>
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="storeIcon" translatesAutoresizingMaskIntoConstraints="NO" id="b4e-wz-COc">
@@ -1005,6 +1006,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="gaw-1U-RTZ"/>
-        <segue reference="eQp-dC-A6C"/>
+        <segue reference="rE7-Dc-9vH"/>
     </inferredMetricsTieBreakers>
 </document>

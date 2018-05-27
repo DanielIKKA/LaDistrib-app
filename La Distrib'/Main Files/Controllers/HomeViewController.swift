@@ -36,6 +36,7 @@ class HomeViewController: UIViewController {
         reloadFeaturesPurshased()
     }
     
+    
     //MARK: IBActions
     @IBAction func settingButton(_ sender: UIButton) {
         performSegue(withIdentifier: "segueToSettings", sender: self)
@@ -61,6 +62,7 @@ class HomeViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "segueToStore") {
             let destVC = segue.destination as! StoreViewController
+            
             destVC.currentUser = self.currentUser
         } else if (segue.identifier == "segueToSettings") {
             let destVc = segue.destination as! SettingViewController
@@ -89,12 +91,21 @@ class HomeViewController: UIViewController {
         let currentUserName = currentUser?.value(forKey: "username") as! String
         let balance = currentUser?.value(forKey: "balance") as! Double
         
-        bluetoothButton.isEnabled = false 
-        
         welcomeLabel.text = currentUserName
         balanceLabel.text = String(format: "%.2f" , balance) + "€"
         
         historyList.layer.cornerRadius = 8
+        
+        guard (UIApplication.shared.delegate as! AppDelegate).bluetoothController.modulePeripheral != nil else {
+            bluetoothButton.isEnabled = false
+            return
+        }
+        if(UIApplication.shared.delegate as! AppDelegate).bluetoothController.modulePeripheral.state == .connected { bluetoothButton.isEnabled = true
+        } else {
+            bluetoothButton.isEnabled = false
+        }
+        
+        
     }
     
     @objc private func BluetoothIconSwitchConnected() {
