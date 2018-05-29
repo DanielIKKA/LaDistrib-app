@@ -56,11 +56,26 @@ class StoreViewController: UIViewController {
         performSegue(withIdentifier: "segueToHomeFromStore", sender: self)
     }
     @IBAction func buyButton(_ sender : UIButton) {
-        if(totalpurchased > (currentUser?.balance)!) {
-            alertNoMoney()
+        if(bluetoothButton.isEnabled){
+            if(totalpurchased > (currentUser?.balance)!) {
+                alertNoMoney()
+            } else {
+                var test : Bool = false
+                
+                for feature in store {
+                    if feature.multiplicator > 0 {
+                        test = true
+                    }
+                }
+                if (test) {
+                    sendRequestBuy()
+                    buyFeatures()
+                }
+            }
         } else {
-            buyFeatures()
+            alertNotConnected()
         }
+        
     }
     
     /*-------------------------------*/
@@ -138,7 +153,10 @@ class StoreViewController: UIViewController {
         }
         updateBalance()
         resetMultiplicators()
+        alertBuySuccess()
     }
+    
+    // MARK: BLE resquests
     private func sendRequestStock() {
         guard bluetoothManager.modulePeripheral != nil else { return }
         var dataToSend = BluetoothConstantes.kStoreRequestKey.description
@@ -177,6 +195,48 @@ class StoreViewController: UIViewController {
         bluetoothManager.writeValue(data: dataToSend)
     }
     
+    private func sendRequestBuy() {
+        guard bluetoothManager.modulePeripheral != nil else { return }
+        var dataToSend = BluetoothConstantes.kBuyFeatureKey.description
+        
+        for feature in store {
+            // Send Reference of feature
+            dataToSend += BluetoothConstantes.kSeparatorKey.description
+            switch feature.title! {
+            case FeatureConstants.Title.kBlackPen:
+                dataToSend += BluetoothConstantes.codeFeature.kBlackPen
+                break
+            case FeatureConstants.Title.kBluePen :
+                dataToSend += BluetoothConstantes.codeFeature.kBluePen
+                break
+            case FeatureConstants.Title.kGreenPen :
+                dataToSend += BluetoothConstantes.codeFeature.kGreenPen
+                break
+            case FeatureConstants.Title.kRedPen :
+                dataToSend += BluetoothConstantes.codeFeature.kRedPen
+                break
+            case FeatureConstants.Title.kPaper :
+                dataToSend += BluetoothConstantes.codeFeature.kPaper
+                break
+            case FeatureConstants.Title.kInk :
+                dataToSend += BluetoothConstantes.codeFeature.kInk
+                break
+            case FeatureConstants.Title.kPencil :
+                dataToSend += BluetoothConstantes.codeFeature.kPencil
+                break
+            default:
+                return
+            }
+                
+            // Send Number of purchases
+            dataToSend += BluetoothConstantes.kNumSeparatorKey.description
+            dataToSend += feature.multiplicator.description
+        }
+        
+        //add the end of message
+        dataToSend += BluetoothConstantes.kEndKeyData.description
+        bluetoothManager.writeValue(data: dataToSend)
+    }
     @objc private func updateDisponibilities() {
         var strArray = [String]()
         var strTmp = String()
@@ -214,11 +274,27 @@ class StoreViewController: UIViewController {
     }
     
     
-    // MARK : alerts
+    // MARK: alerts
     private func alertNoMoney() {
         let alerVC = UIAlertController(title: "Error", message: "Please Credit your account !", preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (success) in
             self.resetMultiplicators()
+        })
+        alerVC.addAction(alertAction)
+        present(alerVC, animated: true)
+    }
+    private func alertNotConnected() {
+        let alerVC = UIAlertController(title: "Error", message: "You are not connected to an AT La Distrib'", preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (success) in
+            self.resetMultiplicators()
+        })
+        alerVC.addAction(alertAction)
+        present(alerVC, animated: true)
+    }
+    private func alertBuySuccess() {
+        let alerVC = UIAlertController(title: "Success", message: nil, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "Continue", style: .default , handler: { (success) in
+            self.sendRequestStock()
         })
         alerVC.addAction(alertAction)
         present(alerVC, animated: true)

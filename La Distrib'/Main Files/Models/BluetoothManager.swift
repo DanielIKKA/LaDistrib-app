@@ -28,9 +28,11 @@ struct BluetoothConstantes {
         static let kDisconnected    = "BLEdisconnected"
     }
     
-    static let kEndKeyData      = Character("Z")
-    static let kStoreRequestKey = Character("D")
     static let kSeparatorKey    = Character("A")
+    static let kBuyFeatureKey   = Character("B")
+    static let kStoreRequestKey = Character("D")
+    static let kNumSeparatorKey = Character("N")
+    static let kEndKeyData      = Character("Z")
     
     static let kWaitingKey      = -1
     static let kUnavailable     =  0

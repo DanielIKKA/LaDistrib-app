@@ -65,7 +65,7 @@ class CustomStoreTableViewCell: UITableViewCell {
             }
         } else if (sender.tag == 1) {
             let tmp = feature.multiplicator + 1
-            if (tmp > feature.stock || tmp == BluetoothConstantes.kUnavailable) && tmp == BluetoothConstantes.kWaitingKey {
+            if (tmp > feature.stock || tmp == BluetoothConstantes.kUnavailable) && stock != BluetoothConstantes.kWaitingKey {
                 return
             } else {
                 feature.multiplicator += 1

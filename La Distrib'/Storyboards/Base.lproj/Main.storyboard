@@ -671,8 +671,8 @@
                                                     <outlet property="featureImage" destination="ziR-D0-TDk" id="JDv-fQ-bB1"/>
                                                     <outlet property="featureTitle" destination="J50-58-ldq" id="1KF-PN-Aae"/>
                                                     <outlet property="multiple" destination="GW6-Sb-YHL" id="cZ5-eM-106"/>
-                                                    <outlet property="totalPrice" destination="ivw-0I-eMh" id="Nah-zG-Lrf"/>
-                                                    <outlet property="unitPrice" destination="zng-eM-iUC" id="ijz-A1-dph"/>
+                                                    <outlet property="totalPrice" destination="zng-eM-iUC" id="k9g-S9-1fd"/>
+                                                    <outlet property="unitPrice" destination="ivw-0I-eMh" id="uLx-yT-gHg"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -1006,6 +1006,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="gaw-1U-RTZ"/>
-        <segue reference="rE7-Dc-9vH"/>
+        <segue reference="eQp-dC-A6C"/>
     </inferredMetricsTieBreakers>
 </document>
