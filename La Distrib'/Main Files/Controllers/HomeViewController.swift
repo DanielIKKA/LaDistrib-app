@@ -142,6 +142,13 @@ extension HomeViewController : UITableViewDelegate, UITableViewDataSource {
         setupCell(cell, indexPath: indexPath)
         return cell
      }
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if(indexPath.row <= featuresPurshased.count) {
+            return nil
+        }
+        return indexPath
+    }
  
     private func setupCell(_ cell: CustomHomeTableViewCell, indexPath: IndexPath)
     {
