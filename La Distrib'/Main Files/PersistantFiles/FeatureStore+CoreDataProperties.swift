@@ -21,5 +21,6 @@ extension FeatureStore {
     @NSManaged public var unitPrice: Double
     @NSManaged public var imageNamed: String?
     @NSManaged public var multiplicator: Int16
-
+    @NSManaged public var stock: Int16
+    
 }

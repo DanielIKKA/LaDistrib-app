@@ -18,6 +18,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var historyList: UITableView!
+    @IBOutlet weak var bluetoothButton: UIButton!
     
     //MARK: Variable
     var dataController : DataController {
@@ -35,16 +36,12 @@ class HomeViewController: UIViewController {
         reloadFeaturesPurshased()
     }
     
+    
     //MARK: IBActions
     @IBAction func settingButton(_ sender: UIButton) {
-        if (currentUser?.isConnected)! && (currentUser?.isStayConnect)! {
-            balanceLabel.textColor = UIColor.green
-        } else {
-            balanceLabel.textColor = UIColor.red
-        }
         performSegue(withIdentifier: "segueToSettings", sender: self)
     }
-    @IBAction func powerButton(_ sender: UIButton) {
+    @IBAction func ButtonActions(_ sender: UIButton) {
         if(sender.tag == 0) {
             disconnect()
         } else if sender.tag == 1 {
@@ -65,6 +62,7 @@ class HomeViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "segueToStore") {
             let destVC = segue.destination as! StoreViewController
+            
             destVC.currentUser = self.currentUser
         } else if (segue.identifier == "segueToSettings") {
             let destVc = segue.destination as! SettingViewController
@@ -81,6 +79,14 @@ class HomeViewController: UIViewController {
         historyList.delegate = self
         historyList.dataSource = self
         
+        // Observers
+        let notificationNameBLEconnect = NSNotification.Name(rawValue : BluetoothConstantes.Notifications.kConnected)
+        NotificationCenter.default.addObserver(self, selector: #selector(BluetoothIconSwitchConnected), name: notificationNameBLEconnect, object: nil)
+        
+        let notificationNameBLEdisconnect = NSNotification.Name(rawValue: BluetoothConstantes.Notifications.kDisconnected)
+        NotificationCenter.default.addObserver(self, selector: #selector(BluetoothIconSwitchDisonnected), name: notificationNameBLEdisconnect, object: nil)
+        
+        
         // GraphicSetup
         let currentUserName = currentUser?.value(forKey: "username") as! String
         let balance = currentUser?.value(forKey: "balance") as! Double
@@ -89,6 +95,24 @@ class HomeViewController: UIViewController {
         balanceLabel.text = String(format: "%.2f" , balance) + "€"
         
         historyList.layer.cornerRadius = 8
+        
+        guard (UIApplication.shared.delegate as! AppDelegate).bluetoothController.modulePeripheral != nil else {
+            bluetoothButton.isEnabled = false
+            return
+        }
+        if(UIApplication.shared.delegate as! AppDelegate).bluetoothController.modulePeripheral.state == .connected { bluetoothButton.isEnabled = true
+        } else {
+            bluetoothButton.isEnabled = false
+        }
+        
+        
+    }
+    
+    @objc private func BluetoothIconSwitchConnected() {
+        bluetoothButton.isEnabled = true
+    }
+    @objc private func BluetoothIconSwitchDisonnected() {
+        bluetoothButton.isEnabled = false
     }
     private func reloadFeaturesPurshased() {
         featuresPurshased = currentUser?.feature?.allObjects as! [Feature]
