@@ -32,7 +32,7 @@
 #define SLOW 127
 #define SHIGH 205
 #define SVHIGH 255
-#define DELAYms 1000 // time
+#define DELAYms 2000 // time
 
 #define INITIALSTOCK  50
 #define NBFEATURES    7
@@ -126,7 +126,7 @@ void loop(){
       dataFromBt = String();
       
       if(nbPaper != 0) {
-        switchOnMotors(true, true, SVHIGH);
+        switchOnMotors(true, true, SLOW);
         switchOffMotors();
         /*int speed = 0;
         SetMotor1(speed, true);
@@ -244,7 +244,7 @@ void switchOnLeds() {
   
   for(int i = 1; i<NBFEATURES; i++) {
     if(led[i] != 0) {
-      switch (led[i]) {
+      switch (i) {
         case 1:
         digitalWrite(LEDPINBICBLUE, HIGH);
         break;
@@ -311,7 +311,7 @@ void switchOffAllLed() {
 void switchOnMotors(bool motor1_On, bool motor2_On, int speed) {
 
   if (motor1_On) {
-    SetMotor1(speed, true);
+    SetMotor1(SHIGH, true);
   }
   if (motor2_On) {
     SetMotor2(speed, true);
@@ -324,6 +324,7 @@ void switchOffMotors() {
   int speed = 0;
   nbPaper = 0;
   SetMotor1(speed, true);
+  delay(500);
   SetMotor2(speed, true);
 }
 
