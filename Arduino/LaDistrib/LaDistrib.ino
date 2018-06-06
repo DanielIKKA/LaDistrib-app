@@ -36,6 +36,7 @@
 
 #define INITIALSTOCK  50
 #define NBFEATURES    7
+#define DELAYLEDSms 2500
 
 // Message Keys
 #define SEPARATORKEY    'A'
@@ -125,7 +126,9 @@ void loop(){
       dataFromBt = String();
       
       if(nbPaper != 0) {
-        int speed = 0;
+        switchOnMotors(true, true, SVHIGH);
+        switchOffMotors();
+        /*int speed = 0;
         SetMotor1(speed, true);
         SetMotor2(speed, true);
         delay(DELAYms*nbPaper);
@@ -133,7 +136,7 @@ void loop(){
         speed = 0;
         nbPaper = 0;
         SetMotor1(speed, true);
-        SetMotor2(speed, true);
+        SetMotor2(speed, true);*/
       }
     }
 }
@@ -237,6 +240,8 @@ void buy() {
 
 // alume toutes les leds 
 void switchOnLeds() {
+  nbPaper = led[0];
+  
   for(int i = 1; i<NBFEATURES; i++) {
     if(led[i] != 0) {
       switch (led[i]) {
@@ -264,7 +269,7 @@ void switchOnLeds() {
     }
   }
   resetLedArray();
-  delay(2000);
+  delay(DELAYLEDSms);
   switchOffAllLed();
 }
 
@@ -301,5 +306,24 @@ void switchOffAllLed() {
   for(int i = LEDPININK ; i<= LEDPINBICBLUE; i+=2) {
     digitalWrite(i, LOW);
   }
+}
+
+void switchOnMotors(bool motor1_On, bool motor2_On, int speed) {
+
+  if (motor1_On) {
+    SetMotor1(speed, true);
+  }
+  if (motor2_On) {
+    SetMotor2(speed, true);
+  }
+  delay(DELAYms*nbPaper);
+  
+}
+
+void switchOffMotors() {
+  int speed = 0;
+  nbPaper = 0;
+  SetMotor1(speed, true);
+  SetMotor2(speed, true);
 }
 
