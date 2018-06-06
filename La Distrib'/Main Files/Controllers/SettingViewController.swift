@@ -31,7 +31,7 @@ class SettingViewController: UIViewController {
     }
     
     // MARK: - IBAction
-    @IBAction func button(_ sender: UIButton) {
+    @IBAction func buttonAction(_ sender: UIButton) {
         if sender.tag == 0 {
             credit()
         }

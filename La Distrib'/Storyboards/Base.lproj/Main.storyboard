@@ -428,6 +428,9 @@
                                         <state key="normal" title="Credit">
                                             <color key="titleColor" red="0.153734237" green="0.46812063459999997" blue="0.55368381739999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="buttonAction:" destination="fdR-Jb-OMg" eventType="touchUpInside" id="bXI-Zn-J2B"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zDn-MX-7vS">
                                         <rect key="frame" x="0.0" y="60" width="315" height="50"/>
@@ -611,7 +614,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="325" height="75"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="Ozb-ee-GsT" id="ZI7-Ua-Cl2">
-                                                    <rect key="frame" x="0.0" y="0.0" width="325" height="74"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="325" height="74.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pencilIcon" translatesAutoresizingMaskIntoConstraints="NO" id="ziR-D0-TDk">
@@ -1005,7 +1008,7 @@
         <image name="storeIcon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gaw-1U-RTZ"/>
+        <segue reference="AXz-xf-JyL"/>
         <segue reference="eQp-dC-A6C"/>
     </inferredMetricsTieBreakers>
 </document>

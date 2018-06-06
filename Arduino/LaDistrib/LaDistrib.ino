@@ -1,9 +1,24 @@
 #include <SoftwareSerial.h>
+#include <LiquidCrystal.h>
 
 /* CONSTANTES */
-// PIN KEY
-#define LEDPIN        13
+// PIN LED KEY
+#define LEDPININK      34
+#define LEDPINBICBLUE  44
+#define LEDPINBICRED   40
+#define LEDPINBICGREEN 38
+#define LEDPINBICBLACK 42
+#define LEDPINPENCIL   36
 
+// PIN LCD KEY
+#define RSPIN 35
+#define EPIN  37
+#define BUS5  39
+#define BUS4  41
+#define BUS3  43
+#define BUS2  45
+
+// PIN MOTOR KEY
 #define M1_ENABLE_PIN 7 //pwm
 #define M1_IN1_PIN    31
 #define M1_IN2_PIN    30
@@ -15,11 +30,11 @@
 // MOTOR KEYs
 #define SVLOW 64 // Speed
 #define SLOW 127
-#define SHIGH 191
+#define SHIGH 205
 #define SVHIGH 255
 #define DELAYms 1000 // time
 
-#define INITIALSTOCK  12
+#define INITIALSTOCK  50
 #define NBFEATURES    7
 
 // Message Keys
@@ -41,8 +56,10 @@
 /* VARIABLES */
 
 String dataFromBt = String();
+LiquidCrystal lcd(RSPIN, EPIN, BUS5, BUS4, BUS3, BUS2);
 
-int stock[NBFEATURES]; 
+int stock[NBFEATURES];
+int led[NBFEATURES] = {0};
 int nbPaper = 0;
 
 void setup() {
@@ -52,18 +69,32 @@ void setup() {
    Serial2.begin(9600);
 
    // init leds
-   pinMode(LEDPIN, OUTPUT);
-   digitalWrite(LEDPIN, LOW);
+   pinMode(LEDPININK, OUTPUT);
+   digitalWrite(LEDPININK, LOW);
+   pinMode(LEDPINBICBLUE, OUTPUT);
+   digitalWrite(LEDPINBICBLUE, LOW);
+   pinMode(LEDPINBICRED, OUTPUT);
+   digitalWrite(LEDPINBICRED, LOW);
+   pinMode(LEDPINBICGREEN, OUTPUT);
+   digitalWrite(LEDPINBICGREEN, LOW);
+   pinMode(LEDPINBICBLACK, OUTPUT);
+   digitalWrite(LEDPINBICBLACK, LOW);
+   pinMode(LEDPINPENCIL, OUTPUT);
+   digitalWrite(LEDPINPENCIL, LOW);
+   
    //on initialise les pins du moteur 1
-  pinMode(M1_IN1_PIN, OUTPUT);
-  pinMode(M1_IN2_PIN, OUTPUT);
-  pinMode(M1_ENABLE_PIN, OUTPUT);
+   pinMode(M1_IN1_PIN, OUTPUT);
+   pinMode(M1_IN2_PIN, OUTPUT);
+   pinMode(M1_ENABLE_PIN, OUTPUT);
  
-  //on initialise les pins du moteur 2
-  pinMode(M2_IN1_PIN, OUTPUT);
-  pinMode(M2_IN2_PIN, OUTPUT);
-  pinMode(M2_ENABLE_PIN, OUTPUT);
+   //on initialise les pins du moteur 2
+   pinMode(M2_IN1_PIN, OUTPUT);
+   pinMode(M2_IN2_PIN, OUTPUT);
+   pinMode(M2_ENABLE_PIN, OUTPUT);
 
+   //init LCD
+   lcd.begin(16, 2);
+   
    // init des stocks
    for(int i=0 ; i<NBFEATURES; i++){
     stock[i] = i+INITIALSTOCK;
@@ -72,6 +103,7 @@ void setup() {
  
 void loop(){
 
+    //lcd.print("GROS");
     if (Serial2.available()) {
         dataFromBt += (char)Serial2.read();
         Serial.println(dataFromBt);
@@ -89,12 +121,15 @@ void loop(){
         
     } else if (dataFromBt[0] == BUYFEATUREKEY && lastCharacter(dataFromBt) == ENDKEY) {
       buy();
+      switchOnLeds();
       dataFromBt = String();
+      
       if(nbPaper != 0) {
-        int speed = SHIGH;
+        int speed = 0;
         SetMotor1(speed, true);
         SetMotor2(speed, true);
         delay(DELAYms*nbPaper);
+        delay(1000);
         speed = 0;
         nbPaper = 0;
         SetMotor1(speed, true);
@@ -172,7 +207,6 @@ void buy() {
   String str = String();
   int rank = 0;
   int nbPurchased = 0;
- 
   for(int i = 0; i<dataFromBt.length(); i++){
     if (isNumber(dataFromBt[i])) {
       int ant = i-1;
@@ -186,14 +220,58 @@ void buy() {
         Serial.print(nbPurchased);
       }
     }
-    if(nbPurchased != 0) {
+    /*if(nbPurchased != 0) {
       if(rank == 0) {
         nbPaper = nbPurchased;
       }
       stock[rank] -= nbPurchased; 
       nbPurchased = 0;
+    }*/
+    if(nbPurchased != 0) {
+      led[rank] = nbPurchased;
+      stock[rank] -= nbPurchased; 
+      nbPurchased = 0;
     }
-    
+  }
+}
+
+// alume toutes les leds 
+void switchOnLeds() {
+  for(int i = 1; i<NBFEATURES; i++) {
+    if(led[i] != 0) {
+      switch (led[i]) {
+        case 1:
+        digitalWrite(LEDPINBICBLUE, HIGH);
+        break;
+        case 2:
+        digitalWrite(LEDPINBICBLACK, HIGH);
+        break;
+        case 3:
+        digitalWrite(LEDPINBICGREEN, HIGH);
+        break;
+        case 4:
+        digitalWrite(LEDPINBICRED, HIGH);
+        break;
+        case 5:
+        digitalWrite(LEDPININK, HIGH);
+        break;
+        case 6:
+        digitalWrite(LEDPINPENCIL, HIGH);
+        break;
+        default:
+        break;
+      }
+    }
+  }
+  resetLedArray();
+  delay(2000);
+  switchOffAllLed();
+}
+
+// Reset a 0 le nb de feature achetée
+void resetLedArray() {
+  for(int i=0 ; i<NBFEATURES ; i++){
+    led[i] = 0;
   }
 }
 
@@ -211,5 +289,17 @@ void SetMotor2(int speed, boolean reverse)
   analogWrite(M2_ENABLE_PIN, speed);
   digitalWrite(M2_IN1_PIN, ! reverse);
   digitalWrite(M2_IN2_PIN, reverse);
+}
+
+// éteint une seul led
+void switchOffLed(int keyLed){
+  digitalWrite(keyLed, LOW);
+}
+
+//éteint toute les led
+void switchOffAllLed() {
+  for(int i = LEDPININK ; i<= LEDPINBICBLUE; i+=2) {
+    digitalWrite(i, LOW);
+  }
 }
 
