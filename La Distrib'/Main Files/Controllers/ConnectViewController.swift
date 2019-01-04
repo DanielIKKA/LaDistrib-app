@@ -286,7 +286,7 @@ extension ConnectViewController : UITextFieldDelegate {
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let nextTag = textField.tag+1
         // Try to find next responder
-        let nextResponder = textField.superview?.viewWithTag(nextTag) as UIResponder!
+        let nextResponder = textField.superview?.viewWithTag(nextTag)
         
         if(nextResponder != nil) {
             nextResponder?.becomeFirstResponder()

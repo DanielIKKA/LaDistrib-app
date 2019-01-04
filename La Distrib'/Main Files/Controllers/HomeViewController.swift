@@ -160,7 +160,7 @@ extension HomeViewController : UITableViewDelegate, UITableViewDataSource {
         cell.totalPrice.text = "\(featuresPurshased[indexPath.row].unitPrice * Double(featuresPurshased[indexPath.row].multiplicator))€"
     }
 
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if( editingStyle == .delete) {
             let feature = featuresPurshased[indexPath.row]
     
