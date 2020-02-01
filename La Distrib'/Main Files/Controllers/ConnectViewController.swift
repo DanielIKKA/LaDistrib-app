@@ -20,7 +20,14 @@ class ConnectViewController : UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var connectButton: UIButton!
     
-    //MARK: Variables
+    //MARK: CoreData Variables
+    var dataController : DataController {
+        return (UIApplication.shared.delegate as! AppDelegate).dataController
+    }
+    var manageObjectContext : NSManagedObjectContext {
+        return dataController.managedObjectContext
+    }
+    
     public var userProfils = [UserProfil]()
     
     /*-------------------------------*/
@@ -43,10 +50,43 @@ class ConnectViewController : UIViewController {
         displayDataBase()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        ConnectCurrentUserIfExist()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "segueToRegistration") {
+        switch segue.identifier! {
+        case "segueToRegistration":
             let nextViewController = segue.destination as! RegistrationViewController
             nextViewController.userExist = userProfils
+            break
+        
+        case "segueToHome":
+            let nextViewController = segue.destination as! HomeViewController
+            let currentUser:  UserProfil? = findUserConnected()
+            
+            if(currentUser == nil) {
+                print("ERREUR")
+            } else {
+                nextViewController.currentUser = currentUser
+            }
+            break
+        
+        default:
+            break
+        }
+    }
+    
+    //MARK: IBActions
+    @IBAction func connection() {
+        if(isAlreadyRegistered() && isGoodPassword()) {
+            let currentUser : UserProfil? = findUser(named: loginTextField.text!)
+            
+            connect(currentUser: currentUser!)
+            alertStayConnected(currentUser!)
+        } else {
+            alertErrorConnection()
         }
     }
     
@@ -72,13 +112,40 @@ class ConnectViewController : UIViewController {
     }
     
     private func chargeUserProfilFromDataBase() {
-        let fetchRequest: NSFetchRequest<UserProfil> = UserProfil.fetchRequest()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "UserProfil")
         
         do {
-            let users = try UserProfilPersistent.context.fetch(fetchRequest)
+            let users = try manageObjectContext.fetch(fetchRequest) as! [UserProfil]
             self.userProfils.removeAll()
             self.userProfils = users
-        } catch {}
+        } catch {
+            fatalError("there are an error fetching the list of UsersProfils")
+        }
+    }
+    
+    private func ConnectCurrentUserIfExist() {
+        // check si il y n'y a qu'un user de connect
+        var cpt = 0
+        var currentUser : UserProfil? = nil
+        
+        for user in userProfils {
+            if user.isStayConnect {
+                currentUser = user
+                cpt += 1
+            }
+        }
+        
+        if currentUser == nil || cpt > 1 {
+            // disconnect all
+            for user in self.userProfils {
+                user.isConnected = false
+                user.isStayConnect = false
+            }
+            return
+        }
+        
+        performSegue(withIdentifier: "segueToHome", sender: self)
+        
     }
     
     @objc private func didTapOnScreenToDismissKeyboard(_ sender: UITapGestureRecognizer){
@@ -94,6 +161,88 @@ class ConnectViewController : UIViewController {
             self.boxView.transform = .identity
         }
     }
+    private func connect(currentUser : UserProfil) {
+        // disconnect all
+        for user in self.userProfils {
+            if user == currentUser {
+                // connect current user
+                currentUser.isConnected = true
+            } else {
+                user.isConnected = false
+                user.isStayConnect = false
+            }
+        }
+    }
+    
+    //MARK: Checks
+    private func isAlreadyRegistered() -> Bool {
+        for user in userProfils {
+            if((user.email) != loginTextField.text! || (user.username) != loginTextField.text!) {
+                return true
+            }
+        }
+        
+        return false
+    }
+    private func isGoodPassword() -> Bool {
+         // Find the good user
+        let userFind : UserProfil? = findUser(named: loginTextField.text!)
+        
+        // check if password is correct
+        if(userFind != nil && userFind?.password == passwordTextField.text!) {
+            return true
+        }
+        
+        return false
+    }
+    private func findUser(named: String) -> UserProfil? {
+        for user in userProfils {
+            if (user.username == loginTextField.text! || user.email == loginTextField.text!) {
+                return user
+            }
+        }
+        return nil
+    }
+    private func findUserConnected() -> UserProfil? {
+        for user in userProfils {
+            if(user.isConnected){
+                return user
+            }
+        }
+        return nil
+    }
+    
+    //MARK: Alert
+    private func alertErrorConnection() {
+        let alertMessage = UIAlertController(title: "Erreur Connection", message: "Username or password isn't correct ! Please try again.", preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "Cancel", style: .cancel) { (success) in
+            self.passwordTextField.text?.removeAll()
+            self.connectButton.isEnabled = false
+            self.loginTextField.becomeFirstResponder()
+        }
+        
+        alertMessage.addAction(alertAction)
+        
+        present(alertMessage, animated: true)
+    }
+    private func alertStayConnected(_ user: UserProfil) {
+        let alertMessage = UIAlertController(title: nil, message: "Do you want to stay connected ?", preferredStyle: .actionSheet)
+        let actionStayConnected = UIAlertAction(title: "Yes", style: .default) { (success) in
+            user.isStayConnect = true
+            self.dataController.saveContext()
+            self.performSegue(withIdentifier: "segueToHome", sender: self)
+        }
+        let actionNo = UIAlertAction(title: "No", style: .destructive) { (success) in
+            user.isStayConnect = false
+            self.dataController.saveContext()
+            self.performSegue(withIdentifier: "segueToHome", sender: self)
+        }
+        
+        alertMessage.addAction(actionStayConnected)
+        alertMessage.addAction(actionNo)
+        
+        present(alertMessage, animated: true, completion: nil)
+    }
     
     /*-------------------------------*/
         //MARK: - Private Debug
@@ -101,7 +250,7 @@ class ConnectViewController : UIViewController {
     private func displayDataBase() {
         print("il y a \(userProfils.count)\n")
         for user in userProfils {
-            print("\(user.username!) \n")
+            print("\(user.username) , \(user.isStayConnect), \(String(describing: user.feature)))\n")
         }
     }
 }
@@ -137,7 +286,7 @@ extension ConnectViewController : UITextFieldDelegate {
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let nextTag = textField.tag+1
         // Try to find next responder
-        let nextResponder = textField.superview?.viewWithTag(nextTag) as UIResponder!
+        let nextResponder = textField.superview?.viewWithTag(nextTag)
         
         if(nextResponder != nil) {
             nextResponder?.becomeFirstResponder()
