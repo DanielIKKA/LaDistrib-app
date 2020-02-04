@@ -15,7 +15,6 @@ LaDistrib' est projet étudiant de deuxième année en école d'ingénieur post-
 
 Démo en vidéo : https://youtu.be/W1EBjXdy3c8
 
----------
 
 ## Tech Stack and Hardware
 
