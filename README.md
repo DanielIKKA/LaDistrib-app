@@ -19,7 +19,7 @@ Démo en vidéo : https://youtu.be/W1EBjXdy3c8
 ## Tech Stack and Hardware
 
 > Programming 
-- Mobile development : iOS natif / Swift 3
+- Mobile development : iOS natif / Swift 4
 - Hardware development : Arduino / C / C++
 
 > Hardware
